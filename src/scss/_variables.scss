@@ -1,0 +1,89 @@
+@import 'bulma/sass/utilities/initial-variables';
+
+$family-sans-serif: 'Public Sans', sans-serif;
+
+// higher big size
+
+$size-1: 2.8rem;
+$size-2: 1.75rem; // H1
+$size-3: 1.5rem; // H2
+$size-4: 1.25rem; // H3
+$size-5: 1.2rem; // H4
+$size-6: 0.9375rem; // H5
+$size-7: 0.75rem; //
+
+$body-line-height: 1.6;
+
+// base on logo to margin 9px
+$gap: 18px; // default is 32px, used by container
+
+// ########## colors ##################################################
+// https://coolors.co/990000-39a2ae-55dbcb-75e4b3-cc998d
+
+$brand: rgb(153, 0, 0); // #900; dark red
+
+$info: rgb(0, 97, 148); // #006194       was rgb(0, 102, 255);  // #0066FF;
+$success: rgb(51, 134, 0); // #338600    was rgb(0, 153, 0); // #009900;
+$warning: rgb(255, 165, 0); // #ffa500   was rgb(242, 113, 28); // #f2711c;
+$danger: rgb(239, 26, 13); // #ef1a0d
+
+$primary: $brand; // (selection/active/focus/normal CTA)
+$primary-hover: $danger;
+$primary-disabled: rgb(223, 170, 169); // #dfaaa9
+
+$secondary: rgb(93, 0, 0); // #5d0000
+$secondary-hover: rgb(111, 0, 0); // #6f0000
+$secondary-disabled: rgb(223, 170, 169); // #dfaaa9
+
+$full-disabled: rgb(253, 243, 242); // #fdf3f2
+
+$link: rgb(0, 157, 163); // #009DA3;
+$link-hover: rgb(41, 104, 122); // #29687a
+
+$grey-dark: rgb(112, 112, 112); //
+$grey: rgb(176, 176, 176); //
+$grey-lightest: rgb(247, 247, 247); // #f7f7f7
+
+$grey-standalone: #ededed;
+
+//$primary-grey: $grey-lightest;
+$grey-disabled: $grey;
+
+//$dark: $grey-darker;
+//$text: $grey-dark;
+
+$scheme-main: $white; //$grey-lightest;
+
+$button-border-width: 2px;
+
+$body-background-color: $brand;
+$navbar-background-color: $brand;
+
+// ########## buttons ##################################################
+
+//$box-background-color: #fff;
+//$box-shadow: none;
+
+// $title-color: $primary;
+// $subtitle-color: #fff;
+// $subtitle-strong-color: #fff;
+
+// eg content title
+// $text-strong: rgb(0, 23, 70);
+
+$navbar-breakpoint: $tablet;
+//$top-navbar-opacity: 1;
+
+$navbar-breakpoint: 769px; // $tablet;
+$navbar-height: 3.5rem;
+
+$modal-content-width: 800px;
+//$modal-large-content-width: 800px; doesn't work
+$modal-background-background-color: rgba(153, 0, 0, 0.75);
+$modal-content-margin-mobile: 0;
+$modal-content-spacing-mobile: 0;
+
+// calendar
+
+$calendar-header-padding: 0.2rem 0;
+$calendar-header-nav-padding: 0.3em;

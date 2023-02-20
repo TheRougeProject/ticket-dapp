@@ -1,0 +1,179 @@
+// ########## .button ##################################################
+
+.button {
+  font-weight: $weight-semibold;
+
+  &.is-primary {
+    &:hover,
+    &.is-hovered {
+      background-color: $primary-hover;
+    }
+    &.is-inverted {
+      background-color: transparent;
+      border-color: $primary;
+      color: $primary;
+      &:hover,
+      &.is-hovered {
+        background-color: transparent;
+        border-color: $primary-hover;
+        color: $primary-hover;
+      }
+    }
+  }
+
+  &.is-secondary {
+    background-color: $secondary;
+    &:hover,
+    &.is-hovered {
+      background-color: $secondary-hover;
+    }
+    &.is-inverted {
+      background-color: transparent;
+      border-color: $secondary;
+      color: $secondary;
+      &:hover,
+      &.is-hovered {
+        background-color: transparent;
+        border-color: $secondary-hover;
+        color: $secondary-hover;
+      }
+    }
+  }
+}
+
+// ########## manager nac ##################################################
+
+// ########## 2 modes breadcrumb ##################################################
+
+// to avoid side effects
+html {
+  background-color: $white;
+}
+
+.manager-nav {
+  .level-right {
+    a {
+      color: $white;
+
+      &:hover,
+      &.is-hovered {
+        color: $secondary-disabled;
+      }
+    }
+
+    @include mobile {
+      a {
+        color: $primary;
+
+        &:hover,
+        &.is-hovered {
+          color: $primary-hover;
+        }
+      }
+    }
+  }
+}
+
+.breadcrumb {
+  @include tablet {
+    padding-bottom: 1.5rem; // same as columns
+
+    //$breadcrumb-item-color: $white;
+    //$breadcrumb-item-active-color: $secondary-disabled;
+    //$breadcrumb-item-hover-color: $secondary-disabled;
+
+    a {
+      font-weight: bold;
+      color: $white;
+      &:hover {
+        color: $secondary-disabled;
+      }
+    }
+
+    li.is-active a {
+      color: $secondary-disabled;
+    }
+  }
+
+  @include mobile {
+    background-color: $white;
+    margin-bottom: 0;
+    // aka $section-padding
+    padding: 0 1.5rem;
+  }
+}
+
+// ########## 2 modes section   ##################################################
+
+.section.is-rounded {
+  @include tablet {
+    border-radius: $radius-large;
+  }
+}
+
+// ########## box is-slate ##################################################
+
+.box {
+  &.is-slate {
+    background-color: $grey-lightest;
+  }
+}
+
+.breadcrumb {
+  padding-top: 1.5rem; // default bottom margin is 1.5rem
+}
+
+// ########## rounded identicon ##################################################
+
+.icon {
+  &.is-rounded {
+    img {
+      border-radius: 50%;
+    }
+  }
+}
+
+// ########## OLD ##################################################
+
+.navbar {
+  //border-radius: $card-radius;
+  // box-shadow: $card-shadow;
+  color: $card-color;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+
+main {
+  margin-top: 3.5rem; // aka min-height navbar
+}
+
+// default justify right modal button
+.modal-card-foot {
+  justify-content: flex-end;
+}
+
+.modal-content.is-large,
+.modal-card.is-large {
+  //width: $modal-large-content-width;
+}
+
+body {
+  min-height: calc(100vh - 1.6em);
+}
+
+.timepicker-next {
+  margin: 0.7rem 0 0 !important;
+}
+.timepicker-previous {
+  margin: 0 0 0.7rem !important;
+}
+
+.timepicker-next,
+.timepicker-previous {
+  padding: 0 !important;
+  line-height: 1.2rem !important;
+  font-size: 1.2rem !important;
+  color: #000 !important;
+  font-weight: bold !important;
+}
