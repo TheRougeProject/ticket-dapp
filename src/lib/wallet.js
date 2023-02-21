@@ -129,8 +129,9 @@ export const wrapper = () => {
       appMetadata: {
         name: 'Rouge Ticket',
         icon: '/logo.svg',
-        logo: 'https://rouge.network/icon.svg',
-        //logo: icon,  side logo todo
+        logo: `<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <image x="0" y="0" width="56" height="56" href="https://rouge.network/icon.svg" />
+</svg>`,
         description: 'Create & manage events on Web3',
         explore: 'https://rouge.network/',
         recommendedInjectedWallets: [
