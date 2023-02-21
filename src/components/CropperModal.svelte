@@ -31,7 +31,7 @@
 
     // TODO XXX just export el from cropper ?
     const { imgEl } = cropper.getData()
-    console.log('before crop', crop)
+    // console.log('before crop', crop)
     const { x, y, width, height } = crop.croppedAreaPixels
 
     const maxSize = Math.max(image.width, image.height)
@@ -72,7 +72,7 @@
 </script>
 
 <Modal bind:this={modal} bind:active noCloseButton={true}>
-  <div class="modal-card">
+  <div class="modal-card m-0">
     <header class="modal-card-head  has-background-light">
       <p class="modal-card-title">{title}</p>
       <p style="color: #f00;" />
@@ -93,17 +93,19 @@
       {/if}
     </section>
     <footer class="modal-card-foot">
-      <p class="card-footer-item"><em>selection = {width}x{height}</em></p>
+      <p class="card-footer-item is-hidden-mobile">
+        <em>selection = {width}x{height}</em>
+      </p>
       <button
         class="button"
         on:click={() => {
           cropper.setZoom(zoom * 1.1)
-        }}>Zoom in</button>
+        }}><span class="is-hidden-mobile">Zoom</span> in</button>
       <button
         class="button"
         on:click={() => {
           cropper.setZoom(zoom * 0.9)
-        }}>Zoom out</button>
+        }}><span class="is-hidden-mobile">Zoom</span> out</button>
       <button class="button is-black" on:click={modal.close}>Cancel</button>
       <button class="button is-primary" on:click={doCrop}>Crop & Save</button>
     </footer>

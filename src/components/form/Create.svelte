@@ -3,6 +3,8 @@
 
   import { defaultEvmStores as evm } from 'svelte-ethers-store'
 
+  import { authed } from '$lib/backend.js'
+
   import { dev } from '$app/environment'
 
   import { goto } from '$app/navigation'
@@ -63,7 +65,7 @@
 {#if active}
   <Authed
     on:close={() => {
-      active = false
+      if (!$authed) active = false
     }}>
     <Modal bind:this={modal} bind:active noCloseButton={true}>
       <div class="modal-card is-large">

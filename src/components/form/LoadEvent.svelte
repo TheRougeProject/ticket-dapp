@@ -110,8 +110,9 @@
         <button class="button is-primary is-outlined" on:click={stopScanner}
           >Stop scanner</button>
       {:else}
-        <button class="button is-primary is-outlined" on:click={startScanner}
-          >Scan event/ticket QR code</button>
+        <button class="button is-primary is-outlined" on:click={startScanner}>
+          Scan <span class="is-hidden-mobile">event/ticket QR code</span>
+        </button>
       {/if}
       <button class="button is-black" on:click={cancel}>Cancel</button>
       <button
