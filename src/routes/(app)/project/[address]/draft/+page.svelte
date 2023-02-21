@@ -190,7 +190,7 @@
       <div class="level-item">
         <button
           class="button is-small is-primary"
-          on:click={() => goto('/project/{address}/add-channel/')}
+          on:click={() => goto(`/project/${address}/add-channel/`)}
           >Add channel</button>
       </div>
     </div>
