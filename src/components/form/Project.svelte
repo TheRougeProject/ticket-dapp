@@ -320,7 +320,7 @@
                 bind:group={data.visual}
                 name="visualDefault"
                 value={visual} />
-              <a class="button is-small mb-1" href="#select">Select</a>
+              <span class="button is-small mb-1">Select</span>
               <figure class="image is-16by9">
                 <img
                   alt="default visual"
