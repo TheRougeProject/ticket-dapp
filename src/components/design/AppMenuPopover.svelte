@@ -51,7 +51,7 @@
         <a
           on:click={toggle}
           href="/"
-          class:is-active={!/^(\/rewards|\/book)/.test($page.url.pathname)}>
+          class:is-active={!/^(\/journey|\/book)/.test($page.url.pathname)}>
           <span class="icon-text is-small"
             ><Icon class="mr-2" name="List" /><span>Event Manager</span></span>
         </a>
@@ -68,8 +68,8 @@
       <li>
         <a
           on:click={toggle}
-          href="/rewards"
-          class:is-active={/^\/rewards/.test($page.url.pathname)}>
+          href="/journey"
+          class:is-active={/^\/journey/.test($page.url.pathname)}>
           <span class="icon-text"
             ><Icon class="mr-2" name="Award" /><span>Rouge Journey</span></span>
         </a>

@@ -177,9 +177,6 @@
 
   main {
     min-height: calc(100vh - 5rem);
-    @include mobile {
-      background-color: transparent;
-    }
   }
 
   .container.is-fluid {

@@ -165,7 +165,7 @@
   {/if}
 
   {#if mobile}
-    <div class="level">
+    <div class="level has-background-white mb-0 pb-5 ">
       <div class="level-left">
         <div class="level-item">
           <h2 class="title is-size-4 mt-5">
