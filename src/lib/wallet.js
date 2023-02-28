@@ -110,6 +110,9 @@ export const wrapper = () => {
         ...(overrides[id] || {})
       }
     })
+    //.filter((o) => !!o.rpcUrl)
+
+    console.log('xxx', { chains })
 
     onboard = Onboard({
       wallets: [injected, gnosis, walletConnect],
@@ -158,6 +161,7 @@ export const wrapper = () => {
   }
 
   const unload = () => {
+    console.log('unload', unsubscribe)
     if (unsubscribe) unsubscribe()
   }
 

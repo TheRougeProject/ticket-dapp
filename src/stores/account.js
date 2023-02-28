@@ -19,17 +19,21 @@ const createStore = () => {
       const balances = {}
       // other options we store a Onject of all contract balances ...
       balances.total = (
-        await blockchain.rouge(address).balanceOf(account)
+        await blockchain.rouge(evm.$chainId)(address).balanceOf(account)
       ).toNumber()
       // event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
       const events = await blockchain
-        .rouge(address)
-        .queryFilter(blockchain.rouge(address).filters.Transfer(null, account))
+        .rouge(evm.$chainId)(address)
+        .queryFilter(
+          blockchain
+            .rouge(evm.$chainId)(address)
+            .filters.Transfer(null, account)
+        )
       for (const { args } of events) {
         // TODO information with get information from nft.js store ...
         // centralize view call + invalidation ...
         const { owner, channelId } = await blockchain
-          .rouge(address)
+          .rouge(evm.$chainId)(address)
           .getTokenInfos(args.tokenId)
         if (owner === account) {
           balances[channelId] = (balances[channelId] || 0) + 1
@@ -41,9 +45,11 @@ const createStore = () => {
       emit()
       for (const { args } of events) {
         const redemptions = await blockchain
-          .rouge(address)
+          .rouge(evm.$chainId)(address)
           .queryFilter(
-            blockchain.rouge(address).filters.Redeemed(null, args.tokenId)
+            blockchain
+              .rouge(evm.$chainId)(address)
+              .filters.Redeemed(null, args.tokenId)
           )
         if (redemptions.length === 1) {
           const {

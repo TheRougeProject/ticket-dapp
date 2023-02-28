@@ -132,7 +132,7 @@
     console.log({ channels: p.channels, acquisitions })
     const params = await abiEncodeAcquire({
       channels: p.channels,
-      contract: blockchain.rouge(contract),
+      contract: blockchain.rouge($chainId)(contract),
       signer: $signer,
       secret: $secret,
       acquisitions
@@ -141,7 +141,7 @@
     step = 4
 
     return {
-      call: blockchain.rouge(contract).acquire,
+      call: blockchain.rouge($chainId)(contract).acquire,
       params,
       onError: () => {
         step = 3

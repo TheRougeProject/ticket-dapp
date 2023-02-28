@@ -5,7 +5,7 @@
   import dayjs from 'dayjs'
   import localizedFormat from 'dayjs/plugin/localizedFormat.js'
 
-  import { signerAddress, chainData } from 'svelte-ethers-store'
+  import { signerAddress, chainId, chainData } from 'svelte-ethers-store'
 
   import ScanQR from '$components/ScanQR.svelte'
   import QR from '$components/QR.svelte'
@@ -94,7 +94,7 @@
 
         // TODO function in contract to check proof...
         const x = await blockchain
-          .rouge(p._address)
+          .rouge($chainId)(p._address)
           .validTokenProof(tokenId, proof)
         console.log(x)
 
@@ -112,7 +112,7 @@
   const redeemCtx = async () => {
     const params = [[[tokenId, proof, certificate]]]
     return {
-      call: blockchain.rouge(p._address).redeem,
+      call: blockchain.rouge($chainId)(p._address).redeem,
       params,
       onError: (err) => {
         console.log('tx error', err)

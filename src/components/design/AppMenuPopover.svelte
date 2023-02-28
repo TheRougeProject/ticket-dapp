@@ -5,6 +5,7 @@
   import { clickoutside } from '$lib/actions/clickoutside.js'
   import { keyDownA11y } from '$lib/utils'
 
+  import chainContext from '$stores/chain.js'
   import blockchain from '$lib/blockchain.js'
 
   import Icon from '$components/Icon.svelte'
@@ -65,15 +66,18 @@
             ><Icon class="mr-2" name="Book" /><span>Tickets book</span></span>
         </a>
       </li>
-      <li>
-        <a
-          on:click={toggle}
-          href="/journey"
-          class:is-active={/^\/journey/.test($page.url.pathname)}>
-          <span class="icon-text"
-            ><Icon class="mr-2" name="Award" /><span>Rouge Journey</span></span>
-        </a>
-      </li>
+      {#if $chainContext.plugins.includes('journey')}
+        <li>
+          <a
+            on:click={toggle}
+            href="/journey"
+            class:is-active={/^\/journey/.test($page.url.pathname)}>
+            <span class="icon-text"
+              ><Icon class="mr-2" name="Award" /><span>Rouge Journey</span
+              ></span>
+          </a>
+        </li>
+      {/if}
       <li>
         <a
           href="#disconnect"

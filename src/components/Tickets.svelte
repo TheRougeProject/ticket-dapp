@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import { utils } from 'ethers'
 
-  import { signerAddress, chainData } from 'svelte-ethers-store'
+  import { signerAddress, chainId, chainData } from 'svelte-ethers-store'
 
   import NFT from '$components/NFT.svelte'
   import EmptyState from '$components/design/EmptyState.svelte'
@@ -14,8 +14,6 @@
   export let address
   export let bearer
   export let loading = true
-
-  //  $: p = $project[address] || {}
 
   $: nfts = $nft.keys
     ? $nft.keys.filter(
@@ -30,7 +28,7 @@
     } else {
       bearer = utils.getAddress(bearer)
     }
-    const project = blockchain.rouge(address)
+    const project = blockchain.rouge($chainId)(address)
     // auto discovery potential NFT
     const events = await project.queryFilter(
       project.filters.Transfer(null, bearer),

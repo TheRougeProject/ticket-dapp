@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte'
 
+  import { chainId } from 'svelte-ethers-store'
+
   import blockchain from '$lib/blockchain.js'
 
   import { formatAddress } from '$lib/utils'
@@ -22,7 +24,7 @@
   let loaded = false
 
   onMount(async () => {
-    const contract = blockchain.rouge(address)
+    const contract = blockchain.rouge($chainId)(address)
     // need initial cache system counting from block X
     const events = await contract.queryFilter(contract.filters.Redeemed(), 0)
     for (const e of events) {

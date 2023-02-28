@@ -10,8 +10,7 @@ import {
   getChainDataByChainId
 } from 'svelte-ethers-store'
 
-import Factory from '@rougenetwork/v2-core/Factory.json'
-import Rouge from '@rougenetwork/v2-core/Rouge.json'
+import Artifacts from '@rougenetwork/v2-core/Artifacts.json'
 
 import IERC20 from '@rougenetwork/v2-core/IERC20.json'
 import IERC721 from '@rougenetwork/v2-core/IERC721.json'
@@ -26,18 +25,10 @@ import registry from '$stores/registry.js'
 import project from '$stores/project.js'
 import account from '$stores/account.js'
 
-//import { explorer, formatEth, toWei, formatIpfsHash } from '$lib/utils'
-
 //import notifier from '$lib/notifier'
 //import pool from '$stores/pool.js'
 
 const noop = () => {}
-
-let factoryAddress // XXX remove ?
-let singletonAddress // XXX remove ?
-
-//evm.attachContract('factory', factoryAddress, Factory.abi)
-//evm.attachContract('singleton', singletonAddress, Rouge.abi)
 
 const createBlockchain = () => {
   const uid = nanoid()
@@ -65,9 +56,6 @@ const createBlockchain = () => {
       // console.log('bad chain', chainId)
       registry.set('invalidChain', true)
     }
-    factoryAddress = import.meta.env[`VITE_FACTORY_ADDRESS_${chainId}`]
-    singletonAddress = import.meta.env[`VITE_SINGLETON_ADDRESS_${chainId}`]
-    console.log({ factoryAddress, singletonAddress })
   })
 
   signer.subscribe(async ($signer) => {
@@ -89,17 +77,9 @@ const createBlockchain = () => {
 
   //     console.log('Subscribing to contracts logs with %s', uid, $provider, evm.$contracts)
   //     $provider.on({ address: nftAddress }, notifyEvent)
-  //     $provider.on({ address: marketAddress }, notifyEvent)
-
   //     console.log('subscribers count %s', $provider.listenerCount())
   //   }
   // })
-
-  // TODO subscribe chianID
-  // if (parseInt(chainId, 16) !== parseInt(import.meta.env.VITE_CHAIN_ID)) {
-  //   provider = null
-  //   throw new Error(`wrong chainId ${parseInt(chainId, 16)}`)
-  // }
 
   const connect = async (chainId) => {
     console.log('CONNECTING TO chain', chainId, wallet)
@@ -143,7 +123,7 @@ const createBlockchain = () => {
       console.log('*** UpdateAuthorization ***', address, fragment, event)
       project.refresh(address)
       // XXX . await ?
-      invalidate(window.location.pathanme)
+      invalidate(window.location.pathname)
     }
   }
 
@@ -267,13 +247,23 @@ const createBlockchain = () => {
 
   const erc20 = builder(IERC20)
   const erc721 = builder(IERC721)
-  //const erc1155 = builder(IERC1155)
-  const rouge = builder(Rouge)
 
-  const factory = (chainId) =>
-    builder(Factory)(import.meta.env[`VITE_FACTORY_ADDRESS_${chainId}`])
+  // shortcuts to access only interfaces
+
+  const rouge = (chainId) => {
+    // console.log('get rouge', Artifacts[chainId][0].contracts.Rouge)
+    return builder(Artifacts[chainId][0].contracts.Rouge)
+  }
+
+  const factory = (chainId) => {
+    // console.log('get factory')
+    return builder(Artifacts[chainId][0].contracts.RougeProxyFactory)(
+      Artifacts[chainId][0].contracts.RougeProxyFactory.address
+    )
+  }
+
   const singleton = (chainId) =>
-    rouge(import.meta.env[`VITE_SINGLETON_ADDRESS_${chainId}`])
+    rouge(chainId)(Artifacts[chainId][0].contracts.Rouge.address)
 
   const addChain = async (chainId) => {
     try {
@@ -388,12 +378,14 @@ const blockchain = createBlockchain()
 
 // TODO support Tokens list + multi chains
 // https://tokenlists.org/
-
+// TODO migrate to chainContext store ...
 export const getChainTokens = (chainId = 0, chainData = {}) => {
   const tokens = {}
   if (!chainId) return tokens
 
-  const list = JSON.parse(import.meta.env[`VITE_ASSET_TOKENS_${chainId}`] || {})
+  const list = JSON.parse(
+    import.meta.env[`VITE_ASSET_TOKENS_${chainId}`] || '{}'
+  )
 
   if (chainData.nativeCurrency?.symbol) {
     if (chainData.nativeCurrency.symbol === 'ETH') {

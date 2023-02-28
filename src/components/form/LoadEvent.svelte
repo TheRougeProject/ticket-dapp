@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { chainData } from 'svelte-ethers-store'
+  import { chainId, chainData } from 'svelte-ethers-store'
 
   import blockchain from '$lib/blockchain.js'
 
@@ -22,7 +22,7 @@
   const candidate = async (address) => {
     try {
       const { uri, channels, balances } = await blockchain
-        .rouge(address)
+        .rouge($chainId)(address)
         .getInfos()
       console.log('ONCHAIN data', { uri, channels, balances })
       dispatch('success', address)

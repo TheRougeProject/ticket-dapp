@@ -4,14 +4,14 @@ import { proxied } from 'svelte-proxied-store'
 import { decodeRoles } from '@rougenetwork/v2-core/rouge'
 import { TokenAmount } from '@rougenetwork/v2-core/Token'
 
-import { dev, browser } from '$app/environment'
+import { browser } from '$app/environment'
 
 import blockchain, { getChainTokens } from '$lib/blockchain'
 import ipfs from '$lib/ipfs'
 
-import { defaultEvmStores as evm, signer, chainId } from 'svelte-ethers-store'
+// import chainContext from '$stores/chain.js'
 
-// or every project is store ?
+import { defaultEvmStores as evm, signer, chainId } from 'svelte-ethers-store'
 
 const createStore = () => {
   const lock = {}
@@ -80,8 +80,8 @@ const createStore = () => {
   const readEVMDeepState = async (address) => {
     if (!evm.$provider) return
 
-    const events = await blockchain.rouge(address).queryFilter(
-      blockchain.rouge(address).filters.ProjectSetup() // await $signer.getAddress())
+    const events = await blockchain.rouge(evm.$chainId)(address).queryFilter(
+      blockchain.rouge(evm.$chainId)(address).filters.ProjectSetup() // await $signer.getAddress())
     )
     if (events.length) {
       // TODO XXX change next version // or initial manager
@@ -96,14 +96,14 @@ const createStore = () => {
   const readEVMBaseState = async (address) => {
     if (!evm.$provider) return
     const { uri, channels, balances } = await blockchain
-      .rouge(address)
+      .rouge(evm.$chainId)(address)
       .getInfos()
     console.log(`ONCHAIN data for ${address}`, { uri, channels, balances })
 
     const meta = await ipfs.getJSON(uri)
     meta.balances = {}
     const enabled = await decodeRoles(
-      blockchain.rouge(address),
+      blockchain.rouge(evm.$chainId)(address),
       ['acquire', 'redeem'],
       constants.AddressZero,
       meta.channels
@@ -173,8 +173,8 @@ const createStore = () => {
       addressesAsBearer
     })
 
-    // const events = await blockchain.rouge(address).queryFilter(
-    //   blockchain.rouge(address).filters.AddedChannel() // await $signer.getAddress())
+    // const events = await blockchain.rouge(evm.$chainId)(address).queryFilter(
+    //   blockchain.rouge(evm.$chainId)(address).filters.AddedChannel() // await $signer.getAddress())
     // )
     // for (const e of events) {
     //   console.log('xxxxxxxxxxxxxxxxxxxxxxx', e)
@@ -290,12 +290,13 @@ const createStore = () => {
       addresses
     })
     emit()
-    if (dev && $chainId === 1337) {
-      const projects = JSON.parse(import.meta.env.VITE_TEST_PROJECTS_1337)
-      for (const k of Object.keys(projects)) {
-        add(projects[k].address)
-      }
-    }
+    // migrate to dev plugin
+    // if (dev && $chainId === 1337) {
+    //   const projects = JSON.parse(import.meta.env.VITE_TEST_PROJECTS_1337)
+    //   for (const k of Object.keys(projects)) {
+    //     add(projects[k].address)
+    //   }
+    // }
   })
 
   signer.subscribe(async ($signer) => {

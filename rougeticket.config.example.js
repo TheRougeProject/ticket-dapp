@@ -12,5 +12,5 @@ export default {
   //
   image: 'https://rouge.network/event/20220830-rouge-live-arbitrum-nova.png',
 
-  plugins: `{}`
+  plugins: '{}'
 }

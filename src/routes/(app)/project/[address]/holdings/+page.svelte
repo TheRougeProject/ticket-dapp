@@ -1,7 +1,7 @@
 <script>
   import { constants } from 'ethers'
 
-  import { signerAddress } from 'svelte-ethers-store'
+  import { signerAddress, chainId } from 'svelte-ethers-store'
 
   import blockchain from '$lib/blockchain.js'
 
@@ -21,7 +21,7 @@
   const withdrawCtx = (token) => {
     if (token === constants.AddressZero) {
       return {
-        call: blockchain.rouge(address).widthdraw,
+        call: blockchain.rouge($chainId)(address).widthdraw,
         params: [$signerAddress, p.balances[token].number],
         onReceipt: () => {
           project.refresh(address)
@@ -29,7 +29,7 @@
       }
     }
     return {
-      call: blockchain.rouge(address).widthdrawToken,
+      call: blockchain.rouge($chainId)(address).widthdrawToken,
       params: [token, $signerAddress, p.balances[token].number],
       onReceipt: () => {
         project.refresh(address)

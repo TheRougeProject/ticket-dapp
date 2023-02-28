@@ -40,7 +40,7 @@
     // can't use validchain here (not yet updated)
     if ($chainId !== chain) return
 
-    const project = blockchain.rouge(contract)
+    const project = blockchain.rouge($chainId)(contract)
     // auto discovery potential NFT
     const events = await project.queryFilter(
       project.filters.Transfer(null, $signerAddress),

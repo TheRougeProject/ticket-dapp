@@ -8,6 +8,7 @@
   import { keyDownA11y } from '$lib/utils.js'
 
   import project from '$stores/project.js'
+  import chainContext from '$stores/chain.js'
 
   import Icon from '$components/Icon.svelte'
   import EmptyState from '$components/design/EmptyState.svelte'
@@ -46,14 +47,16 @@
       <div class="level-left">
         <h2 class="title">Your tickets book on {$chainData.name}</h2>
       </div>
-      <div class="level-right">
-        <div class="level-item">
+      {#if $chainContext.hasPlugin('search')}
+        <div class="level-right">
           <div class="level-item">
-            <a class="button is-primary is-inverted" href="/book/search"
-              >Missing tickets?</a>
+            <div class="level-item">
+              <a class="button is-primary is-inverted" href="/book/search"
+                >Missing tickets?</a>
+            </div>
           </div>
         </div>
-      </div>
+      {/if}
     </div>
 
     {#if addressesAsBearer && addressesAsBearer.length}

@@ -20,8 +20,6 @@
     encodeAnnotatedCertificate
   } from '@rougenetwork/v2-core/rouge'
 
-  import Rouge from '@rougenetwork/v2-core/Rouge.json'
-
   import blockchain from '$lib/blockchain.js'
   import { keyDownA11y, formatTextMaxLength } from '$lib/utils'
 
@@ -78,11 +76,20 @@
     }
 
     // XXX proxy doesn't work here...
-    const rougeContract = new ethers.Contract(address, Rouge.abi, $provider)
+    // TODO move contract instantiation inside lib...
+    const rougeContract = new ethers.Contract(
+      address,
+      [
+        'event Acquired(uint48 indexed tokenId, bytes16 stamp, uint256 salt, uint24 index)',
+        'function getTokenInfos(uint48 tokenId) view returns (address owner, uint16 channelId, bytes16 stamp, bool redeemed, uint256 nextTokenId)',
+        'function validTokenProof(uint16 tokenId, bytes32 proof) view returns (bool)'
+      ],
+      $provider
+    )
 
     const proof = await calculateStampProof({
       // XXX check why home > wallet > open
-      // answer empty half of time if  blockchain.rouge(address),
+      // answer empty half of time if  blockchain.rouge($chainId)(address),
       contract: rougeContract,
       signer: $signer,
       tokenId,

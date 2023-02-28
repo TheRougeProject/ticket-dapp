@@ -1,6 +1,8 @@
 <script>
   import { ethers } from 'ethers'
 
+  import { chainId } from 'svelte-ethers-store'
+
   import blockchain from '$lib/blockchain.js'
   import { types } from '$lib/enums'
 
@@ -32,26 +34,28 @@
     control.loadText =
       'Adding channel... Waiting for your wallet confirmation...'
 
-    blockchain.rouge(address).addChannels({
-      params: [[[false, false, 0, 0, ethers.constants.AddressZero]]],
-      onTx: (tx) => {
-        console.log('onTx', tx)
-        control.loadText = `the transaction ${tx.hash} has been submitted to the blochain.`
-      },
-      onReceipt: (rcpt) => {
-        console.log('onReceipt', rcpt)
-        control.loadText = `New channel has been added!`
-        // const proxy = rcpt.events.filter(e => e.event === 'ProxyCreation')[0].args.proxy
-        // const res = await backend.addProject(proxy)
-        // project.add(proxy)
-        control.loadClose = true
-      },
-      onError: (err = {}) => {
-        console.log('tx error', err)
-        control.loadText = `Failed to add channel....`
-        control.loadClose = true
-      }
-    })
+    blockchain
+      .rouge($chainId)(address)
+      .addChannels({
+        params: [[[false, false, 0, 0, ethers.constants.AddressZero]]],
+        onTx: (tx) => {
+          console.log('onTx', tx)
+          control.loadText = `the transaction ${tx.hash} has been submitted to the blochain.`
+        },
+        onReceipt: (rcpt) => {
+          console.log('onReceipt', rcpt)
+          control.loadText = `New channel has been added!`
+          // const proxy = rcpt.events.filter(e => e.event === 'ProxyCreation')[0].args.proxy
+          // const res = await backend.addProject(proxy)
+          // project.add(proxy)
+          control.loadClose = true
+        },
+        onError: (err = {}) => {
+          console.log('tx error', err)
+          control.loadText = `Failed to add channel....`
+          control.loadClose = true
+        }
+      })
   }
 </script>
 

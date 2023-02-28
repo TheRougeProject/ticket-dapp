@@ -9,6 +9,7 @@
   import blockchain from '$lib/blockchain.js'
   import { getSupportedChainIds } from '$lib/enums.js'
 
+  import chainContext from '$stores/chain.js'
   import project from '$stores/project.js'
   import registry from '$stores/registry.js'
 
@@ -82,11 +83,13 @@
             on:click={openLoad}>Load</button>
         </div>
       </div>
-      <div class="level-right">
-        <div class="level-item">
-          <a class="button is-primary is-inverted" href="/search/">Search</a>
+      {#if $chainContext.hasPlugin('search')}
+        <div class="level-right">
+          <div class="level-item">
+            <a class="button is-primary is-inverted" href="/search/">Search</a>
+          </div>
         </div>
-      </div>
+      {/if}
     </div>
 
     {#if !all.length}

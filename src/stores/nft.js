@@ -28,7 +28,7 @@ const createStore = () => {
       // console.log('load nft', { contract, tokenId })
       lock[key] = true
       const { owner, channelId, redeemed } = await blockchain
-        .rouge(contract)
+        .rouge(evm.$chainId)(contract)
         .getTokenInfos(tokenId)
       if (owner === evm.$signerAddress) {
         project.addBearer(contract)

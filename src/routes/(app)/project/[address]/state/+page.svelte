@@ -1,7 +1,7 @@
 <script>
   import { constants } from 'ethers'
 
-  import { signerAddress } from 'svelte-ethers-store'
+  import { signerAddress, chainId } from 'svelte-ethers-store'
 
   import { abiEncodeAuth, decodeRoles } from '@rougenetwork/v2-core/rouge'
 
@@ -65,7 +65,7 @@
   const refresh = async () => {
     if (!control.delegate) return
     const raw = await decodeRoles(
-      blockchain.rouge(address),
+      blockchain.rouge($chainId)(address),
       Object.keys(selectors),
       control.delegate,
       p.channels
@@ -78,7 +78,7 @@
   }
 
   const authorizeCtx = (selector, grant, delegate = constants.AddressZero) => {
-    const contract = blockchain.rouge(address)
+    const contract = blockchain.rouge($chainId)(address)
     const auths = [
       {
         scope: contract.interface.getSighash(selector),

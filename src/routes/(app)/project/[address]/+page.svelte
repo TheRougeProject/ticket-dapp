@@ -62,8 +62,8 @@
       <a
         target="_blank"
         rel="noreferrer"
-        href="https://grant-explorer.gitcoin.co/#/round/1/0xd95a1969c41112cee9a2c931e849bcef36a16f4c/0xad3348a8338210c5d7eca4187a0267507d9dd8683fe02d253c4a17a952c5ef3c-0xd95a1969c41112cee9a2c931e849bcef36a16f4c"
-        >our Gitcoin grant</a
+        data-beta="https://grant-explorer.gitcoin.co/#/round/1/0xd95a1969c41112cee9a2c931e849bcef36a16f4c/0xad3348a8338210c5d7eca4187a0267507d9dd8683fe02d253c4a17a952c5ef3c-0xd95a1969c41112cee9a2c931e849bcef36a16f4c"
+        href="https://gitcoin.co/grants/7519/rouge-ticket">our Gitcoin grant</a
       >. Unleash quadratic funding and verify your passport to match funds!
     </div>
   </article>
@@ -78,9 +78,6 @@
         href={(p.uri || '').replace('ipfs://', gateway)}>{p.uri}</a>
     </p>
     <p><a href="/i/special/foxwallet/">foxwallet</a></p>
-    <p><a href="/i/special/foxwallet/">foxwallet</a></p>
-    <p><a href="/i/special/foxwalletdebug/">foxwallet debug</a></p>
-    <p><a href="/xxx/">xxx plugins</a></p>
   </article>
 {/if}
 

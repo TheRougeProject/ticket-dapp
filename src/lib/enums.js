@@ -1,15 +1,12 @@
 import { utils } from 'ethers'
-import { dev } from '$app/environment'
 
 const baseChainIds = JSON.parse(import.meta.env.VITE_MAINCHAIN_IDS)
 const baseTestnetChainIds = JSON.parse(import.meta.env.VITE_TESTCHAIN_IDS)
-export const supportedChainIds = dev ? [...baseChainIds, 1337] : baseChainIds
+export const supportedChainIds = baseChainIds
 
 export const getSupportedChainIds = (testnets) => {
   if (!testnets) return baseChainIds
-  return dev
-    ? [...baseChainIds, ...baseTestnetChainIds, 1337]
-    : [...baseChainIds, ...baseTestnetChainIds]
+  return [...baseChainIds, ...baseTestnetChainIds]
 }
 
 // purely informational

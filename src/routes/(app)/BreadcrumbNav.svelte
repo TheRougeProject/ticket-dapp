@@ -1,14 +1,12 @@
 <script>
-  /* global __CONFIG_PLUGINS__ */
-
   import { page } from '$app/stores'
 
   import Icon from '$components/Icon.svelte'
 
+  import chainContext from '$stores/chain.js'
+
   let importedClasses = ''
   export { importedClasses as class }
-
-  $: plugins = JSON.parse(__CONFIG_PLUGINS__ || {})
 
   const activePlugin = (key) => {
     const re = new RegExp(key, 'i')
@@ -16,7 +14,8 @@
   }
 
   const anyPlugin = () => {
-    for (const path of [...Object.keys(plugins), 'book']) {
+    // TODO use path instead of plugin name ...
+    for (const path of [...$chainContext.pluginRoutes, 'book']) {
       const re = new RegExp(path, 'i')
       if (re.test($page.url.pathname)) return true
     }
@@ -54,12 +53,11 @@
           ><Icon name="Book" class="mr-1" />Tickets book</a>
       </div>
     {/if}
-    {#each Object.keys(plugins) as plugin}
-      {#if plugins[plugin].label && !activePlugin(plugin)}
+    {#each $chainContext.pluginRoutes as entry}
+      {#if !activePlugin(entry.path)}
         <div class="level-item">
-          <a class="button is-text is-small" href={plugin}
-            ><Icon name={plugins[plugin].icon} class="mr-1" />{plugins[plugin]
-              .label}</a>
+          <a class="button is-text is-small" href={entry.path}
+            ><Icon name={entry.icon} class="mr-1" />{entry.label}</a>
         </div>
       {/if}
     {/each}
