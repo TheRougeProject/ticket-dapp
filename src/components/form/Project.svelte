@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, getContext } from 'svelte'
 
   import dayjs from 'dayjs'
 
@@ -13,6 +13,8 @@
   import DropZone from '$components/DropZone.svelte'
   import CropperModal from '$components/CropperModal.svelte'
   import Waiting from '$components/Waiting.svelte'
+
+  const mobile = getContext('mobile')
 
   export let data = {}
   export let edit = false
@@ -92,7 +94,7 @@
       control.error.name = 'This field is required'
     }
 
-    if (mobile) {
+    if ($mobile) {
       data.when = [data.when1, data.when2]
     }
 
@@ -177,12 +179,7 @@
   onMount(() => {
     // console.log('bind data', JSON.stringify(data), control)
   })
-
-  let innerWidth
-  $: mobile = innerWidth < 769
 </script>
-
-<svelte:window bind:innerWidth />
 
 <CropperModal
   bind:this={cropper}
@@ -196,7 +193,7 @@
 
 <h3 class="subtitle mt-4">When?</h3>
 <div class="columns is-multiline">
-  {#if mobile}
+  {#if $mobile}
     <div class="column is-full">
       <div class="field">
         <label for="when1" class="label">From</label>
