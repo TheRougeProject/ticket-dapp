@@ -12,7 +12,7 @@
   }
 
   const innerWidth = writable(0)
-  const mobile = derived(innerWidth, ($innerWidth) => $innerWidth < 769)
+  export const mobile = derived(innerWidth, ($innerWidth) => $innerWidth < 769)
   setContext('mobile', mobile)
 </script>
 

@@ -49,6 +49,13 @@
     on:clickoutside={outside}>
     <ul class="menu-list">
       <li>
+        <span class="mx-2"
+          ><img
+            style="height: 2em;"
+            alt="Rouge Ticket logo"
+            src="/rouge-ticket-white.svg" /></span>
+      </li>
+      <li>
         <a
           on:click={toggle}
           href="/"
