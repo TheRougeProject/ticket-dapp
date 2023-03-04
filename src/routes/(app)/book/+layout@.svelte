@@ -18,11 +18,10 @@
   <nav class="navbar" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item is-black" alt="Rouge Ticket" href="/book">
-        <span class="icon is-large mr-2">
-          <img alt="Rouge Ticket logo" src="/logo.svg" />
-        </span>
-        <strong class="is-hidden-mobile mr-2">Rouge Ticket</strong>
-        <span class="tag is-white">beta</span>
+        <span class="mx-2 is-hidden-mobile"
+          ><img alt="Rouge Ticket logo" src="/rouge-ticket-black.svg" /></span>
+        <span class="mx-2 icon is-large is-hidden-tablet"
+          ><img alt="Rouge Ticket logo" src="/logo.svg" /></span>
       </a>
     </div>
 

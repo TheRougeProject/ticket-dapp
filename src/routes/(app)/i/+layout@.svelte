@@ -15,8 +15,6 @@
         <span class="icon is-large mr-2">
           <img alt="Rouge Ticket logo" src="/logo.svg" />
         </span>
-        <strong class="is-hidden-mobile mr-2">Rouge Ticket</strong>
-        <span class="tag is-white">beta</span>
       </a>
     </div>
 
