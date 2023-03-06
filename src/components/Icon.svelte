@@ -31,13 +31,20 @@
 </span>
 
 <style lang="scss" global>
+  /* for our icon */
   .icon.is-superlarge {
     height: 4rem;
     width: 4rem;
   }
 
+  .icon.is-cover {
+    width: 100%;
+    height: auto;
+  }
+
+  /*
   .icon-tabler {
     height: 100%;
     width: 100%;
-  }
+  } */
 </style>

@@ -34,11 +34,13 @@
   import QR from '$components/QR.svelte'
   import ClipboardCopy from '$components/tools/ClipboardCopy.svelte'
   import Icon from '$components/Icon.svelte'
+  //import { default as qrcode } from '$icons/qrcode.svelte'
+  import * as icons from '$icons/index.js'
 
   export let address
   export let tokenId
-  export let noattributes = false
-  export let noowner = false
+  // export let noattributes = false
+  // export let noowner = false
 
   $: p = $project[address] || {}
   $: nft = $cache[`${address}:${tokenId}`] || {}
@@ -257,84 +259,122 @@
   </div>
 </Modal>
 
-<div class="card mb-2">
-  {#if !noowner}
-    <footer class="card-header">
-      <p class="card-footer-item is-size-7">
-        owner: {(nft?.owner || '').slice(0, 20)}...
-      </p>
-    </footer>
-  {/if}
-
-  <div class="card-content p-0">
-    <div class="media" on:keydown={keyDownA11y(openQR)} on:click={openQR}>
-      <div class="media-left" style="width: 50%;">
-        <figure class="image is-16:9">
-          {#if $project[address].visual}
-            <img alt={p.name} data-ipfs={p.visual} use:ipfs />
-          {:else}
-            <img alt="no visual" src="/empty_p.png" />
-          {/if}
-        </figure>
-      </div>
-      <div class="media-content is-size-7">
-        <p class="icon-text">
-          <span>{nft.redeemed ? 'Stub' : 'Ticket'} #{tokenId}</span>
-          <Icon
-            name="qrcode"
-            class="pt-1 ml-2 is-small {proofType ? 'is-proven' : ''}" />
-        </p>
-        <p class="is-size-7">{formatTextMaxLength(channel.label, 20)}</p>
-
-        {#if nft.redeemed}
-          <span class="mt-1 tag is-info is-light">
-            <Icon name="Checkbox" class="is-small" /> <span>used</span>
-          </span>
-        {:else if proofType === 0}
-          <span class="mt-1 tag is-warning">
-            <Icon name="ShieldOff" class="is-small" /> <span>no proof</span>
-          </span>
-        {:else if proofType === 1}
-          <span class="mt-1 tag is-success">
-            <Icon name="ShieldCheck" class="is-small" /> <span>proved</span>
-          </span>
-        {:else if proofType === 2}
-          <span class="mt-1 tag is-success">
-            <Icon name="ShieldLock" class="is-small" /> <span>signed</span>
-          </span>
-        {/if}
-        {#if channel.icon}
-          <figure class="image is-24x24">
-            <img alt={channel.label} data-ipfs={channel.icon} use:ipfs />
-          </figure>
-        {/if}
-      </div>
-    </div>
+<div class="nft box p-0 m-4" on:keydown={keyDownA11y(openQR)} on:click={openQR}>
+  <img alt={p.name} data-ipfs={p.visual} use:ipfs />
+  <div class="id">{nft.redeemed ? 'Stub' : 'Ticket'} #{tokenId}</div>
+  <div class="qr" class:is-proven={!!proofType}>
+    <svelte:component this={icons.qrcode} />
   </div>
-
-  {#if !noowner}
-    <footer class="card-footer">
-      <p class="card-footer-item is-size-7">
-        {(nft?.description || '').slice(0, 200)}...
-      </p>
-    </footer>
-  {/if}
-
-  {#if !noattributes && nft?.attributes}
-    <footer class="card-footer">
-      <p class="has-text-centered">
-        {#each nft.attributes as attribut}
-          <span class="tag m-1">
-            {attribut.trait_type} = {attribut.value}
-          </span>
-        {/each}
-      </p>
-    </footer>
-  {/if}
+  <div class="qr">
+    <img alt={channel.label} data-ipfs={channel.icon} use:ipfs />
+  </div>
+  <div class="type has-text-centered">
+    <p class="cellcentered">{formatTextMaxLength(channel.label, 20)}</p>
+  </div>
+  <div class="state">
+    {#if nft.redeemed}
+      <span class="cellcentered tag is-info is-light is-medium">
+        <Icon name="Checkbox" class="is-small mr-2" /> <span>used</span>
+      </span>
+    {:else if proofType === 0}
+      <span class="cellcentered tag is-warning  is-medium">
+        <Icon name="ShieldOff" class="is-small mr-2" /> <span>no proof</span>
+      </span>
+    {:else if proofType === 1}
+      <span class="cellcentered tag is-success  is-medium">
+        <Icon name="ShieldCheck" class="is-small mr-2" /> <span>proved</span>
+      </span>
+    {:else if proofType === 2}
+      <span class="cellcentered tag is-success  is-medium">
+        <Icon name="ShieldLock" class="is-small mr-2" /> <span>signed</span>
+      </span>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   @import '../scss/_variables.scss';
+
+  /*
+  Grid    = 32 x 32
+  visual  = 32 x 18  [ 768 * 432 16:9 ]
+  Ticket# = 32 x 4
+  QR/icon = 14 * 14   with 6 % padding
+  2 blocs = 18 x 7
+  */
+
+  .nft {
+    display: grid;
+    background-color: $grey-lightest;
+    grid-template-columns: repeat(32, 1fr);
+    grid-template-rows: repeat(32, 1fr);
+    column-gap: 0;
+    row-gap: 0;
+    box-shadow: 12px 12px 8px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+
+    &:hover {
+      background-color: $grey-lighter;
+      cursor: pointer;
+      transform: scale(1.02);
+    }
+
+    img {
+      grid-area: 1 / 1 / 19 / 33; /* <row-start> / <column-start> / <row-end> / <column-end> */
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      user-drag: none;
+      -webkit-user-drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .id {
+      grid-area: 2 / 2 / 6 / 32;
+      background-color: transparent;
+      color: #fff;
+      text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+      line-height: 100%;
+      font-size: calc(
+        1.8rem
+      ); /* use calc() to set the font size relative to the viewport width */
+      font-weight: 800;
+    }
+
+    .qr {
+      grid-area: 19 / 1 / 33 / 15;
+      background-color: transparent;
+      padding: 0.3rem;
+      line-height: 0;
+    }
+
+    .state {
+      grid-area: 19 / 15 / 26 / 33;
+      align-items: center;
+      justify-items: center;
+      position: relative;
+    }
+
+    .type {
+      grid-area: 26 / 15 / 33 / 33;
+      align-items: center;
+      justify-items: center;
+      position: relative;
+      line-height: 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .cellcentered {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
   .modal-card header {
     color: hsl(0deg, 0%, 21%);
@@ -351,10 +391,5 @@
       right: 3px;
       bottom: 0;
     }
-  }
-
-  .card-content:hover {
-    background-color: $grey-lightest;
-    cursor: pointer;
   }
 </style>
