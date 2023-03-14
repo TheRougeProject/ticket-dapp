@@ -48,7 +48,7 @@
     use:clickoutside
     on:clickoutside={outside}>
     <ul class="menu-list">
-      <li>
+      <li class="mb-4">
         <span class="mx-2"
           ><img
             style="height: 2em;"
