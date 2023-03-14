@@ -265,9 +265,11 @@
   <div class="qr" class:is-proven={!!proofType}>
     <svelte:component this={icons.qrcode} />
   </div>
-  <div class="qr">
-    <img alt={channel.label} data-ipfs={channel.icon} use:ipfs />
-  </div>
+  {#if channel.icon}
+    <div class="qr">
+      <img alt={channel.label} data-ipfs={channel.icon} use:ipfs />
+    </div>
+  {/if}
   <div class="type has-text-centered">
     <p class="cellcentered">{formatTextMaxLength(channel.label, 20)}</p>
   </div>
