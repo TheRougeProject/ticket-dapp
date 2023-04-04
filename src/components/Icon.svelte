@@ -1,34 +1,47 @@
 <script>
   import { onMount } from 'svelte'
 
-  // import { icons as feather } from 'feather-icons'
-  // import * as tabler from 'tabler-icons-svelte'
-  // importing all icons is just too slow
-  import * as tabler from '$icons/tabler.js'
   import * as icons from '$icons/index.js'
+  import * as tabler from '@tabler/icons-svelte'
 
   export let name
-  // export let size = '100%'
   export let color = 'currentColor'
   export let stroke = 2
+  export let raw = false
 
   let importedClasses = ''
   export { importedClasses as class }
 
   onMount(() => {
-    if (!icons[name] && !tabler[name]) {
+    if (!icons[name] && !tabler[`Icon${name}`]) {
       console.warn(`*** UNSUPPORTED ICON NAME *** ${name}`)
     }
   })
 </script>
 
-<span class="icon {importedClasses}">
+{#if raw}
   {#if icons[name]}
     <svelte:component this={icons[name]} />
-  {:else if tabler && tabler[name]}
-    <svelte:component this={tabler[name]} {color} strokeWidth={stroke} />
+  {:else if tabler && tabler[`Icon${name}`]}
+    <svelte:component
+      this={tabler[`Icon${name}`]}
+      {color}
+      size="auto"
+      strokeWidth={stroke} />
   {/if}
-</span>
+{:else}
+  <span class="icon {importedClasses}">
+    {#if icons[name]}
+      <svelte:component this={icons[name]} />
+    {:else if tabler && tabler[`Icon${name}`]}
+      <svelte:component
+        this={tabler[`Icon${name}`]}
+        {color}
+        size="auto"
+        strokeWidth={stroke} />
+    {/if}
+  </span>
+{/if}
 
 <style lang="scss" global>
   /* for our icon */
@@ -41,10 +54,4 @@
     width: 100%;
     height: auto;
   }
-
-  /*
-  .icon-tabler {
-    height: 100%;
-    width: 100%;
-  } */
 </style>
