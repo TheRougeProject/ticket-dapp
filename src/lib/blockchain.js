@@ -12,8 +12,8 @@ import {
 
 import Artifacts from '@rougenetwork/v2-core/Artifacts.json'
 
-import IERC20 from '@rougenetwork/v2-core/IERC20.json'
-import IERC721 from '@rougenetwork/v2-core/IERC721.json'
+import IERC20 from '@openzeppelin/contracts/build/contracts/IERC20.json'
+import IERC721 from '@openzeppelin/contracts/build/contracts/IERC721.json'
 
 import { Token } from '@rougenetwork/v2-core/Token'
 

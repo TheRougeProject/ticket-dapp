@@ -85,7 +85,7 @@
   bind:active={qrActive}
   noCloseButton={true}
   bottomIsRounded={true}>
-  <div class="modal-card ">
+  <div class="modal-card">
     <header class="modal-card-head has-background-light">
       <p class="modal-card-title">Event Id QR code</p>
       <button class="delete" aria-label="close" on:click={modal.close} />
@@ -102,16 +102,14 @@
       <p class="has-text-centered"><small>{p.name}</small></p>
       <QR text={`${$chainData.shortName}:${address}`} />
       <p class="has-text-centered is-size-7">
-        <small>
-          <a
-            class="icon-text"
-            target="_blank"
-            rel="noreferrer"
-            href={p._isDraft ? '#' : explorer($chainData, 'address', address)}>
-            <span><b>{$chainData.shortName}:</b>{address}</span>
-            <Icon name="external-link" class="is-small" />
-          </a>
-        </small>
+        <a
+          class="icon-text"
+          target="_blank"
+          rel="noreferrer"
+          href={p._isDraft ? '#' : explorer($chainData, 'address', address)}>
+          <span><b>{$chainData.shortName}:</b>{address}</span>
+          <Icon name="ExternalLink" class="mr-3 is-cover" />
+        </a>
       </p>
     </section>
   </div>
@@ -165,7 +163,7 @@
   {/if}
 
   {#if mobile}
-    <div class="level has-background-white mb-0 pb-5 ">
+    <div class="level has-background-white mb-0 pb-5">
       <div class="level-left">
         <div class="level-item">
           <h2 class="title is-size-4 mt-5">

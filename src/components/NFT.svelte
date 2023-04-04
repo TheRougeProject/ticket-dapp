@@ -1,9 +1,12 @@
 <script>
   import { onMount } from 'svelte'
+  import { writable } from 'svelte/store'
 
   import { ethers } from 'ethers'
 
   import { dev } from '$app/environment'
+
+  import { resize } from '$lib/actions/resize.js'
 
   import {
     provider,
@@ -21,7 +24,7 @@
   } from '@rougenetwork/v2-core/rouge'
 
   import blockchain from '$lib/blockchain.js'
-  import { keyDownA11y, formatTextMaxLength } from '$lib/utils'
+  import { keyDownA11y } from '$lib/utils'
 
   import project from '$stores/project.js'
   import cache from '$stores/nft.js'
@@ -54,6 +57,9 @@
   let qrData
   let qrUnlocked // TODO proof or certificate !
   let proofType
+
+  const ticketWidth = writable(0)
+  const updater = (node) => ticketWidth.set(node.clientWidth)
 
   const saveLocal = async () => {
     localStorage.setItem('rge:dev:qrData', qrUnlocked)
@@ -165,7 +171,7 @@
           </div>
         </div>
         <div class="level-right">
-          <div class="level-item ">
+          <div class="level-item">
             <button
               class="delete"
               aria-label="close"
@@ -259,9 +265,21 @@
   </div>
 </Modal>
 
-<div class="nft box p-0 m-4" on:keydown={keyDownA11y(openQR)} on:click={openQR}>
+<div
+  use:resize={updater}
+  class="nft box p-0 m-4"
+  on:keydown={keyDownA11y(openQR)}
+  on:click={openQR}>
   <img alt={p.name} data-ipfs={p.visual} use:ipfs />
-  <div class="id">{nft.redeemed ? 'Stub' : 'Ticket'} #{tokenId}</div>
+  <div
+    class="id"
+    style="height: {Math.floor(
+      (4 / 32) * $ticketWidth
+    )}px; font-size: {Math.floor(
+      (4 / 32) * $ticketWidth
+    )}px; line-height: {Math.floor((4 / 32) * $ticketWidth)}px">
+    <span>{nft.redeemed ? 'Stub' : 'Ticket'} #{tokenId}<span /></span>
+  </div>
   <div class="qr" class:is-proven={!!proofType}>
     <svelte:component this={icons.qrcode} />
   </div>
@@ -270,25 +288,39 @@
       <img alt={channel.label} data-ipfs={channel.icon} use:ipfs />
     </div>
   {/if}
-  <div class="type has-text-centered">
-    <p class="cellcentered">{formatTextMaxLength(channel.label, 20)}</p>
+  <div
+    class="type has-text-centered"
+    style="font-size: {Math.floor(
+      (3 / 32) * $ticketWidth
+    )}px; line-height: {Math.floor((3 / 32) * $ticketWidth)}px">
+    <p class="cellcentered">{channel.label}</p>
   </div>
-  <div class="state">
+  <div
+    class="state"
+    style="height: {Math.floor(
+      (4 / 32) * $ticketWidth
+    )}px; font-size: {Math.floor(
+      (2.5 / 32) * $ticketWidth
+    )}px; line-height: {Math.floor((3 / 32) * $ticketWidth)}px">
     {#if nft.redeemed}
-      <span class="cellcentered tag is-info is-light is-medium">
-        <Icon name="Checkbox" class="is-small mr-2" /> <span>used</span>
+      <span class="tag is-info">
+        <span class="memo"><Icon name="Checkbox" raw={true} /></span>
+        <span>used</span>
       </span>
     {:else if proofType === 0}
-      <span class="cellcentered tag is-warning  is-medium">
-        <Icon name="ShieldOff" class="is-small mr-2" /> <span>no proof</span>
+      <span class="tag is-warning">
+        <span class="memo"><Icon name="ShieldOff" raw={true} /></span>
+        <span>no proof</span>
       </span>
     {:else if proofType === 1}
-      <span class="cellcentered tag is-success  is-medium">
-        <Icon name="ShieldCheck" class="is-small mr-2" /> <span>proved</span>
+      <span class="tag is-success">
+        <span class="memo"><Icon name="ShieldCheck" raw={true} /></span>
+        <span>proved</span>
       </span>
     {:else if proofType === 2}
-      <span class="cellcentered tag is-success  is-medium">
-        <Icon name="ShieldLock" class="is-small mr-2" /> <span>signed</span>
+      <span class="tag is-success">
+        <span class="memo"><Icon name="ShieldLock" raw={true} /></span>
+        <span>signed</span>
       </span>
     {/if}
   </div>
@@ -314,6 +346,7 @@
     row-gap: 0;
     box-shadow: 12px 12px 8px rgb(0 0 0 / 0.2);
     cursor: pointer;
+    font-size: 100%;
 
     &:hover {
       background-color: $grey-lighter;
@@ -337,13 +370,34 @@
     .id {
       grid-area: 2 / 2 / 6 / 32;
       background-color: transparent;
-      color: #fff;
-      text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-      line-height: 100%;
-      font-size: calc(
-        1.8rem
-      ); /* use calc() to set the font size relative to the viewport width */
-      font-weight: 800;
+      span {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #fff;
+        text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+        font-weight: 800;
+      }
+    }
+
+    .state {
+      grid-area: 14 / 2 / 18 / 32;
+      position: relative;
+      .tag {
+        position: absolute;
+        font-size: inherit;
+        line-height: inherit;
+        height: 100%;
+        right: 0;
+        bottom: 0;
+        border-radius: 0.3em;
+      }
+      .memo {
+        height: 80%;
+        width: 80%;
+        padding-right: 0.35em;
+      }
     }
 
     .qr {
@@ -353,21 +407,20 @@
       line-height: 0;
     }
 
-    .state {
-      grid-area: 19 / 15 / 26 / 33;
-      align-items: center;
-      justify-items: center;
-      position: relative;
-    }
-
     .type {
-      grid-area: 26 / 15 / 33 / 33;
+      grid-area: 19 / 15 / 33 / 33;
       align-items: center;
       justify-items: center;
       position: relative;
-      line-height: 0.8rem;
-      font-size: 0.8rem;
       font-weight: 800;
+      padding: 0.3rem;
+      p {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     .cellcentered {
@@ -382,16 +435,5 @@
     color: hsl(0deg, 0%, 21%);
     font-size: 1.25rem;
     line-height: 1;
-  }
-
-  .media-content {
-    line-height: normal;
-    position: relative;
-
-    figure {
-      position: absolute;
-      right: 3px;
-      bottom: 0;
-    }
   }
 </style>
