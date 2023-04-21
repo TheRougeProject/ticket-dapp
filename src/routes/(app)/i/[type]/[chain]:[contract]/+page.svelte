@@ -2,16 +2,17 @@
   import { onMount, onDestroy } from 'svelte'
   import { writable } from 'svelte/store'
 
+  import { ethers } from 'ethers'
   import {
     getChainDataByChainId,
     chainId,
     provider,
     signerAddress,
     signer
-  } from 'svelte-ethers-store'
+  } from 'ethers-svelte'
 
   import { abiEncodeAcquire } from '@rougenetwork/v2-core/rouge'
-  import { TokenAmountSet } from '@rougenetwork/v2-core/Token'
+  import { TokenAmountSet } from 'erc-token-js'
 
   import blockchain from '$lib/blockchain.js'
   import { ipfs } from '$lib/actions/ipfs.js'
@@ -51,8 +52,10 @@
 
   const cart = writable({})
   const allowed = writable({})
+  const sufficient = writable({})
 
-  $: ready = !Object.values($allowed).includes(false)
+  $: readyAllow = !Object.values($allowed).includes(false)
+  $: readyBalance = !Object.values($sufficient).includes(false)
 
   const unsub = cart.subscribe((selection) => {
     const tokenSet = TokenAmountSet.from([])
@@ -60,17 +63,11 @@
     for (const i of Object.keys(selection)) {
       if (/^\d+$/.test(i)) {
         if (p.channels[i].amount && selection[i]) {
-          tokenSet.add(p.channels[i].amount.mul(selection[i]))
+          tokenSet.add(p.channels[i].amount.mul(BigInt(selection[i])))
         }
         totalQty += selection[i]
       }
     }
-    /* selection.approve = Object.keys(total).map(
-     *   symbol => ({ ...token[symbol], amount: total[symbol] })
-     * )
-     * selection.totalText = Object.keys(total).map(
-     *   symbol => formatAmount({ ...token[symbol], amount: total[symbol] })
-     * ).join(' + ') || 'free' */
 
     selection.total = tokenSet.toString(' + ')
     selection.tokenSet = tokenSet
@@ -85,11 +82,11 @@
   const validate = async () => {
     if (!$signerAddress) return
     const { chainId } = await $provider.getNetwork()
+
     if (chainId !== chain) {
       step = step < 2 ? step : 2
       return
     }
-    console.log({ chain, chainId })
     step = step === 2 ? 3 : step
   }
   const unsub2 = signerAddress.subscribe(validate)
@@ -107,9 +104,8 @@
 
   $: balances = $signerAddress ? $account.balancesFor(contract) : {}
 
-  // TODO test approve & approve
   const buyCtx = async () => {
-    if (!ready) return
+    if (!readyAllow || !readyBalance) return
 
     success = false
 
@@ -146,11 +142,16 @@
       onError: () => {
         step = 3
       },
-      onReceipt: (rcpt) => {
-        const { from, to, tokenId } = rcpt.events[0].args
-        console.log('final on rcpt', { from, to, tokenId })
+      onReceipt: async (rcpt) => {
         project.addBearer(contract)
-        nft.add(`${contract}:${tokenId}`)
+        const instance = blockchain.rouge($chainId)(contract)
+        const events = await instance.queryFilter(
+          instance.filters.Transfer(ethers.ZeroAddress, $signerAddress),
+          rcpt.blockNumber
+        )
+        for (const e of events) {
+          nft.add(`${contract}:${e.args.tokenId}`)
+        }
       }
     }
   }
@@ -334,7 +335,7 @@
                       colspan={channel.icon ? 4 : 5}
                       style="vertical-align: center;">{channel.label}</th>
                     <td colspan="2" class="has-text-right">
-                      {channel?.amount || 'Free'}
+                      {channel?.amount?.toString() || 'Free'}
                     </td>
                     <td colspan="1" class="has-text-right">
                       <input
@@ -436,7 +437,7 @@
                 </div>
                 <div class="level-right">
                   <p class="level-item">
-                    {p.channels[entry].amount || 'free'}
+                    {p.channels[entry]?.amount?.toString() || 'free'}
                   </p>
                 </div>
               </div>
@@ -444,7 +445,13 @@
           {/each}
 
           <div class="box m-6 has-text-right">
-            {#if !ready}
+            {#if !readyBalance}
+              <article class="message is-danger">
+                <div class="message-body">
+                  You don't have enough funds to buy these tickets
+                </div>
+              </article>
+            {:else if !readyAllow}
               <article class="message is-danger">
                 <div class="message-body">
                   In order to buy your ticket(s), you must first approve token
@@ -454,29 +461,34 @@
             {/if}
 
             {#each $cart.tokenSet.values() as amount}
-              {#if amount.token.type === 'ERC20'}
-                <Approve
-                  {contract}
-                  {amount}
-                  max={false}
-                  bind:allowed={$allowed[amount.token.address]}>
-                  {JSON.stringify(amount)}
-                </Approve>
-              {/if}
+              <Approve
+                {contract}
+                {amount}
+                max={false}
+                bind:allowed={$allowed[amount.token.address]}
+                bind:sufficient={$sufficient[amount.token.address]}>
+                {amount.toString()}
+              </Approve>
             {/each}
 
-            {#if !success}
-              <TxButton
-                disabled={!ready || p._isDraft}
-                class="button is-primary mt-4"
-                submitCtx={buyCtx}
-                on:success={() => (success = true)}>
-                Checkout {#if $cart.total}(total={$cart.total}){/if}
-              </TxButton>
-              <p>
-                After payment, each purchased ticket will be delivered as an
-                NFT.
-              </p>
+            {#if !success && !p._isDraft}
+              {#key readyBalance}
+                {#key readyAllow}
+                  <TxButton
+                    disabled={!readyAllow || !readyBalance}
+                    class="button is-primary mt-4"
+                    submitCtx={buyCtx}
+                    on:success={() => (success = true)}>
+                    Checkout {#if $cart.total}({$cart.total}){/if}
+                  </TxButton>
+                  {#if readyBalance && readyAllow}
+                    <p>
+                      After payment, each purchased ticket will be delivered as
+                      an NFT.
+                    </p>
+                  {/if}
+                {/key}
+              {/key}
             {/if}
 
             <!--

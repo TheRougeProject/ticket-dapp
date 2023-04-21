@@ -34,7 +34,7 @@ const createStore = () => {
         emit()
       },
       onReceipt: (rcpt) => {
-        //console.log('onReceipt', rcpt)
+        console.log('onReceipt', rcpt)
         assign({
           [callId]: { ...get(callId), step: 3, rcpt }
         })

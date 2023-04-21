@@ -146,27 +146,27 @@
                   href="#telegram"
                   class="ml-2"
                   on:keydown={keyDownA11y(telegram)}
-                  on:click={telegram}><Icon name="Telegram" /></a>
+                  on:click={telegram}><Icon name="BrandTelegram" /></a>
                 <a
                   href="#whatsapp"
                   class="ml-2"
                   on:keydown={keyDownA11y(whatsapp)}
-                  on:click={whatsapp}><Icon name="Whatsapp" /></a>
+                  on:click={whatsapp}><Icon name="BrandWhatsapp" /></a>
                 <a
                   href="#twitter"
                   class="ml-2"
                   on:keydown={keyDownA11y(twitter)}
-                  on:click={twitter}><Icon name="Twitter" /></a>
+                  on:click={twitter}><Icon name="BrandTwitter" /></a>
                 <a
                   href="#facebook"
                   class="ml-2"
                   on:keydown={keyDownA11y(facebook)}
-                  on:click={facebook}><Icon name="Facebook" /></a>
+                  on:click={facebook}><Icon name="BrandFacebook" /></a>
                 <a
                   href="#linkedin"
                   class="ml-2"
                   on:keydown={keyDownA11y(linkedin)}
-                  on:click={linkedin}><Icon name="Linkedin" /></a>
+                  on:click={linkedin}><Icon name="BrandLinkedin" /></a>
               {/if}
             </Share>
           </span>

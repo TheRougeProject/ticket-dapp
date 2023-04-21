@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  import { chainId, chainData } from 'svelte-ethers-store'
+  import { chainId, chainData } from 'ethers-svelte'
 
   import { goto } from '$app/navigation'
 
@@ -33,7 +33,7 @@
     const { symbol, price, free, ...channel } = input
 
     if (!free) {
-      channel.amount = tokens[symbol].newAmount(price)
+      channel.amount = tokens[symbol].newAmount(Number(price)).toJSON()
     }
     const updated = [...p.channels]
     updated[index] = channel
@@ -50,7 +50,7 @@
     if (channel.amount) {
       input = {
         ...channel,
-        price: channel.amount.toFormat(),
+        price: channel.amount.toFloat(),
         symbol: channel.amount.token.symbol
       }
     } else {
@@ -59,7 +59,6 @@
         free: true
       }
     }
-    console.log('input sent', input)
   })
 </script>
 

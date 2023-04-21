@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  import { defaultEvmStores as evm } from 'svelte-ethers-store'
+  import { defaultEvmStores as evm } from 'ethers-svelte'
 
   import { authed } from '$lib/backend.js'
 

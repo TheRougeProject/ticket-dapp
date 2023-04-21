@@ -2,7 +2,7 @@
 
 import { proxied } from 'svelte-proxied-store'
 
-import { defaultEvmStores as evm, chainId } from 'svelte-ethers-store'
+import { defaultEvmStores as evm, chainId } from 'ethers-svelte'
 
 import Artifacts from '@rougenetwork/v2-core/Artifacts.json'
 

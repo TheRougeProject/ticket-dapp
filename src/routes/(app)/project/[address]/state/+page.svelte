@@ -1,7 +1,7 @@
 <script>
-  import { constants } from 'ethers'
+  import { ethers } from 'ethers'
 
-  import { signerAddress, chainId } from 'svelte-ethers-store'
+  import { signerAddress, chainId } from 'ethers-svelte'
 
   import { abiEncodeAuth, decodeRoles } from '@rougenetwork/v2-core/rouge'
 
@@ -38,7 +38,7 @@
   // XXX is there a cleaner lifecyle ?
   $: if (ready) {
     for (const k of Object.keys(selectors)) {
-      console.log('test invalidation', k)
+      // console.log('test invalidation', k)
       if (actions[k]) actions[k].reset()
     }
   }
@@ -77,11 +77,11 @@
     refresh()
   }
 
-  const authorizeCtx = (selector, grant, delegate = constants.AddressZero) => {
+  const authorizeCtx = (selector, grant, delegate = ethers.ZeroAddress) => {
     const contract = blockchain.rouge($chainId)(address)
     const auths = [
       {
-        scope: contract.interface.getSighash(selector),
+        scope: contract.interface.getFunction(selector).selector,
         address: delegate,
         grant
       }

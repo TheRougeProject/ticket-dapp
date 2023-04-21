@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  import { chainId } from 'svelte-ethers-store'
+  import { chainId } from 'ethers-svelte'
 
   import blockchain from '$lib/blockchain.js'
 
@@ -10,7 +10,7 @@
   import project from '$stores/project.js'
   import nft from '$stores/nft.js'
 
-  import { Jazzicon } from 'svelte-ethers-store/components'
+  import { Jazzicon } from 'ethers-svelte/components'
   import EmptyState from '$components/design/EmptyState.svelte'
   import Slate from '$components/design/Slate.svelte'
 

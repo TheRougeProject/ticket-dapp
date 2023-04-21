@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { chainId, chainData } from 'svelte-ethers-store'
+  import { chainId, chainData } from 'ethers-svelte'
 
   import blockchain from '$lib/blockchain.js'
 

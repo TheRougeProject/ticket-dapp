@@ -1,7 +1,7 @@
 <script>
-  import { constants } from 'ethers'
+  import { ethers } from 'ethers'
 
-  import { signerAddress, chainId } from 'svelte-ethers-store'
+  import { signerAddress, chainId } from 'ethers-svelte'
 
   import blockchain from '$lib/blockchain.js'
 
@@ -19,7 +19,7 @@
   $: p = $project[address] || {}
 
   const withdrawCtx = (token) => {
-    if (token === constants.AddressZero) {
+    if (token === ethers.ZeroAddress) {
       return {
         call: blockchain.rouge($chainId)(address).widthdraw,
         params: [$signerAddress, p.balances[token].number],
@@ -50,7 +50,7 @@
     <Slate>
       <p>
         {p.balances[token].token.symbol}
-        {#if token === constants.AddressZero}
+        {#if token === ethers.ZeroAddress}
           <Address noIdenticon={true} {address}>native coin</Address>
         {:else}
           <Address noIdenticon={true} address={token} />
@@ -63,7 +63,7 @@
       <div slot="actions">
         <TxButton
           class="button is-outlined is-primary"
-          disabled={p.balances[token].number.eq(0)}
+          disabled={p.balances[token].number === 0n}
           submitCtx={() => withdrawCtx(token)}>
           Withdraw All
         </TxButton>

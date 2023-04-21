@@ -51,11 +51,12 @@
         {#if channel.amount?.token?.address}
           <Address address={channel.amount?.token?.address}>
             <span class="icon-text">
-              <span>{channel.amount}</span><Icon name="ExternalLink" />
+              <span>{channel.amount?.toString()}</span><Icon
+                name="ExternalLink" />
             </span>
           </Address>
         {:else}
-          {channel.amount || 'free'}
+          {channel.amount?.toString() || 'free'}
           {#if channel.max}
             (max/address = {channel.max})
           {/if}

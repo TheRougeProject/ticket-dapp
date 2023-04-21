@@ -1,9 +1,9 @@
 <script>
   import { onMount } from 'svelte'
 
-  import { connected, signerAddress, chainData } from 'svelte-ethers-store'
+  import { connected, signerAddress, chainData } from 'ethers-svelte'
 
-  import { Jazzicon } from 'svelte-ethers-store/components'
+  import { Jazzicon } from 'ethers-svelte/components'
 
   import Head from '$components/Head.svelte'
   import AppContext from '$components/AppContext.svelte'
@@ -16,7 +16,7 @@
   import blockchain from '$lib/blockchain.js'
 
   onMount(async () => {
-    if (!$signerAddress) blockchain.autoConnect()
+    //if (!$signerAddress) blockchain.autoConnect()
   })
 
   let popparent
@@ -119,7 +119,8 @@
             <a
               rel="noreferrer"
               target="_blank"
-              href="https://discord.gg/aUeSjsN8Tx"><Icon name="Discord" /></a
+              href="https://discord.gg/aUeSjsN8Tx"
+              ><Icon name="BrandDiscord" /></a
             >&nbsp;
             <a
               rel="noreferrer"
@@ -133,7 +134,7 @@
               rel="noreferrer"
               target="_blank"
               href="https://github.com/TheRougeProject"
-              ><Icon name="Github" /></a
+              ><Icon name="BrandGithub" /></a
             >&nbsp;
             <a
               rel="noreferrer"

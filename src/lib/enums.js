@@ -1,12 +1,13 @@
-import { utils } from 'ethers'
+import { ethers } from 'ethers'
 
+// XXX only support non BigInt chainId
 const baseChainIds = JSON.parse(import.meta.env.VITE_MAINCHAIN_IDS)
 const baseTestnetChainIds = JSON.parse(import.meta.env.VITE_TESTCHAIN_IDS)
-export const supportedChainIds = baseChainIds
+export const supportedChainIds = baseChainIds.map((id) => BigInt(id))
 
 export const getSupportedChainIds = (testnets) => {
-  if (!testnets) return baseChainIds
-  return [...baseChainIds, ...baseTestnetChainIds]
+  if (!testnets) return supportedChainIds
+  return [...baseChainIds, ...baseTestnetChainIds].map((id) => BigInt(id))
 }
 
 // purely informational
@@ -55,10 +56,10 @@ export const types = [
 
 // TODO support https://tokenlists.org/
 
-// XXX move to utils ?
+// XXX move to erc-token-js
 
 export const f = (decimals) => (s) =>
-  utils.commify(utils.formatUnits((s + '').split(' ').join(''), decimals))
+  ethers.formatUnits((s + '').split(' ').join(''), decimals)
 export const f6 = f(6)
 export const f18 = f(18)
 

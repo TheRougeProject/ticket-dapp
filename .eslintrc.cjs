@@ -12,6 +12,9 @@ module.exports = {
       parser: 'svelte-eslint-parser'
     }
   ],
+  globals: {
+    BigInt: true
+  },
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2021

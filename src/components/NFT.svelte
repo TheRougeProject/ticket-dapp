@@ -14,7 +14,7 @@
     signerAddress,
     chainId,
     chainData
-  } from 'svelte-ethers-store'
+  } from 'ethers-svelte'
 
   import {
     generateCertificate,
@@ -76,7 +76,8 @@
         bearer: $signerAddress,
         tokenId,
         signature,
-        selector: blockchain.singleton($chainId).interface.getSighash('redeem'),
+        selector: blockchain.singleton($chainId).interface.getFunction('redeem')
+          .selector,
         expire
       })
       proofType = 2
@@ -133,7 +134,8 @@
         signer: $signer,
         contract: address,
         tokenId,
-        selector: blockchain.singleton($chainId).interface.getSighash('redeem')
+        selector: blockchain.singleton($chainId).interface.getFunction('redeem')
+          .selector
       })
       registry.set(did, { signature, expire })
       refreshProof()

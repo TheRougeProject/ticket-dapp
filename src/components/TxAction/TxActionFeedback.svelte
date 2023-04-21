@@ -1,7 +1,7 @@
 <script>
   import { getContext } from 'svelte'
 
-  import { chainData } from 'svelte-ethers-store'
+  import { chainData } from 'ethers-svelte'
 
   import tracker from '$stores/tracker.js'
 

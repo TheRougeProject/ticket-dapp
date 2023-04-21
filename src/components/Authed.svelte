@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { signerAddress } from 'svelte-ethers-store'
+  import { signerAddress } from 'ethers-svelte'
 
   import Modal from '$components/Modal.svelte'
 

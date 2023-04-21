@@ -1,10 +1,10 @@
 <script>
   import { onMount } from 'svelte'
-  import { constants, utils, BigNumber } from 'ethers'
+  import { ethers } from 'ethers'
 
   import blockchain from '$lib/blockchain.js'
 
-  import { signerAddress } from 'svelte-ethers-store'
+  import { provider, signerAddress } from 'ethers-svelte'
 
   import TxButton from '$components/TxAction/Button.svelte'
 
@@ -12,34 +12,33 @@
   export let amount
   export let max = false
   export let allowed = false
-  export let insufficient = false
+  export let sufficient = false
 
   let state = 'loading...'
-  let balance = BigNumber.from(0)
-  let allowance = BigNumber.from(0)
+  let balance = 0n
+  let allowance = 0n
 
-  $: number = max ? constants.MaxUint256 : amount.number
+  $: number = max ? ethers.MaxUint256 : amount.number
 
   const load = async () => {
+    if (amount.token._isNative) {
+      allowed = true
+      const balance = await $provider.getBalance($signerAddress)
+      sufficient = balance >= amount.number
+      state = null
+
+      return
+    }
+
     balance = await blockchain
       .erc20(amount.token.address)
       .balanceOf($signerAddress)
     allowance = await blockchain
       .erc20(amount.token.address)
       .allowance($signerAddress, contract)
-    console.log(
-      '[%s] balance = %s / allowance = %s ',
-      amount.token.symbol,
-      utils.formatUnits(balance + '', amount.token.decimals),
-      utils.formatUnits(allowance + '', amount.token.decimals)
-    )
-    if (allowance.gte(amount.number)) {
-      amount.addTag('allowed')
-      allowed = true
-    }
-    if (balance.lt(amount.number)) {
-      insufficient = true
-    }
+
+    sufficient = balance >= amount.number
+    allowed = allowance >= amount.number
     state = null
   }
 
@@ -54,12 +53,16 @@
   onMount(load)
 </script>
 
-{#if !allowed}
+{#if !sufficient}
+  <TxButton disabled={true} class="button">
+    Not enough {amount.token.symbol}
+  </TxButton>
+{:else if !allowed}
   <TxButton
-    disabled={state ? undefined : true}
+    disabled={state == null ? undefined : true}
     class="button"
     submitCtx={approveCtx}
     on:success={load}>
-    Approve {amount + ''}
+    Approve <slot />
   </TxButton>
 {/if}

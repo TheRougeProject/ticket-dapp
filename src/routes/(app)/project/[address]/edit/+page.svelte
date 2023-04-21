@@ -34,7 +34,6 @@
     project.refresh(address)
 
     goto(`/project/${address}/draft`)
-    //history.go(-1)
   }
 
   onMount(() => {

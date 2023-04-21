@@ -6,7 +6,7 @@
     signerAddress,
     chainId,
     chainData
-  } from 'svelte-ethers-store'
+  } from 'ethers-svelte'
 
   import blockchain from '$lib/blockchain.js'
   import { getSupportedChainIds } from '$lib/enums.js'
@@ -76,7 +76,7 @@
         <div class="level-left">
           <div class="level-item">
             <button
-              class="button is-primary "
+              class="button is-primary"
               disabled={!$signerAddress}
               on:click={openCreate}>Create</button>
           </div>
@@ -286,9 +286,9 @@
                   <a
                     rel="noreferrer"
                     target="_blank"
-                    href={getChainDataByChainId(id).infoURL}>
+                    href={getChainDataByChainId(id)?.infoURL}>
                     <span class="tag is-grey mr-2 mb-2"
-                      >{getChainDataByChainId(id).name}</span>
+                      >{getChainDataByChainId(id)?.name}</span>
                   </a>
                 {/each}
               </p>

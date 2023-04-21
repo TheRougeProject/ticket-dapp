@@ -1,6 +1,6 @@
 <script>
-  import { chainData } from 'svelte-ethers-store'
-  import { Jazzicon } from 'svelte-ethers-store/components'
+  import { chainData } from 'ethers-svelte'
+  import { Jazzicon } from 'ethers-svelte/components'
 
   import { keyDownA11y, formatAddress } from '$lib/utils'
 

@@ -1,5 +1,5 @@
 <script>
-  import { signerAddress, chainData } from 'svelte-ethers-store'
+  import { signerAddress, chainData } from 'ethers-svelte'
 
   import dayjs from 'dayjs'
 

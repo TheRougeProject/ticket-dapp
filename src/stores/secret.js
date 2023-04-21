@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-import { utils } from 'ethers'
+import { ethers } from 'ethers'
 import { nanoid } from 'nanoid'
 
 import { browser } from '$app/environment'
@@ -16,10 +16,10 @@ const createStore = () => {
     if (browser) {
       deviceSeed = localStorage.getItem(storageKey())
       if (!deviceSeed) {
-        deviceSeed = utils.id(nanoid())
+        deviceSeed = ethers.id(nanoid())
         localStorage.setItem(storageKey(), deviceSeed)
       }
-      set(utils.id(deviceSeed))
+      set(ethers.id(deviceSeed))
     }
     // TODO other more sophisticated secret options
     // secret = localseed | or encrypted(password).

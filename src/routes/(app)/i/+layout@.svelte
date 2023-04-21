@@ -1,7 +1,7 @@
 <script>
-  import { signerAddress, chainId, chainData } from 'svelte-ethers-store'
+  import { signerAddress, chainId, chainData } from 'ethers-svelte'
 
-  import { Jazzicon } from 'svelte-ethers-store/components'
+  import { Jazzicon } from 'ethers-svelte/components'
 
   import { formatAddress } from '$lib/utils'
 

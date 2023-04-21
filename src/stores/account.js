@@ -1,4 +1,4 @@
-import { utils } from 'ethers'
+import { ethers } from 'ethers'
 
 import { proxied } from 'svelte-proxied-store'
 
@@ -6,7 +6,7 @@ import { browser } from '$app/environment'
 
 import blockchain from '$lib/blockchain'
 
-import { defaultEvmStores as evm } from 'svelte-ethers-store'
+import { defaultEvmStores as evm } from 'ethers-svelte'
 
 const createStore = () => {
   const lock = {}
@@ -18,9 +18,10 @@ const createStore = () => {
       const checkins = {}
       const balances = {}
       // other options we store a Onject of all contract balances ...
-      balances.total = (
-        await blockchain.rouge(evm.$chainId)(address).balanceOf(account)
-      ).toNumber()
+      balances.total = await blockchain
+        .rouge(evm.$chainId)(address)
+        .balanceOf(account)
+
       // event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
       const events = await blockchain
         .rouge(evm.$chainId)(address)
@@ -85,7 +86,7 @@ const createStore = () => {
     get: function (target, key) {
       if (/^balancesFor/.test(key)) {
         return (address, account = evm.$signerAddress) => {
-          if (!utils.isAddress(address)) return
+          if (!ethers.isAddress(address)) return
           // TODO check address syntax ...
           const storeKey = `${address}:balancesFor:${account}`
           if (!target[storeKey]) refreshBalance(storeKey, address, account)
@@ -94,7 +95,7 @@ const createStore = () => {
       }
       if (/^checksIn/.test(key)) {
         return (address, account = evm.$signerAddress) => {
-          if (!utils.isAddress(address)) return
+          if (!ethers.isAddress(address)) return
           // TODO check address syntax ...
           const storeKey = `${address}:checksIn:${account}`
           if (!target[storeKey]) refreshBalance(storeKey, address, account)

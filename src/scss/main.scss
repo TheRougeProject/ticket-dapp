@@ -27,3 +27,7 @@ $shadow: 0.05rem 0.05rem 0.15rem -0.05rem $primary-disabled,
 /// @import "bulma-o-steps/bulma-steps.sass";
 
 @import './_overrides.scss';
+
+#preloaded {
+  display: none;
+}

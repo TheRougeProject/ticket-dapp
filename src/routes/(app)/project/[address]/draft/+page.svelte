@@ -1,6 +1,6 @@
 <script>
   import Mustache from 'mustache'
-  import { chainId, chainData } from 'svelte-ethers-store'
+  import { chainId, chainData } from 'ethers-svelte'
 
   import { browser } from '$app/environment'
   import { goto } from '$app/navigation'
@@ -38,7 +38,7 @@
   const control = {}
 
   const buildImage = async () => {
-    console.log({ p })
+    // console.log({ p })
 
     const template = ' eee {{ x }} fff '
     var rendered = Mustache.render(template, { x: 'Luke' })
@@ -61,15 +61,17 @@
       if (!success || !cids || cids.length !== 1)
         throw new Error('springbok error')
 
-      console.log({ success, cids })
+      // console.log({ success, cids })
 
       const auths = [
         {
-          scope: blockchain.singleton($chainId).interface.getSighash('acquire'),
+          scope: blockchain.singleton($chainId).interface.getFunction('acquire')
+            .selector,
           enable: true
         },
         {
-          scope: blockchain.singleton($chainId).interface.getSighash('redeem'),
+          scope: blockchain.singleton($chainId).interface.getFunction('redeem')
+            .selector,
           enable: true
         }
       ].map((a) => abiEncodeAuth(a))
@@ -85,6 +87,7 @@
         auths,
         onReceipt: (rcpt) => {
           // control.loadText = `Your project has been created!`
+
           const proxy = rcpt.events.filter(
             (e) => e.event === 'ProxyCreation'
           )[0].args.proxy
@@ -157,7 +160,7 @@
       </nav>
 
       <div slot="info">
-        {channel.amount || 'free'}
+        {channel.amount?.toString() || 'free'}
       </div>
 
       <div slot="actions">

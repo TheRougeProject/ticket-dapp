@@ -1,8 +1,8 @@
 <script>
   import { onMount } from 'svelte'
-  import { utils } from 'ethers'
+  import { ethers } from 'ethers'
 
-  import { signerAddress, chainId, chainData } from 'svelte-ethers-store'
+  import { signerAddress, chainId, chainData } from 'ethers-svelte'
 
   import NFT from '$components/NFT.svelte'
   import EmptyState from '$components/design/EmptyState.svelte'
@@ -26,7 +26,7 @@
     if (!bearer) {
       bearer = $signerAddress
     } else {
-      bearer = utils.getAddress(bearer)
+      bearer = ethers.getAddress(bearer)
     }
     const project = blockchain.rouge($chainId)(address)
     // auto discovery potential NFT

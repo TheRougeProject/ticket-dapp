@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { chainData } from 'svelte-ethers-store'
+  import { chainData } from 'ethers-svelte'
 
   import { explorer } from '$lib/utils.js'
 
@@ -39,7 +39,7 @@
       <div class="column is-two-thirds">
         <ul class="steps is-narrow is-small is-centered has-content-centered">
           <li class="steps-segment has-gaps" class:is-active={call.step === 1}>
-            <span class="steps-marker " />
+            <span class="steps-marker" />
             <div class="steps-content">
               <p class="heading">Wallet</p>
             </div>
@@ -51,7 +51,7 @@
             </div>
           </li>
           {#if call.err}
-            <li class="steps-segment has-gaps ">
+            <li class="steps-segment has-gaps">
               <span class="steps-marker is-danger">
                 <Icon name="ThumbDown" />
               </span>

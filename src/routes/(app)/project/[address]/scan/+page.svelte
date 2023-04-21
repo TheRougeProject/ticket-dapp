@@ -1,7 +1,7 @@
 <script>
   import project from '$stores/project.js'
 
-  import { signerAddress } from 'svelte-ethers-store'
+  import { signerAddress } from 'ethers-svelte'
 
   import CheckIn from '$components/CheckIn.svelte'
 

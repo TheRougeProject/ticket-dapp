@@ -1,6 +1,6 @@
 <script>
-  import { chainData as chainDataStore } from 'svelte-ethers-store'
-  import { Identicon } from 'svelte-ethers-store/components'
+  import { chainData as chainDataStore } from 'ethers-svelte'
+  import { Identicon } from 'ethers-svelte/components'
 
   import { formatAddress } from '$lib/utils'
 

@@ -2,7 +2,7 @@
   import { createEventDispatcher, setContext } from 'svelte'
   import { writable } from 'svelte/store'
 
-  import { chainData, signer } from 'svelte-ethers-store'
+  import { chainData, provider, signerAddress } from 'ethers-svelte'
 
   import tracker from '$stores/tracker.js'
 
@@ -40,14 +40,15 @@
     const ctx = await submitCtx()
     if (typeof ctx !== 'object') return
 
-    console.log('debug', ctx)
     // XXX more controls ?
     // params is not really defined in specs, use options ?
     if (ctx.params && ctx.params.length > 1) {
       const options = ctx.params[ctx.params.length - 1]
+
       if (typeof options === 'object' && options.value) {
-        const balance = await $signer.getBalance()
-        if (balance.lt(options.value)) {
+        const balance = await $provider.getBalance($signerAddress)
+
+        if (balance < options.value) {
           txAction.update((state) => ({
             ...state,
             control: {

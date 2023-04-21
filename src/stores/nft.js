@@ -1,7 +1,7 @@
-import { utils } from 'ethers'
+import { ethers } from 'ethers'
 
 import { proxied } from 'svelte-proxied-store'
-import { defaultEvmStores as evm } from 'svelte-ethers-store'
+import { defaultEvmStores as evm } from 'ethers-svelte'
 
 import { browser } from '$app/environment'
 
@@ -22,8 +22,8 @@ const createStore = () => {
       const [contract, tokenId] = key.split(':')
 
       // TODO only work with hexify tokenId
-      //if (!utils.isAddress(contract) || !/^\d+$/.test(tokenId)) return
-      if (!utils.isAddress(contract)) return
+      //if (!ethers.isAddress(contract) || !/^\d+$/.test(tokenId)) return
+      if (!ethers.isAddress(contract)) return
 
       // console.log('load nft', { contract, tokenId })
       lock[key] = true

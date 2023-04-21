@@ -1,6 +1,6 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
-  import { connected, chainId, chainData } from 'svelte-ethers-store'
+  import { connected, chainId, chainData } from 'ethers-svelte'
 
   import { page } from '$app/stores'
 
@@ -10,7 +10,7 @@
   import project from '$stores/project.js'
 
   import Icon from '$components/Icon.svelte'
-  import { Identicon } from 'svelte-ethers-store/components'
+  import { Identicon } from 'ethers-svelte/components'
   import ClipboardCopy from '$components/tools/ClipboardCopy.svelte'
   import Modal from '$components/Modal.svelte'
   import QR from '$components/QR.svelte'
@@ -108,7 +108,7 @@
           rel="noreferrer"
           href={p._isDraft ? '#' : explorer($chainData, 'address', address)}>
           <span><b>{$chainData.shortName}:</b>{address}</span>
-          <Icon name="ExternalLink" class="mr-3 is-cover" />
+          <Icon name="ExternalLink" class="mr-3" />
         </a>
       </p>
     </section>

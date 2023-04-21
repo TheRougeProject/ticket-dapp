@@ -6,7 +6,7 @@
     signerAddress,
     chainId,
     chainData
-  } from 'svelte-ethers-store'
+  } from 'ethers-svelte'
 
   import NFT from '$components/NFT.svelte'
   import Project from '$components/Project.svelte'

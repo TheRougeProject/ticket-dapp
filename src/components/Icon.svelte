@@ -26,7 +26,6 @@
     <svelte:component
       this={tabler[`Icon${name}`]}
       {color}
-      size="auto"
       strokeWidth={stroke} />
   {/if}
 {:else}
@@ -37,7 +36,6 @@
       <svelte:component
         this={tabler[`Icon${name}`]}
         {color}
-        size="auto"
         strokeWidth={stroke} />
     {/if}
   </span>

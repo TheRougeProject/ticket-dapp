@@ -1,4 +1,4 @@
-import { ethers, utils, constants } from 'ethers'
+import { ethers } from 'ethers'
 import { nanoid } from 'nanoid'
 
 import { invalidate } from '$app/navigation'
@@ -8,18 +8,19 @@ import {
   provider,
   signer,
   getChainDataByChainId
-} from 'svelte-ethers-store'
+} from 'ethers-svelte'
 
 import Artifacts from '@rougenetwork/v2-core/Artifacts.json'
 
 import IERC20 from '@openzeppelin/contracts/build/contracts/IERC20.json'
 import IERC721 from '@openzeppelin/contracts/build/contracts/IERC721.json'
 
-import { Token } from '@rougenetwork/v2-core/Token'
+import { Token } from 'erc-token-js'
 
 import { dev, browser } from '$app/environment'
 
 import { getSupportedChainIds } from '$lib/enums.js'
+import { toHexString } from '$lib/utils.js'
 
 import registry from '$stores/registry.js'
 import project from '$stores/project.js'
@@ -82,7 +83,6 @@ const createBlockchain = () => {
   // })
 
   const connect = async (chainId) => {
-    console.log('CONNECTING TO chain', chainId, wallet)
     if (!wallet) {
       // todo
     }
@@ -98,7 +98,7 @@ const createBlockchain = () => {
     if (!chainId) {
       let defaultChain = registry.get('defaultChain')
       if (!defaultChain) return
-      chainId = utils.isHexString(defaultChain)
+      chainId = ethers.isHexString(defaultChain)
         ? parseInt(defaultChain, 16)
         : defaultChain
       console.log('find default chain', chainId)
@@ -153,7 +153,7 @@ const createBlockchain = () => {
     onError = noop
   }) => {
     try {
-      console.log('calla', { key, params })
+      // console.log('calla', { key, params })
       const overrides = {}
       if (estimateGas && key) {
         const estimate = await estimateGas[key](...params)
@@ -163,7 +163,7 @@ const createBlockchain = () => {
       if (
         params.length > 0 &&
         typeof params[params.length - 1] === 'object' &&
-        params[params.length - 1].value
+        params[params.length - 1].value != null
       ) {
         params[params.length - 1] = {
           ...params[params.length - 1],
@@ -172,8 +172,9 @@ const createBlockchain = () => {
       } else {
         params = [...params, overrides]
       }
-      console.log('callb', { method, params, overrides })
+
       const tx = await method(...params)
+
       onTx(tx)
       onReceipt(await tx.wait())
     } catch (e) {
@@ -202,7 +203,7 @@ const createBlockchain = () => {
       auths
     ])
     return factory(evm.$chainId).createProxyWithNonce({
-      params: [contract.address, initCode, saltNonce],
+      params: [await contract.getAddress(), initCode, saltNonce],
       onTx,
       onReceipt,
       onError
@@ -220,25 +221,32 @@ const createBlockchain = () => {
             jsonInterface.abi,
             evm.$provider
           )
+          if (typeof key !== 'string') return contract[key]
+          if (
+            /^(interface|runner|getAddress|filters|queryFilter|queryTransaction)$/.test(
+              key
+            )
+          )
+            return contract[key]
           try {
-            //if (/^(filters|queryFilter)$/.test(key)) return contract[key]
-            // console.log('builder**key', key)
             const fragment = contract.interface.getFunction(key)
-            // XXX ethers.utils.FunctionFragment.isFunctionFragment( object ) ⇒ boolean
-            if (fragment.type !== 'function')
-              throw new Error(
-                `unknown function ${jsonInterface.contractName}.${key}`
-              )
+
+            // XXX ethers.FunctionFragment.isFunctionFragment( object ) ⇒ boolean
+            if (typeof fragment !== 'object' || fragment?.type !== 'function')
+              throw new Error(`unknown function ${address}.${key}`)
             if (/^pure|view$/.test(fragment.stateMutability))
               return contract[key]
-            return (o) =>
+
+            return (o) => {
               call({
                 ...o,
                 key,
-                method: contract.connect(evm.$signer)[key],
-                estimateGas: contract.connect(evm.$signer).estimateGas
+                method: contract.connect(evm.$signer)[key]
+                //estimateGas: contract.connect(evm.$signer).estimateGas
               })
+            }
           } catch (e) {
+            console.log('[Tx buidler] FALLBACK', e)
             return contract[key]
           }
         }
@@ -268,8 +276,7 @@ const createBlockchain = () => {
   const addChain = async (chainId) => {
     try {
       const data = getChainDataByChainId(chainId)
-      chainId = utils.hexStripZeros(utils.hexlify(chainId))
-      // console.log("data", chainId, data)
+      chainId = toHexString(chainId)
       await evm.$provider.provider.request({
         method: 'wallet_addEthereumChain',
         params: [
@@ -290,7 +297,7 @@ const createBlockchain = () => {
 
   const switchChain = async (chainId) => {
     try {
-      chainId = utils.hexStripZeros(utils.hexlify(chainId))
+      chainId = toHexString(chainId)
       await evm.$provider.provider.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId }]
@@ -389,7 +396,7 @@ export const getChainTokens = (chainId = 0, chainData = {}) => {
 
   if (chainData.nativeCurrency?.symbol) {
     if (chainData.nativeCurrency.symbol === 'ETH') {
-      chainData.nativeCurrency.formatSymbol = constants.EtherSymbol
+      chainData.nativeCurrency.formatSymbol = ethers.EtherSymbol
     }
     tokens[chainData.nativeCurrency.symbol] = Token.native({
       ...chainData.nativeCurrency,
@@ -401,7 +408,7 @@ export const getChainTokens = (chainId = 0, chainData = {}) => {
     tokens.USDC = Token.from(
       {
         name: 'USDC',
-        decimals: '6',
+        decimals: 6,
         symbol: 'USDC',
         address: list.USDC
       },
@@ -413,7 +420,7 @@ export const getChainTokens = (chainId = 0, chainData = {}) => {
     tokens.UNI = Token.from(
       {
         name: 'UNI',
-        decimals: '18',
+        decimals: 18,
         symbol: 'UNI',
         address: list.UNI || '0xFE701b1aEA13587Ca6169cd0A13e0d3503313F32'
       },

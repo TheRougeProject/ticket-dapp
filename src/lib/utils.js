@@ -1,10 +1,14 @@
-import { utils } from 'ethers'
-import { tick } from 'svelte'
+import { ethers } from 'ethers'
 
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat.js'
 
 dayjs.extend(localizedFormat)
+
+// toHexString(toHexString(any) = (toHexString(any)
+export const toHexString = (any) => {
+  return '0x' + BigInt(any).toString(16)
+}
 
 export const formatDate = (date) => {
   return date ? dayjs(date).format('LLLL') : ''
@@ -20,15 +24,6 @@ export const dataURLtoBlob = (dataurl) => {
     u8arr[n] = bstr.charCodeAt(n)
   }
   return new Blob([u8arr], { type: mime })
-}
-
-// compat goto
-export const goto = async (path) => {
-  await tick()
-  console.log(`History.state`, history.state)
-  history.pushState({ name: 'utils' }, '', path)
-  console.log(`History.state`, history.state)
-  await tick()
 }
 
 export const setClipboard = (value) => {
@@ -49,7 +44,7 @@ export const formatIpfsHash = (h) => {
 
 export const formatAddress = (a = '', short = true) => {
   try {
-    a = utils.getAddress(a)
+    a = ethers.getAddress(a)
     return short && a ? a.substr(0, 6) + '...' + a.substr(38, 4) : a
   } catch (e) {
     return ''

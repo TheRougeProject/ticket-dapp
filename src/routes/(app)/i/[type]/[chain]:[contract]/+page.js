@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit'
-import { allChainsData } from 'svelte-ethers-store'
+import { allChainsData } from 'ethers-svelte'
 
 export const prerender = false
 
@@ -15,7 +15,7 @@ export const load = async ({ params }) => {
 
   return {
     type: params.type,
-    chain: parseInt(params.chain),
+    chain: BigInt(params.chain),
     contract: params.contract
   }
 }

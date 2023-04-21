@@ -1,7 +1,7 @@
 <script>
   import { ethers } from 'ethers'
 
-  import { chainId } from 'svelte-ethers-store'
+  import { chainId } from 'ethers-svelte'
 
   import blockchain from '$lib/blockchain.js'
   import { types } from '$lib/enums'
@@ -37,7 +37,7 @@
     blockchain
       .rouge($chainId)(address)
       .addChannels({
-        params: [[[false, false, 0, 0, ethers.constants.AddressZero]]],
+        params: [[[false, false, 0, 0, ethers.ZeroAddress]]],
         onTx: (tx) => {
           console.log('onTx', tx)
           control.loadText = `the transaction ${tx.hash} has been submitted to the blochain.`

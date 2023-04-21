@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  import { chainId } from 'svelte-ethers-store'
+  import { chainId } from 'ethers-svelte'
 
   import blockchain from '$lib/blockchain.js'
 

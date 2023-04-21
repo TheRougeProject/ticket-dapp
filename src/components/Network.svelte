@@ -4,9 +4,9 @@
     chainId,
     chainData,
     getChainDataByChainId
-  } from 'svelte-ethers-store'
+  } from 'ethers-svelte'
 
-  import { Jazzicon } from 'svelte-ethers-store/components'
+  import { Jazzicon } from 'ethers-svelte/components'
 
   import { supportedChainIds } from '$lib/enums.js'
 

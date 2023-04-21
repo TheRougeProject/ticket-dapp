@@ -1,5 +1,5 @@
 <script>
-  import { connected } from 'svelte-ethers-store'
+  import { connected } from 'ethers-svelte'
 
   import blockchain from '$lib/blockchain.js'
 
@@ -13,7 +13,7 @@
 {:else}
   <Modal bind:this={modal} active={true} noCloseButton={true}>
     <div class="modal-card is-large">
-      <header class="modal-card-head  has-background-light">
+      <header class="modal-card-head has-background-light">
         <p class="modal-card-title">Wallet required!</p>
       </header>
       <section class="modal-card-body">

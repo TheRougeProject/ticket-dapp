@@ -1,7 +1,7 @@
 <script>
-  import { connected, signerAddress, chainData } from 'svelte-ethers-store'
+  import { connected, signerAddress, chainData } from 'ethers-svelte'
 
-  import { Jazzicon } from 'svelte-ethers-store/components'
+  import { Jazzicon } from 'ethers-svelte/components'
 
   import { keyDownA11y, formatAddress } from '$lib/utils'
   import blockchain from '$lib/blockchain.js'
@@ -78,7 +78,7 @@
     <div class="container is-fluid">
       <BreadcrumbNav class="mt-5 mb-2" />
 
-      <div class="box ">
+      <div class="box">
         <slot />
       </div>
     </div>

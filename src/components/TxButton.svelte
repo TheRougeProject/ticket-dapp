@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  import { chainData, signer } from 'svelte-ethers-store'
+  import { chainData, signer } from 'ethers-svelte'
 
   import { explorer } from '$lib/utils.js'
 

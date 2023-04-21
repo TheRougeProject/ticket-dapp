@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store'
 import { decode } from 'jsonwebtoken-esm'
 
-import { utils } from 'ethers'
+import { ethers } from 'ethers'
 
-import { defaultEvmStores as evm, chainId } from 'svelte-ethers-store'
+import { defaultEvmStores as evm, chainId } from 'ethers-svelte'
 
 import { eip712DomainByChain } from '@rougenetwork/v2-core/config'
 
@@ -55,13 +55,13 @@ export const createBackend = () => {
     let signature
     // XXX TMP workaround wallet connect incompatibility with ethers.js
     if (/^wc/.test(evm.$provider.provider.connector?.protocol)) {
-      const payload = utils._TypedDataEncoder.getPayload(domain, types, content)
+      const payload = ethers.TypedDataEncoder.getPayload(domain, types, content)
       signature = await evm.$provider.send('eth_signTypedData', [
         evm.$signerAddress.toLowerCase(),
         JSON.stringify(payload)
       ])
     } else {
-      signature = await evm.$signer._signTypedData(domain, types, content)
+      signature = await evm.$signer.signTypedData(domain, types, content)
     }
 
     const response = await fetch(`${endpoint}${path}`, {

@@ -1,5 +1,5 @@
 <script>
-  import { chainId, chainData } from 'svelte-ethers-store'
+  import { chainId, chainData } from 'ethers-svelte'
 
   import { goto } from '$app/navigation'
 
@@ -37,7 +37,7 @@
     const { symbol, price, free, ...channel } = input
 
     if (!free) {
-      channel.amount = tokens[symbol].newAmount(price)
+      channel.amount = tokens[symbol].newAmount(Number(price)).toJSON()
     }
 
     project.updateDraft(address, { ...p, channels: [...p.channels, channel] })

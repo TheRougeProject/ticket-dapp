@@ -7,14 +7,10 @@ import gnosisModule from '@web3-onboard/gnosis'
 
 // https://www.npmjs.com/package/@web3-onboard/core
 
-import { utils } from 'ethers'
-
+import { toHexString } from '$lib/utils.js'
 import { getSupportedChainIds } from '$lib/enums.js'
 
-import {
-  defaultEvmStores as evm,
-  getChainDataByChainId
-} from 'svelte-ethers-store'
+import { defaultEvmStores as evm, getChainDataByChainId } from 'ethers-svelte'
 import registry from '$stores/registry.js'
 
 import {
@@ -102,8 +98,9 @@ export const wrapper = () => {
     const chains = supportedChainIds.map((id) => {
       const rpcUrl = import.meta.env[`VITE_FALLBACK_PROVIDER_${id}`]
       const chainData = getChainDataByChainId(id)
+
       return {
-        id: utils.hexStripZeros(utils.hexlify(id)),
+        id: toHexString(id),
         token: chainData.nativeCurrency?.symbol,
         label: chainData.name,
         rpcUrl,
@@ -111,8 +108,6 @@ export const wrapper = () => {
       }
     })
     //.filter((o) => !!o.rpcUrl)
-
-    console.log('xxx', { chains })
 
     onboard = Onboard({
       wallets: [injected, gnosis, walletConnect],
@@ -161,12 +156,11 @@ export const wrapper = () => {
   }
 
   const unload = () => {
-    console.log('unload', unsubscribe)
+    //console.log('unload', unsubscribe)
     if (unsubscribe) unsubscribe()
   }
 
   const evmConnect = async (wallet) => {
-    console.log('setting wallet', wallet.provider)
     await evm.setProvider(wallet.provider, wallet.accounts[0].address)
     currentWallet = getFingerPrint(wallet)
     registry.set('defaultChain', wallet.chains[0].id)
@@ -177,7 +171,7 @@ export const wrapper = () => {
   }
 
   const autoConnect = async (chainId) => {
-    chainId = utils.hexStripZeros(utils.hexlify(chainId))
+    chainId = toHexString(chainId)
     if (!onboard) load()
     const defaultWallet = window.localStorage.getItem(
       `rge:defaultWallet:${chainId}`
@@ -198,7 +192,7 @@ export const wrapper = () => {
   }
 
   const setChain = async (chainId) => {
-    chainId = utils.hexStripZeros(utils.hexlify(chainId))
+    chainId = toHexString(chainId)
     if (!currentWallet) {
       if (!onboard) load()
       const wallets = await onboard.connectWallet()

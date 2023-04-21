@@ -1,11 +1,11 @@
 <script>
   import { onMount } from 'svelte'
-  import { constants } from 'ethers'
+  import { ethers } from 'ethers'
 
   import dayjs from 'dayjs'
   import localizedFormat from 'dayjs/plugin/localizedFormat.js'
 
-  import { signerAddress, chainId, chainData } from 'svelte-ethers-store'
+  import { signerAddress, chainId, chainData } from 'ethers-svelte'
 
   import ScanQR from '$components/ScanQR.svelte'
   import QR from '$components/QR.svelte'
@@ -51,11 +51,15 @@
     control.detected = true
     console.log('onQR', data, p)
 
+    if (/^did:rge/.test(data)) {
+      throw new Error('You must use not a unlocked ticket [1]')
+    }
+
     try {
       const decoded = await decodeAnnotated(data)
 
       if (decoded.contract !== p._address) {
-        throw new Error('not a valid ticket [1]')
+        throw new Error('not a valid ticket [2]')
       }
 
       // more test like already used etc
@@ -74,7 +78,7 @@
           s
         })
 
-        proof = constants.HashZero
+        proof = ethers.ZeroHash
 
         certificate = abiEncodeCertificate({
           from: bearer,
@@ -202,7 +206,7 @@
           >Turn on camera</button>
       {/if}
     </div>
-    <div class="buttons  is-centered mt-4">
+    <div class="buttons is-centered mt-4">
       <TxActionFeedback />
     </div>
   </TxAction>

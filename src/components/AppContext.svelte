@@ -29,10 +29,9 @@
 <style lang="scss" global>
   @import '../scss/main.scss';
 
-  body > div.app {
+  body {
     position: relative;
-    min-height: calc(100vh);
-    xpadding-bottom: 2rem;
+    height: fit-content;
   }
 
   .version {

@@ -1,17 +1,18 @@
-import { constants, utils, BigNumber } from 'ethers'
+import { ethers } from 'ethers'
 
 import { proxied } from 'svelte-proxied-store'
 import { decodeRoles } from '@rougenetwork/v2-core/rouge'
-import { TokenAmount } from '@rougenetwork/v2-core/Token'
+import { TokenAmount } from 'erc-token-js'
 
 import { browser } from '$app/environment'
 
 import blockchain, { getChainTokens } from '$lib/blockchain'
 import ipfs from '$lib/ipfs'
+import { toHexString } from '$lib/utils.js'
 
 // import chainContext from '$stores/chain.js'
 
-import { defaultEvmStores as evm, signer, chainId } from 'svelte-ethers-store'
+import { defaultEvmStores as evm, signer, chainId } from 'ethers-svelte'
 
 const createStore = () => {
   const lock = {}
@@ -105,20 +106,25 @@ const createStore = () => {
     const enabled = await decodeRoles(
       blockchain.rouge(evm.$chainId)(address),
       ['acquire', 'redeem'],
-      constants.AddressZero,
+      ethers.ZeroAddress,
       meta.channels
     )
-    meta.state = { acquired: 0, redeemed: 0, enabled: enabled[channels.length] }
+    meta.state = {
+      acquired: 0n,
+      redeemed: 0n,
+      enabled: enabled[channels.length]
+    }
 
     const TOKENS = getChainTokens(evm.$chainId, evm.$chainData)
     meta.channels = await Promise.all(
       channels.map(({ supply, totalAcquired, totalRedeemed, amount }, i) => {
-        //if (state.token !== constants.AddressZero) {
+        //if (state.token !== ethers.ZeroAddress) {
         //all should be done during create variant time...
         //const symbol = await blockchain.erc20(m.token).symbol()
         //}
         meta.state.acquired += totalAcquired
         meta.state.redeemed += totalRedeemed
+
         // XXX supply in state if updated possible
 
         // TODO generelize the amount building
@@ -137,11 +143,12 @@ const createStore = () => {
 
         if (meta.channels[i].amount) {
           meta.channels[i].amount = TokenAmount.from(meta.channels[i].amount)
+
           if (!meta.channels[i].amount.eq(amount)) {
             console.warn('incoherent channel id %s token amount', i)
           }
         } else {
-          if (!BigNumber.from(amount).isZero) {
+          if (!BigInt(amount) === 0n) {
             console.warn('incoherent channel id %s token amount', i)
           }
         }
@@ -158,8 +165,17 @@ const createStore = () => {
     )
 
     for (let i = 0; i < channels.length; i++) {
-      const address = channels[i].token || constants.AddressZero
-      if (meta.balances[address] || channels[i].amount.eq(0)) continue
+      const address = channels[i].token || ethers.ZeroAddress
+
+      console.log({
+        channels,
+        x: channels[i].amount,
+        'meta.balances[address]': meta.balances[address],
+        'channels[i].amount': channels[i].amount,
+        test: channels[i].amount === 0n
+      })
+
+      if (meta.balances[address] || channels[i].amount === 0n) continue
       // pass zero as decimals when value comes from chain
       meta.balances[address] = meta.channels[i].amount.token.newAmount(
         balances[i],
@@ -167,7 +183,7 @@ const createStore = () => {
       )
     }
 
-    console.log(`PARSED data for ${address}`, {
+    console.log(`[projects:store] PARSED data for ${address}`, {
       enabled,
       meta,
       addressesAsBearer
@@ -185,7 +201,7 @@ const createStore = () => {
         tags: { event: 'x' },
         uri,
         ...meta,
-        _chainId: evm.$chainId,
+        _chainId: evm.$chainId.toString(),
         _address: address,
         _loaded: true
       }
@@ -194,14 +210,14 @@ const createStore = () => {
   }
 
   const refresh = async (address) => {
-    if (!browser || lock[address] || !utils.isAddress(address)) return
+    if (!browser || lock[address] || !ethers.isAddress(address)) return
     lock[address] = true
     try {
       console.log('refresh project', address)
       if (/^0x0000000000/.test(address)) {
         const data = {
           ...JSON.parse(localStorage.getItem(`rge:draft:${address}`)),
-          _chainId: evm.$chainId,
+          _chainId: evm.$chainId.toString(),
           _isDraft: true,
           _loaded: true
         }
@@ -258,6 +274,7 @@ const createStore = () => {
 
   // XXX naive 1 depth copy ...
   const serialize = (data) => {
+    // console.log('DATA to serialize', data)
     return JSON.stringify({ ...data, _isDraft: true })
   }
 
@@ -269,7 +286,7 @@ const createStore = () => {
 
   const createDraft = async (data) => {
     console.log({ draftNonce })
-    const address = utils.hexZeroPad(utils.hexlify(draftNonce), 20)
+    const address = ethers.zeroPadValue(toHexString(draftNonce), 20)
     localStorage.setItem(draftNonceKey(), ++draftNonce)
     updateDraft(address, data)
     return address

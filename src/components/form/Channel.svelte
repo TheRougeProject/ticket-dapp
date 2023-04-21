@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  import { chainId, chainData } from 'svelte-ethers-store'
+  import { chainId, chainData } from 'ethers-svelte'
 
   import { getChainTokens } from '$lib/blockchain.js'
   import backend from '$lib/backend.js'
@@ -280,7 +280,7 @@
                 <br />
               {/if}
               <button
-                class="button is-small "
+                class="button is-small"
                 on:click={() => {
                   data.icon = null
                 }}>Remove</button>
