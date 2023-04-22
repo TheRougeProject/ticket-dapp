@@ -16,7 +16,7 @@
   import blockchain from '$lib/blockchain.js'
 
   onMount(async () => {
-    //if (!$signerAddress) blockchain.autoConnect()
+    if (!$signerAddress) blockchain.autoConnect()
   })
 
   let popparent

@@ -70,7 +70,7 @@
     {/if}
   </BreadcrumbNav>
 
-  <div class="container has-background-white p-5 content">
+  <div class="container has-background-white p-5">
     {#if valid}
       <div class="level is-mobile">
         <div class="level-left">
@@ -113,68 +113,67 @@
       {/if}
 
       {#each all as address}
-        <div class="box level is-slate">
-          <div class="level-left">
-            <div class="level-item">
-              <a
-                href="/project/{address}/{$project[address]._isDraft
-                  ? 'draft/'
-                  : ''}">
-                <figure class="image xis-16by9" style="width: 150px;">
-                  {#if $project[address].visual}
-                    {#key all.length}
-                      <img
-                        data-ipfs={$project[address].visual}
-                        src="/empty_p.png"
-                        alt="Project main visual"
-                        style="object-fit: cover;"
-                        use:ipfs />
-                    {/key}
-                  {:else}
+        <div class="box homelist">
+          <div class="part-item mb-1">
+            <a
+              href="/project/{address}/{$project[address]._isDraft
+                ? 'draft/'
+                : ''}">
+              <figure class="image xis-16by9" style="width: 150px;">
+                {#if $project[address].visual}
+                  {#key all.length}
                     <img
+                      data-ipfs={$project[address].visual}
                       src="/empty_p.png"
                       alt="Project main visual"
-                      style="object-fit: cover;" />
-                  {/if}
-                </figure>
-              </a>
-            </div>
-
-            <div class="level-item">
-              <div
-                class="flex is-flex-direction-column is-align-content-space-around summary">
-                <div>
-                  <strong
-                    ><a
-                      href="/project/{address}/{$project[address]._isDraft
-                        ? 'draft/'
-                        : ''}">{$project[address].name || '...'}</a
-                    ></strong>
-                  {#if $project[address]._isDraft}<span class="tag is-primary"
-                      >Draft</span
-                    >{/if}
-                </div>
-
-                <div>
-                  {#if !$project[address]._isDraft}<Address
-                      noIdenticon={true}
-                      {address} /> ·
-                  {/if}{$project[address].channels?.length} channels
-                </div>
-                {#if !$project[address]._isDraft}
-                  <small>
-                    {$project[address].state?.acquired || '0'} attendees · {$project[
-                      address
-                    ].state?.redeemed || '0'} checked-in
-                  </small>
+                      style="object-fit: cover;"
+                      use:ipfs />
+                  {/key}
+                {:else}
+                  <img
+                    src="/empty_p.png"
+                    alt="Project main visual"
+                    style="object-fit: cover;" />
                 {/if}
+              </figure>
+            </a>
+          </div>
+
+          <div class="part-item mx-4">
+            <div
+              class="flex is-flex-direction-column is-align-content-space-around summary">
+              <div>
+                <strong
+                  ><a
+                    href="/project/{address}/{$project[address]._isDraft
+                      ? 'draft/'
+                      : ''}">{$project[address].name || '...'}</a
+                  ></strong>
+                {#if $project[address]._isDraft}<span class="tag is-primary"
+                    >Draft</span
+                  >{/if}
               </div>
+
+              <div>
+                {#if !$project[address]._isDraft}<Address
+                    noIdenticon={true}
+                    {address} /> ·
+                {/if}{$project[address].channels?.length} channels
+              </div>
+              {#if !$project[address]._isDraft}
+                <small>
+                  {$project[address].state?.acquired || '0'} attendees · {$project[
+                    address
+                  ].state?.redeemed || '0'} checked-in
+                </small>
+              {/if}
             </div>
           </div>
 
-          <div class="level-right">
+          <div
+            class="part-item is-flex is-flex-direction-column is-justify-content-space-evenly has-text-centered">
             {#if $project[address]._isDraft}
-              <p class="level-item">
+              <p>
                 <small
                   ><a href="/project/{address}/edit/">
                     <span class="icon-text"
@@ -182,7 +181,6 @@
                     </span></a
                   ></small>
               </p>
-              <p class="level-item is-hidden-mobile"><small>·</small></p>
               <Confirm
                 let:activate
                 title="Delete the draft event?"
@@ -191,7 +189,7 @@
                 ].name}» and everything you set up? There is no going back."
                 confirmLabel="Delete"
                 on:confirm={() => project.deleteDraft(address)}>
-                <p class="level-item">
+                <p>
                   <small
                     ><a
                       href="#activate"
@@ -204,7 +202,7 @@
                 </p>
               </Confirm>
             {:else}
-              <p class="level-item">
+              <p>
                 <small
                   ><a href="/i/ticket/{$chainData.shortName}:{address}/">
                     <span class="icon-text"
@@ -212,17 +210,16 @@
                     </span></a
                   ></small>
               </p>
-              <p class="level-item is-hidden-mobile"><small>·</small></p>
               <!--
-               <p class="level-item"><small><a href="/project/{address}/scan/">
-               <span class="icon-text"><Icon name="scanQr" /><span>Check-In</span>
-               </a></small></p>
-          -->
+                     <p class="level-item"><small><a href="/project/{address}/scan/">
+                     <span class="icon-text"><Icon name="scanQr" /><span>Check-In</span>
+                     </a></small></p>
+                -->
               <ConfirmUnload
                 let:activate
                 p={$project[address]}
                 on:confirm={() => project.rm(address)}>
-                <p class="level-item">
+                <p>
                   <small
                     ><a
                       href="#activate"
@@ -334,6 +331,31 @@
 <style lang="scss">
   @import '../../scss/_variables.scss';
   @import 'bulma/sass/utilities/_all';
+
+  .homelist {
+    display: flex;
+    justify-content: space-between;
+
+    @include mobile {
+      display: block;
+    }
+
+    .part-item {
+      margin: auto;
+    }
+
+    .part-item:nth-child(1) {
+      width: 150px;
+    }
+
+    .part-item:nth-child(2) {
+      flex-grow: 1;
+    }
+
+    .part-item:nth-child(3) {
+      width: 150px;
+    }
+  }
 
   /* equivalent is-radius */
   .content {
