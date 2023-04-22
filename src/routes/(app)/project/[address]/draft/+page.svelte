@@ -85,16 +85,22 @@
         URI: `ipfs://${cids[0].cid}`,
         channels: data.channels.map((v) => abiEncodeChannel(v)),
         auths,
-        onReceipt: (rcpt) => {
+        onReceipt: async (rcpt) => {
           // control.loadText = `Your project has been created!`
 
-          const proxy = rcpt.events.filter(
-            (e) => e.event === 'ProxyCreation'
-          )[0].args.proxy
-          project.add(proxy)
-          project.deleteDraft(address)
-          // projet page in charge of waiting infos loaded ?
-          goto(`/project/${proxy}/`)
+          const instance = blockchain.factory($chainId)
+          const events = await instance.queryFilter(
+            instance.filters.ProxyCreation(),
+            rcpt.blockNumber
+          )
+          console.log(events)
+          if (events.length > 0) {
+            const proxy = events[0].args.proxy
+            project.add(proxy)
+            project.deleteDraft(address)
+            // projet page in charge of waiting infos loaded ?
+            goto(`/project/${proxy}/`)
+          }
         }
       }
     } catch (err) {
