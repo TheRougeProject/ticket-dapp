@@ -150,6 +150,7 @@
           rcpt.blockNumber
         )
         for (const e of events) {
+          if (e.transactionHash !== rcpt.hash) continue
           nft.add(`${contract}:${e.args.tokenId}`)
         }
       }

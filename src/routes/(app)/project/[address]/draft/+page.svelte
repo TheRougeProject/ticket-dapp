@@ -87,15 +87,14 @@
         auths,
         onReceipt: async (rcpt) => {
           // control.loadText = `Your project has been created!`
-
           const instance = blockchain.factory($chainId)
           const events = await instance.queryFilter(
             instance.filters.ProxyCreation(),
             rcpt.blockNumber
           )
-          console.log(events)
-          if (events.length > 0) {
-            const proxy = events[0].args.proxy
+          for (const e of events) {
+            if (e.transactionHash !== rcpt.hash) continue
+            const proxy = e.args.proxy
             project.add(proxy)
             project.deleteDraft(address)
             // projet page in charge of waiting infos loaded ?
