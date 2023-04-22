@@ -37,8 +37,6 @@
   import QR from '$components/QR.svelte'
   import ClipboardCopy from '$components/tools/ClipboardCopy.svelte'
   import Icon from '$components/Icon.svelte'
-  //import { default as qrcode } from '$icons/qrcode.svelte'
-  import * as icons from '$icons/index.js'
 
   export let address
   export let tokenId
@@ -282,12 +280,13 @@
     )}px; line-height: {Math.floor((4 / 32) * $ticketWidth)}px">
     <span>{nft.redeemed ? 'Stub' : 'Ticket'} #{tokenId}<span /></span>
   </div>
-  <div class="qr" class:is-proven={!!proofType}>
-    <svelte:component this={icons.qrcode} />
-  </div>
   {#if channel.icon}
     <div class="qr">
       <img alt={channel.label} data-ipfs={channel.icon} use:ipfs />
+    </div>
+  {:else}
+    <div class="qr" class:is-proven={!!proofType}>
+      <Icon name="Ticket" class="is-block" />
     </div>
   {/if}
   <div
@@ -407,6 +406,7 @@
       background-color: transparent;
       padding: 0.3rem;
       line-height: 0;
+      color: #ccc;
     }
 
     .type {

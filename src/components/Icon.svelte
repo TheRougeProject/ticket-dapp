@@ -37,6 +37,8 @@
         this={tabler[`Icon${name}`]}
         {color}
         strokeWidth={stroke} />
+    {:else if name === 'none'}
+      <svg />
     {/if}
   </span>
 {/if}
@@ -51,5 +53,14 @@
   .icon.is-cover {
     width: 100%;
     height: auto;
+  }
+  .icon.is-block {
+    display: block;
+    width: 100%;
+    height: 100%;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 </style>

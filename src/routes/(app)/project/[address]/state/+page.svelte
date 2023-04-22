@@ -132,7 +132,7 @@
         </span>
       {:else}
         <span class="icon-text has-text-danger">
-          <Icon name="lock" />
+          <Icon name="Lock" />
           <p class="subtitle heading pl-2">disabled</p>
         </span>
       {/if}
