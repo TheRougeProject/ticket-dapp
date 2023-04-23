@@ -6,8 +6,10 @@ import localizedFormat from 'dayjs/plugin/localizedFormat.js'
 dayjs.extend(localizedFormat)
 
 // toHexString(toHexString(any) = (toHexString(any)
-export const toHexString = (any) => {
-  return '0x' + BigInt(any).toString(16)
+export const toHexString = (any, size) => {
+  const hexString = BigInt(any).toString(16)
+  if (size) return '0x' + hexString.padStart(size, '0')
+  return '0x' + hexString
 }
 
 export const formatDate = (date) => {

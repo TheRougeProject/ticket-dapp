@@ -7,6 +7,7 @@
   import Project from '$components/Project.svelte'
 
   import project from '$stores/project.js'
+  //import { toHexString } from '$lib/utils.js'
 
   export let data
 
@@ -18,6 +19,17 @@
 
   const endpoint = import.meta.env.VITE_SPRINGBOK_ENDPOINT
   const gateway = `${endpoint}/ipfs/`
+
+  const test = () => {
+    //   // Object { draftNonce: 1 }
+    //   const draftNonce = 1
+    //   //toHexString(draftNonce)
+    //   //invalid BytesLike value (argument="value", value="0x1", code=INVALID_ARGUMENT, version=6.3.0)
+    //   console.log(draftNonce)
+    //
+    //   const address = toHexString(draftNonce, 40)
+    //   console.log(address)
+  }
 </script>
 
 <Project {p} />
@@ -78,6 +90,8 @@
         href={(p.uri || '').replace('ipfs://', gateway)}>{p.uri}</a>
     </p>
     <p><a href="/i/special/foxwallet/">foxwallet</a></p>
+
+    <button class="button" on:click={test}>test</button>
   </article>
 {/if}
 

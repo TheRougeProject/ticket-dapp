@@ -286,8 +286,7 @@ const createStore = () => {
 
   const createDraft = async (data) => {
     console.log({ draftNonce })
-    const address = ethers.zeroPadValue(toHexString(draftNonce), 20)
-    localStorage.setItem(draftNonceKey(), ++draftNonce)
+    const address = toHexString(draftNonce, 40)
     updateDraft(address, data)
     return address
   }
