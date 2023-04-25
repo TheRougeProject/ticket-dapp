@@ -67,16 +67,19 @@
   </div>
 </nav>
 
-{#if false}
+{#if true}
   <article class="message is-info">
     <div class="message-body">
-      Do you like the app? Support the project by donating to
-      <a
+      Do you like this app? Support us and help shape the future of
+      permissionless & decentralized event management. You can donate to Rouge
+      Ticket on <a
         target="_blank"
         rel="noreferrer"
-        data-beta="https://grant-explorer.gitcoin.co/#/round/1/0xd95a1969c41112cee9a2c931e849bcef36a16f4c/0xad3348a8338210c5d7eca4187a0267507d9dd8683fe02d253c4a17a952c5ef3c-0xd95a1969c41112cee9a2c931e849bcef36a16f4c"
-        href="https://gitcoin.co/grants/7519/rouge-ticket">our Gitcoin grant</a
-      >. Unleash quadratic funding and verify your passport to match funds!
+        href="https://explorer.gitcoin.co/#/round/1/0x12bb5bbbfe596dbc489d209299b8302c3300fa40/0x12bb5bbbfe596dbc489d209299b8302c3300fa40-28"
+        >the Gitcoin Grants Beta Round</a
+      >. Don't forget, every donation is amplified by Quadratic Funding if your
+      verify your "Gitcoin Passport", making your contributions even more
+      valuable.
     </div>
   </article>
 {/if}
