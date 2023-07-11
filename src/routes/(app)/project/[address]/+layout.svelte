@@ -308,7 +308,7 @@
                   class:is-active={/^\/draft/.test(position)}
                   href="/project/{address}/draft">
                   <span class="icon-text"
-                    ><Icon class="mr-3" name="Edit" />{#if !collapse}<span
+                    ><Icon name="Edit" class="mr-3" />{#if !collapse}<span
                         >Edit draft</span
                       >{/if}</span>
                 </a>
@@ -320,7 +320,7 @@
                 class:is-active={/^\/$/.test(position)}
                 href="/project/{address}/">
                 <span class="icon-text"
-                  ><Icon class="mr-3" name="dashboard" />{#if !collapse}<span
+                  ><Icon name="dashboard" class="mr-3" />{#if !collapse}<span
                       >Dashboard</span
                     >{/if}</span>
               </a>
@@ -330,7 +330,7 @@
                 on:click={close}
                 href="/i/ticket/{$chainData.shortName}:{address}/">
                 <span class="icon-text"
-                  ><Icon class="mr-3" name="ticket" />{#if !collapse}<span
+                  ><Icon name="ticket" class="mr-3" />{#if !collapse}<span
                       >Get tickets{#if p._isDraft}&nbsp;preview{/if}</span
                     >{/if}</span>
               </a>
@@ -342,7 +342,7 @@
                   class:is-active={/^\/state/.test(position)}
                   href="/project/{address}/state">
                   <span class="icon-text"
-                    ><Icon class="mr-3" name="state" />{#if !collapse}<span
+                    ><Icon name="state" class="mr-3" />{#if !collapse}<span
                         >State</span
                       >{/if}</span
                   ></a>
@@ -353,7 +353,7 @@
                   class:is-active={/^\/holdings/.test(position)}
                   href="/project/{address}/holdings"
                   ><span class="icon-text"
-                    ><Icon class="mr-3" name="holdings" />{#if !collapse}<span
+                    ><Icon name="holdings" class="mr-3" />{#if !collapse}<span
                         >Holdings</span
                       >{/if}</span
                   ></a>
@@ -364,7 +364,7 @@
                   class:is-active={/^\/settings/.test(position)}
                   href="/project/{address}/settings"
                   ><span class="icon-text"
-                    ><Icon class="mr-3" name="settings" />{#if !collapse}<span
+                    ><Icon name="settings" class="mr-3" />{#if !collapse}<span
                         >Settings</span
                       >{/if}</span
                   ></a>
@@ -384,7 +384,7 @@
                   class:is-active={/^\/acquisitions/.test(position)}
                   href="/project/{address}/acquisitions"
                   ><span class="icon-text"
-                    ><Icon class="mr-3" name="users" />{#if !collapse}<span
+                    ><Icon name="users" class="mr-3" />{#if !collapse}<span
                         >List</span
                       >{/if}</span
                   ></a>
@@ -402,7 +402,7 @@
                   class:is-active={/^\/scan/.test(position)}
                   href="/project/{address}/scan"
                   ><span class="icon-text"
-                    ><Icon class="mr-3" name="scanQr" />{#if !collapse}<span
+                    ><Icon name="scanQr" class="mr-3" />{#if !collapse}<span
                         >Scanner</span
                       >{/if}</span
                   ></a>
@@ -413,7 +413,7 @@
                   class:is-active={/^\/redemptions/.test(position)}
                   href="/project/{address}/redemptions"
                   ><span class="icon-text"
-                    ><Icon class="mr-3" name="history" />{#if !collapse}<span
+                    ><Icon name="history" class="mr-3" />{#if !collapse}<span
                         >History</span
                       >{/if}</span
                   ></a>
@@ -432,7 +432,7 @@
                 class:is-active={/^\/channels/.test(position)}
                 href="/project/{address}/channels"
                 ><span class="icon-text"
-                  ><Icon class="mr-3" name="details" />{#if !collapse}<span
+                  ><Icon name="details" class="mr-3" />{#if !collapse}<span
                       >Details</span
                     >{/if}</span
                 ></a>
@@ -443,7 +443,7 @@
                 class:is-active={/add-channel/.test(position)}
                 href="/project/{address}/add-channel/"
                 ><span class="icon-text"
-                  ><Icon class="mr-3" name="add" />{#if !collapse}<span
+                  ><Icon name="add" class="mr-3" />{#if !collapse}<span
                       >Add</span
                     >{/if}</span
                 ></a>
@@ -467,10 +467,8 @@
                   }}
                   ><span class="icon-text"
                     ><Icon
-                      class="mr-3"
-                      name={collapse
-                        ? 'openCollapse'
-                        : 'closeCollapse'} />{#if !collapse}<span>Collapse</span
+                      name={collapse ? 'openCollapse' : 'closeCollapse'}
+                      class="mr-3" />{#if !collapse}<span>Collapse</span
                       >{/if}</span
                   ></a>
               </li>

@@ -6,6 +6,7 @@
     "clean": "rimraf .build",
     "dev": "vite dev --port 2000 --host localhost",
     "build": "npm run clean && vite build",
+    "update-icons": "node ./update-icons.js",
     "preview": "vite preview",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",

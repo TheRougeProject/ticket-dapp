@@ -61,7 +61,7 @@
           href="/"
           class:is-active={!/^(\/journey|\/book)/.test($page.url.pathname)}>
           <span class="icon-text is-small"
-            ><Icon class="mr-2" name="List" /><span>Event Manager</span></span>
+            ><Icon name="List" class="mr-2" /><span>Event Manager</span></span>
         </a>
       </li>
       <li>
@@ -70,7 +70,7 @@
           href="/book"
           class:is-active={/^\/book/.test($page.url.pathname)}>
           <span class="icon-text"
-            ><Icon class="mr-2" name="Book" /><span>Tickets book</span></span>
+            ><Icon name="Book" class="mr-2" /><span>Tickets book</span></span>
         </a>
       </li>
       {#if $chainContext.plugins.includes('journey')}
@@ -80,7 +80,7 @@
             href="/journey"
             class:is-active={/^\/journey/.test($page.url.pathname)}>
             <span class="icon-text"
-              ><Icon class="mr-2" name="Award" /><span>Rouge Journey</span
+              ><Icon name="Award" class="mr-2" /><span>Rouge Journey</span
               ></span>
           </a>
         </li>
@@ -91,7 +91,7 @@
           on:click={blockchain.disconnect}
           on:keydown={keyDownA11y(blockchain.disconnect)}>
           <span class="icon-text"
-            ><Icon class="mr-2" name="Logout" /><span>Disconnect</span></span>
+            ><Icon name="Logout" class="mr-2" /><span>Disconnect</span></span>
         </a>
       </li>
     </ul>
