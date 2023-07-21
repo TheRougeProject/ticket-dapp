@@ -82,18 +82,21 @@ export const wrapper = () => {
     })
     const gnosis = gnosisModule()
 
+    const supportedChainIds = getSupportedChainIds(
+      registry.get('includeTestnets')
+    )
+
     // initialize the module with options
     const walletConnect = walletConnectModule({
-      //bridge: 'YOUR_CUSTOM_BRIDGE_SERVER',
+      version: 2,
+      handleUri: (uri) => console.log(uri),
+      projectId: import.meta.env.VITE_WALLETCONNECT_ID,
+      requiredChains: supportedChainIds.map((n) => parseInt(n))
       //qrcodeModalOptions: {
       //mobileLinks: ['rainbow', 'metamask', 'argent', 'trust', 'imtoken', 'pillar']
       //}
       // connectFirstChainId: true
     })
-
-    const supportedChainIds = getSupportedChainIds(
-      registry.get('includeTestnets')
-    )
 
     const chains = supportedChainIds.map((id) => {
       const rpcUrl = import.meta.env[`VITE_FALLBACK_PROVIDER_${id}`]
