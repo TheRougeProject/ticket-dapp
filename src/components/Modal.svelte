@@ -11,6 +11,9 @@
   export let topIsRounded = false
   export let bottomIsRounded = false
 
+  let importedClasses = ''
+  export { importedClasses as class }
+
   const dispatch = createEventDispatcher()
 
   export const onClose = (event) => dispatch('close', event)
@@ -37,7 +40,7 @@
 
 {#if active}
   <Portal target="body">
-    <div class="modal" class:is-active={active}>
+    <div class="modal {importedClasses}" class:is-active={active}>
       <div
         class="modal-background"
         on:click={onClose}
@@ -63,17 +66,31 @@
   @import 'bulma/sass/utilities/_all';
 
   .modal {
-    padding-left: 2px;
-    padding-right: 2px;
-  }
+    &:not(.fullscreen) {
+      padding-left: 2px;
+      padding-right: 2px;
 
-  .modal-content.top-is-rounded {
-    border-top-left-radius: $radius-large;
-    border-top-right-radius: $radius-large;
-  }
+      .modal-content.top-is-rounded {
+        border-top-left-radius: $radius-large;
+        border-top-right-radius: $radius-large;
+      }
 
-  .modal-content.bottom-is-rounded {
-    border-bottom-left-radius: $radius-large;
-    border-bottom-right-radius: $radius-large;
+      .modal-content.bottom-is-rounded {
+        border-bottom-left-radius: $radius-large;
+        border-bottom-right-radius: $radius-large;
+      }
+    }
+
+    &.fullscreen {
+      .modal-content {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: unset;
+        max-height: unset;
+      }
+    }
   }
 </style>

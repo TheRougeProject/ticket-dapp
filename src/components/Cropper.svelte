@@ -2,12 +2,20 @@
   import { onMount } from 'svelte'
 
   import Cropper from 'cropperjs'
+  import Modal from '$components/Modal.svelte'
+
+  export let active = false
+  export let src
+
+  let modal
+
+  const close = () => {}
 
   const init = () => {
     const image = new Image()
 
-    image.src = '/rouge-ticket-black.png'
-    image.alt = 'Picture'
+    image.src = src
+    // image.alt = 'Picture'
 
     const cropper = new Cropper(image, {
       container: '.cropper-container'
@@ -19,4 +27,22 @@
   onMount(init)
 </script>
 
-<div class="cropper-container">XXX</div>
+{#if active}
+  <Modal
+    bind:this={modal}
+    bind:active
+    class="fullscreen"
+    noCloseButton={true}
+    on:close={close}>
+    <div class="cropper-container" />
+  </Modal>
+{/if}
+
+<!-- eslint-disable -->
+
+<style lang="scss" global>
+  cropper-canvas {
+    height: 100vh;
+    width: 100hw;
+  }
+</style>
