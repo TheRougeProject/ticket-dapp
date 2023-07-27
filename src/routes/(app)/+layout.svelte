@@ -145,7 +145,7 @@
         {#if dev}
           <div class="xis-flex-grow-1 has-text-centered">
             <span class="icon-text">
-              <a href="/explorer/">Explorer</a>
+              <a href="/test/">test</a>
             </span>
           </div>
           <div class="xis-flex-grow-1 has-text-centered">
