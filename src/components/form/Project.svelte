@@ -14,6 +14,8 @@
   import CropperModal from '$components/CropperModal.svelte'
   import Waiting from '$components/Waiting.svelte'
 
+  import Upload from '$components/Upload.svelte'
+
   const mobile = getContext('mobile')
 
   export let data = {}
@@ -388,6 +390,10 @@
     </div>
   {/if}
 </div>
+
+<h3 class="subtitle mt-4">test?</h3>
+
+<Upload />
 
 <h3 class="subtitle mt-4">Where?</h3>
 <div class="columns is-multiline">

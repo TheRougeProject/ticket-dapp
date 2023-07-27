@@ -28,6 +28,9 @@
     "svelte-file-dropzone": "^1.0.0"
   },
   "devDependencies": {
+    "@pqina/filepond-plugin-image-editor": "^9.0.3",
+    "@pqina/pintura": "^8.60.15",
+    "@pqina/svelte-pintura": "^9.0.1",
     "@sveltejs/adapter-static": "2.0.2",
     "@sveltejs/kit": "1.22.3",
     "@tabler/icons-svelte": "^2.27.0",
@@ -43,6 +46,12 @@
     "eslint-plugin-svelte": "^2.32.3",
     "ethers": "^6.6.4",
     "ethers-svelte": "^3.2.0",
+    "filepond-plugin-file-encode": "^2.1.10",
+    "filepond-plugin-file-validate-size": "^2.2.8",
+    "filepond-plugin-file-validate-type": "^1.2.8",
+    "filepond-plugin-image-crop": "^2.0.6",
+    "filepond-plugin-image-preview": "^4.6.11",
+    "filepond-plugin-image-transform": "^3.8.7",
     "husky": "^8.0.3",
     "ics": "^2.37.0",
     "lint-staged": "^13.2.3",
@@ -53,6 +62,7 @@
     "prettier-plugin-svelte": "^2.10.0",
     "sass": "^1.64.0",
     "svelte-eslint-parser": "^0.26.1",
+    "svelte-filepond": "^0.2.0",
     "svelte-preprocess": "^5.0.4",
     "vite": "^4.4.5"
   },
