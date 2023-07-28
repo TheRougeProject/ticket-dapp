@@ -9,6 +9,7 @@
 
   let modal
   let cropper
+  let selection
 
   const close = () => {}
 
@@ -25,10 +26,8 @@
 
     cropper = new Cropper(image, {
       container: '.cropper-container'
-      //     template,
     })
-
-    const selection = cropper.getCropperSelections()[0]
+    selection = cropper.getCropperSelections()[0]
 
     selection.setAttribute('initial-aspect-ratio', 1.77777777777777)
     selection.setAttribute('aspect-ratio', 1.777777777777)
@@ -48,10 +47,18 @@
     on:close={close}>
     <div class="cropper-control m-2">
       <div class="buttons is-centered has-transparent-background">
-        <button class="button" on:click={() => {}}>
-          <span class="is-hidden-mobile">Zoom</span> in</button>
-        <button class="button" on:click={() => {}}>
-          <span class="is-hidden-mobile">Zoom</span> out</button>
+        <button
+          class="button"
+          on:click={() => {
+            selection.$zoom(0.05)
+          }}>
+          <span class="is-hidden-mobile mr-1">Zoom</span> In</button>
+        <button
+          class="button"
+          on:click={() => {
+            selection.$zoom(-0.05)
+          }}>
+          <span class="is-hidden-mobile mr-1">Zoom</span> Out</button>
         <button class="button is-black" on:click={modal.close}>Cancel</button>
         <button class="button is-primary" on:click={crop}>Crop & Save</button>
       </div>
