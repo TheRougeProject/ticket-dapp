@@ -12,26 +12,6 @@
 
   const close = () => {}
 
-  const template =
-    '<cropper-canvas background>' +
-    '<cropper-image></cropper-image>' +
-    '<cropper-shade hidden></cropper-shade>' +
-    '<cropper-handle action="select" plain></cropper-handle>' +
-    '<cropper-selection  movable resizable zoomable>' +
-    '<cropper-grid role="grid" bordered covered></cropper-grid>' +
-    '<cropper-crosshair centered></cropper-crosshair>' +
-    '<cropper-handle action="move" theme-color="rgba(255, 255, 255, 0.35)"></cropper-handle>' +
-    '<cropper-handle action="n-resize"></cropper-handle>' +
-    '<cropper-handle action="e-resize"></cropper-handle>' +
-    '<cropper-handle action="s-resize"></cropper-handle>' +
-    '<cropper-handle action="w-resize"></cropper-handle>' +
-    '<cropper-handle action="ne-resize"></cropper-handle>' +
-    '<cropper-handle action="nw-resize"></cropper-handle>' +
-    '<cropper-handle action="se-resize"></cropper-handle>' +
-    '<cropper-handle action="sw-resize"></cropper-handle>' +
-    '</cropper-selection>' +
-    '</cropper-canvas>'
-
   const crop = () => {
     const selection = cropper.getCropperSelections()[0]
     console.log(selection)
@@ -49,14 +29,11 @@
     })
 
     const selection = cropper.getCropperSelections()[0]
-    console.log(selection)
 
     selection.setAttribute('initial-aspect-ratio', 1.77777777777777)
     selection.setAttribute('aspect-ratio', 1.777777777777)
-
-    console.log(selection, template)
-
-    //    console.log(cropper)
+    selection.$moveTo(selection.x + 1)
+    selection.$center()
   }
 
   onMount(init)
