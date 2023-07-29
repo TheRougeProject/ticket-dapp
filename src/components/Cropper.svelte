@@ -10,12 +10,25 @@
   let modal
   let cropper
   let selection
+  let info
 
   const close = () => {}
 
-  const crop = () => {
-    const selection = cropper.getCropperSelections()[0]
+  const crop = async () => {
     console.log(selection)
+
+    const canvas = await selection.$toCanvas()
+    console.log(canvas)
+  }
+
+  const updateInfo = () => {
+    const [scaleX, , , scaleY] = cropper.getCropperImage().$getTransform()
+    info = {
+      width: Math.round(selection.width / scaleX),
+      height: Math.round(selection.height / scaleY)
+    }
+    // minWidth={768}
+    // minHeight={432}
   }
 
   const init = () => {
@@ -27,12 +40,21 @@
     cropper = new Cropper(image, {
       container: '.cropper-container'
     })
+
+    // but not if image small than window
+    cropper
+      .getCropperImage()
+      .$center('contain')
+      .addEventListener('transform', updateInfo)
+
     selection = cropper.getCropperSelections()[0]
 
     selection.setAttribute('initial-aspect-ratio', 1.77777777777777)
     selection.setAttribute('aspect-ratio', 1.777777777777)
     selection.$moveTo(selection.x + 1)
     selection.$center()
+
+    selection.addEventListener('change', updateInfo)
   }
 
   onMount(init)
@@ -45,18 +67,23 @@
     class="fullscreen"
     noCloseButton={true}
     on:close={close}>
+    <div class="cropper-info m-2">
+      <div class="has-text-centered has-transparent-background">
+        <span>{info?.width} x {info?.height}</span>
+      </div>
+    </div>
     <div class="cropper-control m-2">
       <div class="buttons is-centered has-transparent-background">
         <button
           class="button"
           on:click={() => {
-            selection.$zoom(0.05)
+            cropper.getCropperImage().$zoom(0.05)
           }}>
           <span class="is-hidden-mobile mr-1">Zoom</span> In</button>
         <button
           class="button"
           on:click={() => {
-            selection.$zoom(-0.05)
+            cropper.getCropperImage().$zoom(-0.05)
           }}>
           <span class="is-hidden-mobile mr-1">Zoom</span> Out</button>
         <button class="button is-black" on:click={modal.close}>Cancel</button>
@@ -67,41 +94,20 @@
   </Modal>
 {/if}
 
-{#if false && src}
-  <div class="cropper-container">
-    <cropper-canvas background>
-      <cropper-image {src} />
-      <cropper-shade hidden />
-      <cropper-handle action="select" plain />
-      <cropper-selection
-        initial-coverage="0.5"
-        aspect-ratio="1.77777777"
-        initial-aspect-ratio="1.77777777"
-        movable
-        resizable
-        zoomable>
-        <cropper-grid role="grid" covered />
-        <cropper-crosshair centered />
-        <cropper-handle action="move" theme-color="rgba(255, 255, 255, 0.35)" />
-        <cropper-handle action="n-resize" />
-        <cropper-handle action="e-resize" />
-        <cropper-handle action="s-resize" />
-        <cropper-handle action="w-resize" />
-        <cropper-handle action="ne-resize" />
-        <cropper-handle action="nw-resize" />
-        <cropper-handle action="se-resize" />
-        <cropper-handle action="sw-resize" />
-      </cropper-selection>
-    </cropper-canvas>
-  </div>
-{/if}
-
 <!-- eslint-disable -->
 
 <style lang="scss" global>
   cropper-canvas {
     height: 100vh;
     width: 100hw;
+  }
+
+  .cropper-info {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 100;
   }
 
   .cropper-control {
