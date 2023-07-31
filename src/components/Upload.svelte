@@ -7,16 +7,6 @@
   import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
   import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 
-  import FilePondPluginImageEditor from '@pqina/filepond-plugin-image-editor'
-
-  import {
-    openEditor,
-    createDefaultImageReader,
-    createDefaultImageWriter,
-    processImage,
-    getEditorDefaults
-  } from '@pqina/pintura'
-
   // import registry from '$stores/registry.js'
   // import user from '$stores/user.js'
 
@@ -24,8 +14,7 @@
     FilePondPluginFileValidateSize,
     FilePondPluginFileValidateType,
     FilePondPluginImagePreview,
-    FilePondPluginFileEncode,
-    FilePondPluginImageEditor
+    FilePondPluginFileEncode
   )
 
   const control = {
@@ -39,80 +28,16 @@
 
   const handleStart = () => {
     control.step = 1
-    console.log('handleEnd')
+    console.log('handleStart')
   }
 
   const handleUploadError = (err) => {
     console.log('upload error', err)
   }
 
-  const handleEnd = () => {
+  const handleEnd = async () => {
     control.step = 2
-
     console.log('handleEnd')
-  }
-
-  const imageEditor = {
-    // used to create the editor, receives editor configuration, should return an editor instance
-    createEditor: openEditor,
-
-    // Required, used for reading the image data
-    imageReader: [createDefaultImageReader],
-
-    // optionally. can leave out when not generating a preview thumbnail and/or output image
-    imageWriter: [
-      // The image writer to use
-      createDefaultImageWriter,
-      // optional image writer instructions, this instructs the image writer to resize the image to match a width of 384 pixels
-      {
-        targetSize: {
-          width: 128
-        }
-      }
-
-      /* Uncomment when editing videos, remove above code
-             () =>
-             createDefaultMediaWriter(
-             // Generic Media Writer options, passed to image and video writer
-             {
-             targetSize: {
-             width: 400,
-             },
-             },
-             [
-             // For handling images
-             createDefaultImageWriter(),
-
-             // For handling videos
-             createDefaultVideoWriter({
-             // Video writer instructions here
-             // ...
-
-             // Encoder to use
-             encoder: createMediaStreamEncoder({
-             imageStateToCanvas,
-             }),
-             }),
-             ]
-             ),
-           */
-    ],
-
-    // used to generate poster images, runs an editor in the background
-    imageProcessor: processImage,
-
-    // Pintura Image Editor properties
-    editorOptions: {
-      // pass the editor default configuration options
-      ...getEditorDefaults({
-        /* Uncomment when editing videos
-                 locale: { ...plugin_trim_locale_en_gb },
-               */
-      }),
-
-      // we want a square crop
-      imageCropAspectRatio: 1
-    }
   }
 
   /* uncomment to preview the resulting file in the document after editing
@@ -128,16 +53,64 @@
 
   $: sizeLimit = '1MB'
 
+  const server = {
+    process: (
+      fieldName,
+      file,
+      metadata,
+      load,
+      error,
+      progress,
+      abort /* transfer, options */
+    ) => {
+      // fieldName is the name of the input field
+      // file is the actual file object to send
+      const formData = new FormData()
+      formData.append(fieldName, file, file.name)
+
+      // const request = new XMLHttpRequest();
+      // request.open('POST', 'url-to-api');
+
+      console.log(pond, fieldName, file, file.name)
+      let reader = new FileReader()
+
+      reader.readAsDataURL(file)
+
+      reader.onload = (e) => {
+        console.log(e)
+      }
+
+      // Should call the progress method to update the progress to 100% before calling load
+      // Setting computable to false switches the loading indicator to infinite mode
+      // request.upload.onprogress = (e) => {
+      //     progress(e.lengthComputable, e.loaded, e.total);
+      // };
+
+      load('ok 1')
+
+      //error('oh no');
+
+      // Should expose an abort method so the request can be cancelled
+      return {
+        abort: () => {
+          // This function is entered if the user has tapped the cancel button
+          //request.abort();
+
+          // Let FilePond know the request has been cancelled
+          abort()
+        }
+      }
+    }
+  }
+
   // if (!['image/gif','image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'].inc>
 </script>
 
 <FilePond
   {name}
-  {imageEditor}
+  {server}
   bind:this={pond}
   allowFileEncode={true}
-  allowImageEditor={true}
-  imageEditorInstantEdit={true}
   acceptedFileTypes={['image/gif', 'image/jpeg', 'image/png', 'image/webp']}
   labelFileTypeNotAllowed={'Only GIF, JPEG, PNG & WebPPDF are upported'}
   labelIdle={`<p class="my-3">Or drop/upload here your custom visual <br /> <span class="button is-small filepond--label-action my-3">Upload from device</span></p>`}
@@ -158,7 +131,6 @@
 <span class="filepond--drop-label" />
 
 <style lang="scss" global>
-  @import '@pqina/pintura/pintura.css';
   @import 'filepond/dist/filepond.css';
   @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 

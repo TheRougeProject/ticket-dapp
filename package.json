@@ -28,9 +28,6 @@
     "svelte-file-dropzone": "^1.0.0"
   },
   "devDependencies": {
-    "@pqina/filepond-plugin-image-editor": "^9.0.3",
-    "@pqina/pintura": "^8.60.15",
-    "@pqina/svelte-pintura": "^9.0.1",
     "@sveltejs/adapter-static": "2.0.3",
     "@sveltejs/kit": "1.22.3",
     "@tabler/icons-svelte": "^2.27.0",
