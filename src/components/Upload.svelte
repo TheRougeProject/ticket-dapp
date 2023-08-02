@@ -64,14 +64,8 @@
       abort /* transfer, options */
     ) => {
       // fieldName is the name of the input field
-      // file is the actual file object to send
-      const formData = new FormData()
-      formData.append(fieldName, file, file.name)
-
-      // const request = new XMLHttpRequest();
-      // request.open('POST', 'url-to-api');
-
       console.log(pond, fieldName, file, file.name)
+
       let reader = new FileReader()
 
       reader.readAsDataURL(file)
