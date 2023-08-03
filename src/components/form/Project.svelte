@@ -1,5 +1,5 @@
 <script>
-  import { onMount, getContext } from 'svelte'
+  import { getContext } from 'svelte'
 
   import dayjs from 'dayjs'
 
@@ -10,10 +10,7 @@
   import { ipfs } from '$lib/actions/ipfs.js'
 
   import Calendar from '$components/Calendar/index.svelte'
-  import DropZone from '$components/DropZone.svelte'
-  import CropperModal from '$components/CropperModal.svelte'
   import Waiting from '$components/Waiting.svelte'
-
   import Upload from '$components/Upload.svelte'
 
   const mobile = getContext('mobile')
@@ -27,60 +24,17 @@
     warned: {}
   }
 
-  let cropper
+  const uploadSuccess = (event) => {
+    console.log('uploadSuccess', event)
+    // TDOO remove croppedVisual
+    delete control.croppedVisual
+    delete control.error.visual
 
-  // new uploaded image
-  const handleUpload = (event) => {
-    const file = event.detail.acceptedFiles[0]
-    let reader = new FileReader()
+    data.visual = event.detail.src
+  }
 
-    //if (!['image/gif','image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'].includes(file.type)) {
-    if (
-      !['image/gif', 'image/jpeg', 'image/png', 'image/webp'].includes(
-        file.type
-      )
-    ) {
-      control.error.visual = `Unsupported visual type ${file.type}`
-      return
-    }
-
-    reader.readAsDataURL(file)
-    reader.onload = (e) => {
-      const image = new Image()
-      image.src = e.target.result
-      image.onload = ({ target }) => {
-        // console.log(target.width, target.height)
-        if (!['image/svg+xml'] && target.width < 768) {
-          control.error.visual = `Image dimensions (${target.width} x ${target.height} px) is too small: a minimum 768px width is required`
-          return
-        }
-        if (!['image/svg+xml'] && target.height < 432) {
-          control.error.visual = `Image dimensions (${target.width} x ${target.height} px) is too small: a minimum 432px height is required`
-          return
-        }
-
-        if (
-          !['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'].includes(
-            file.type
-          ) &&
-          Math.round((target.width / target.height) * 10) !== 17
-        ) {
-          console.log('ratio', Math.round((target.width / target.height) * 10))
-          control.error.visual = `Your ${file.type} visual should have a 16:9 ratio`
-          return
-        }
-
-        cropper.reset()
-        delete control.croppedVisual
-        delete control.error.visual
-
-        data.visual = target.src
-        if (['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
-          // XXX replace by activate ?
-          cropActive = true
-        }
-      }
-    }
+  const uploadFailure = (event) => {
+    console.log('uploadFailure', event)
   }
 
   let mark = 1
@@ -163,7 +117,6 @@
           // todo
         }
       }
-      cropper.reset()
       control.error.visual = 'Server error, please retry later'
       control.isWaiting = false
       return false
@@ -171,29 +124,10 @@
 
     return true
   }
-
-  let cropActive = false
-  let cropHandler = (cropped) => {
-    // console.log('received cropped visual', cropped.width)
-    control.croppedVisual = cropped
-  }
-
-  onMount(() => {
-    // console.log('bind data', JSON.stringify(data), control)
-  })
 </script>
 
-<CropperModal
-  bind:this={cropper}
-  bind:active={cropActive}
-  title="Resize & Crop your visual"
-  image={data.visual}
-  handler={cropHandler}
-  minWidth={768}
-  minHeight={432}
-  factor={0.5} />
-
 <h3 class="subtitle mt-4">When?</h3>
+
 <div class="columns is-multiline">
   {#if $mobile}
     <div class="column is-full">
@@ -334,15 +268,7 @@
     {/key}
     <div class="column pt-1 is-one-third">
       <div class="is-16by9">
-        <DropZone
-          multiple={false}
-          on:drop={handleUpload}
-          buttonLabel="Upload"
-          buttonClass="is-small">
-          <p class="has-text-centered mb-3 is-size-7">
-            Or drop here/upload your custom visual<br />(GIF, JPEG, PNG or WebP)
-          </p>
-        </DropZone>
+        <Upload on:success={uploadSuccess} on:failure={uploadFailure} />
       </div>
       <p class="has-text-centered is-size-7 py-1">
         min. size 768x432 pixels, 16:9 ratio
@@ -368,7 +294,7 @@
               class="button is-small mb-3"
               disabled={!/^data/.test(data.visual) || undefined}
               on:click={() => {
-                cropActive = true
+                // TODO cropActive = true
               }}>Crop/Resize</button>
           </div>
         {/if}
@@ -392,8 +318,6 @@
 </div>
 
 <h3 class="subtitle mt-4">test?</h3>
-
-<Upload />
 
 <h3 class="subtitle mt-4">Where?</h3>
 <div class="columns is-multiline">

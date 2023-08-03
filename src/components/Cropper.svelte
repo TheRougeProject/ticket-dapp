@@ -6,19 +6,22 @@
 
   export let active = false
   export let src
+  export let callback
 
   let modal
   let cropper
   let selection
   let info
 
-  const close = () => {}
+  const cancel = () => {
+    modal.close()
+    callback.reject()
+  }
 
   const crop = async () => {
-    console.log(selection)
-
     const canvas = await selection.$toCanvas()
-    console.log(canvas)
+    modal.close()
+    callback.resolve(canvas.toDataURL('image/png'))
   }
 
   const updateInfo = () => {
@@ -86,7 +89,7 @@
             cropper.getCropperImage().$zoom(-0.05)
           }}>
           <span class="is-hidden-mobile mr-1">Zoom</span> Out</button>
-        <button class="button is-black" on:click={modal.close}>Cancel</button>
+        <button class="button is-black" on:click={cancel}>Cancel</button>
         <button class="button is-primary" on:click={crop}>Crop & Save</button>
       </div>
     </div>

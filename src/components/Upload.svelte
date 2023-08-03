@@ -1,11 +1,12 @@
 <script>
-  // import { onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
+
+  import Cropper from '$components/Cropper.svelte'
 
   import FilePond, { registerPlugin } from 'svelte-filepond'
   import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size'
   import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
   import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-  import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 
   // import registry from '$stores/registry.js'
   // import user from '$stores/user.js'
@@ -13,9 +14,10 @@
   registerPlugin(
     FilePondPluginFileValidateSize,
     FilePondPluginFileValidateType,
-    FilePondPluginImagePreview,
-    FilePondPluginFileEncode
+    FilePondPluginImagePreview
   )
+
+  const dispatch = createEventDispatcher()
 
   const control = {
     step: 0,
@@ -70,19 +72,38 @@
 
       reader.readAsDataURL(file)
 
-      reader.onload = (e) => {
-        console.log(e)
+      reader.onload = async (e) => {
+        // if (!['image/gif','image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'].inc>
+        // TODO if svg, no resize ...
+
+        // if ratio ok no reisze ?
+        //         // console.log(target.width, target.height)
+        //         if (!['image/svg+xml'] && target.width < 768) {
+        //           control.error.visual = `Image dimensions (${target.width} x ${target.height} px) is too small: a minimum 768px width is required`
+        //           return
+        //         }
+        //         if (!['image/svg+xml'] && target.height < 432) {
+        //           control.error.visual = `Image dimensions (${target.width} x ${target.height} px) is too small: a minimum 432px height is required`
+        //           return
+        //         }
+
+        // console.log(e.target.result)
+        try {
+          const resized = await new Promise((resolve, reject) => {
+            callback = { resolve, reject }
+            src = e.target.result
+          })
+          src = null
+          load('ok')
+          dispatch('success', { src: resized })
+          pond.removeFiles()
+        } catch (err) {
+          src = null
+          error('oh no')
+          dispatch('failure')
+          pond.removeFiles()
+        }
       }
-
-      // Should call the progress method to update the progress to 100% before calling load
-      // Setting computable to false switches the loading indicator to infinite mode
-      // request.upload.onprogress = (e) => {
-      //     progress(e.lengthComputable, e.loaded, e.total);
-      // };
-
-      load('ok 1')
-
-      //error('oh no');
 
       // Should expose an abort method so the request can be cancelled
       return {
@@ -97,14 +118,18 @@
     }
   }
 
-  // if (!['image/gif','image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'].inc>
+  let src
+  let callback
 </script>
+
+{#if src}
+  <Cropper active={true} {callback} {src} />
+{/if}
 
 <FilePond
   {name}
   {server}
   bind:this={pond}
-  allowFileEncode={true}
   acceptedFileTypes={['image/gif', 'image/jpeg', 'image/png', 'image/webp']}
   labelFileTypeNotAllowed={'Only GIF, JPEG, PNG & WebPPDF are upported'}
   labelIdle={`<p class="my-3">Or drop/upload here your custom visual <br /> <span class="button is-small filepond--label-action my-3">Upload from device</span></p>`}
@@ -116,11 +141,9 @@
   onaddfilestart={handleStart}
   onerror={handleUploadError}
   onprocessfiles={handleEnd}
+  FilePondPlugin="Error"
   allowRemove={true}
   labelTapToUndo="Tap to change image" />
-<p class="has-text-centered is-size-7 py-1">
-  min. size 768x432 pixels, 16:9 ratio
-</p>
 
 <span class="filepond--drop-label" />
 
