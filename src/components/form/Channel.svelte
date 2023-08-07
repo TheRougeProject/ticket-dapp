@@ -8,9 +8,8 @@
 
   import { ipfs } from '$lib/actions/ipfs.js'
 
-  import DropZone from '$components/DropZone.svelte'
-  import CropperModal from '$components/CropperModal.svelte'
   import Waiting from '$components/Waiting.svelte'
+  import Upload from '$components/Upload.svelte'
 
   import Accordion from '$components/design/Accordion.svelte'
 
@@ -24,57 +23,32 @@
   }
 
   let cropper
-  let cropActive = false
+  const uploadSuccess = (event) => {
+    console.log('uploadSuccess', event)
+    // TDOO remove croppedVisual
+    delete control.croppedVisual
+    delete control.error.visual
 
-  const handleUpload = (event) => {
-    const file = event.detail.acceptedFiles[0]
-    let reader = new FileReader()
-
-    //if (!['image/gif','image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'].includes(file.type)) {
-    if (
-      !['image/gif', 'image/jpeg', 'image/png', 'image/webp'].includes(
-        file.type
-      )
-    ) {
-      control.error.icon = `Unsupported icon type ${file.type}`
-      return
-    }
-
-    reader.readAsDataURL(file)
-    reader.onload = (e) => {
-      const image = new Image()
-      image.src = e.target.result
-      image.onload = ({ target }) => {
-        if (!['image/svg+xml'] && target.width < 96) {
-          control.error.icon = `Icon dimensions (${target.width} x ${target.height} px) is too small: a minimum 96px width is required`
-          return
-        }
-        if (!['image/svg+xml'] && target.height < 96) {
-          control.error.icon = `Icon dimensions (${target.width} x ${target.height} px) is too small: a minimum 96px height is required`
-          return
-        }
-        if (
-          !['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'].includes(
-            file.type
-          ) &&
-          Math.round((target.width / target.height) * 10) !== 10
-        ) {
-          console.log('ratio', Math.round((target.width / target.height) * 10))
-          control.error.icon = `Your ${file.type} icon should have a square ratio`
-          return
-        }
-
-        cropper.reset()
-        delete control.croppedIcon
-        delete control.error.icon
-
-        data.icon = target.src
-        if (['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
-          cropActive = true
-        }
-      }
-    }
+    data.icon = event.detail.src
   }
+
+  const uploadFailure = (event) => {
+    console.log('uploadFailure', event)
+  }
+
+  // reader.onload = (e) => {
+  //   const image = new Image()
+  //   image.src = e.target.result
+  //   image.onload = ({ target }) => {
+  //     if (!['image/svg+xml'] && target.width < 96) {
+  //       control.error.icon = `Icon dimensions (${target.width} x ${target.height} px) is too small: a minimum 96px width is required`
+  //       return
+  //     }
+  //     if (!['image/svg+xml'] && target.height < 96) {
+  //       control.error.icon = `Icon dimensions (${target.width} x ${target.height} px) is too small: a minimum 96px height is required`
+  //       return
+  //     }
+  // control.error.icon = `Your ${file.type} icon should have a square ratio`
 
   export const validate = async () => {
     control.error = {}
@@ -137,17 +111,6 @@
     if (data.icon || data.max) opened = true
   })
 </script>
-
-<CropperModal
-  bind:this={cropper}
-  bind:active={cropActive}
-  minWidth={96}
-  minHeight={96}
-  title="Resize & Crop your Icon"
-  image={data.icon}
-  handler={(cropped) => {
-    control.croppedIcon = cropped
-  }} />
 
 <div class="columns is-multiline">
   <div class="column is-one-third">
@@ -261,21 +224,17 @@
           <div class="columns is-vcentered">
             <div class="column is-half">
               <figure class="image is-96x96" style="overflow: hidden;">
-                {#if /^ipfs:/.test(data.icon) && !control.croppedIcon}
+                {#if /^ipfs:/.test(data.icon)}
                   <img alt="channel icon" data-ipfs={data.icon} use:ipfs />
-                {:else}
-                  <img
-                    alt="channel icon"
-                    src={control.croppedIcon || data.icon} />
                 {/if}
               </figure>
             </div>
             <div class="column is-half">
-              {#if /^data:image\/(png|jpeg|webp)/.test(data.icon)}
+              {#if false && /^data:image\/(png|jpeg|webp)/.test(data.icon)}
                 <button
                   class="button is-small mb-3"
                   on:click={() => {
-                    cropActive = true
+                    // cropActive = true
                   }}>Crop/Resize</button>
                 <br />
               {/if}
@@ -287,17 +246,10 @@
             </div>
           </div>
         {:else}
-          <DropZone
-            multiple={false}
-            on:drop={handleUpload}
-            buttonLabel="Upload"
-            buttonClass="is-small">
-            <p class="has-text-centered mb-3 is-size-7">
-              Drop here/upload an image
-              <br />(GIF, JPEG, PNG or WebP)
-              <br />(min. size 96x96 pixels, square ratio)
-            </p>
-          </DropZone>
+          <Upload
+            ratio="96x96"
+            on:success={uploadSuccess}
+            on:failure={uploadFailure} />
         {/if}
         {#if control.error.icon}<p class="help is-danger">
             {control.error.icon}
