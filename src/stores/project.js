@@ -280,6 +280,7 @@ const createStore = () => {
 
   // draft project c(r)ud
   const updateDraft = async (address, data) => {
+    console.log(data)
     localStorage.setItem(`rge:draft:${address}`, serialize(data))
     add(address)
   }
@@ -288,6 +289,8 @@ const createStore = () => {
     console.log({ draftNonce })
     const address = toHexString(draftNonce, 40)
     updateDraft(address, data)
+    draftNonce++
+    localStorage.setItem(draftNonceKey(), draftNonce)
     return address
   }
 
