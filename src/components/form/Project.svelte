@@ -268,7 +268,11 @@
     {/key}
     <div class="column pt-1 is-one-third">
       <div class="is-16by9">
-        <Upload on:success={uploadSuccess} on:failure={uploadFailure} />
+        <Upload
+          minSize="768x432"
+          forceRatio={true}
+          on:success={uploadSuccess}
+          on:failure={uploadFailure} />
       </div>
       <p class="has-text-centered is-size-7 py-1">
         min. size 768x432 pixels, 16:9 ratio

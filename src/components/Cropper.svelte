@@ -7,6 +7,12 @@
   export let active = false
   export let src
   export let callback
+  export let minSize
+  export let forceRatio
+
+  $: minWidth = minSize.split('x')[0]
+  $: minHeight = minSize.split('x')[1]
+  $: ratio = minWidth / minHeight
 
   let modal
   let cropper
@@ -38,7 +44,7 @@
     const image = new Image()
 
     image.src = src
-    image.alt = 'Picture'
+    image.alt = 'Image'
 
     cropper = new Cropper(image, {
       container: '.cropper-container'
@@ -52,8 +58,11 @@
 
     selection = cropper.getCropperSelections()[0]
 
-    selection.setAttribute('initial-aspect-ratio', 1.77777777777777)
-    selection.setAttribute('aspect-ratio', 1.777777777777)
+    if (forceRatio) {
+      selection.setAttribute('initial-aspect-ratio', ratio)
+      selection.setAttribute('aspect-ratio', ratio)
+    }
+
     selection.$moveTo(selection.x + 1)
     selection.$center()
 

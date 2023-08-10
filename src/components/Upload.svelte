@@ -17,6 +17,14 @@
     FilePondPluginImagePreview
   )
 
+  export let minSize
+  export let forceRatio = true
+
+  // eslint-disable-next-line no-unused-vars
+  $: minWidth = minSize.split('x')[0]
+  // eslint-disable-next-line no-unused-vars
+  $: minHeight = minSize.split('x')[1]
+
   const dispatch = createEventDispatcher()
 
   const control = {
@@ -42,17 +50,6 @@
     console.log('handleEnd')
   }
 
-  /* uncomment to preview the resulting file in the document after editing
-           onpreparefile: (fileItem, file) => {
-           const media = document.createElement(
-           /video/.test(file.type) ? 'video' : 'img'
-           );
-           media.controls = true;
-           media.src = URL.createObjectURL(file);
-           document.body.appendChild(media);
-           },
-         */
-
   $: sizeLimit = '1MB'
 
   const server = {
@@ -66,13 +63,16 @@
       abort /* transfer, options */
     ) => {
       // fieldName is the name of the input field
-      console.log(pond, fieldName, file, file.name)
+      console.log(pond, fieldName, file, metadata, file.name)
 
       let reader = new FileReader()
 
       reader.readAsDataURL(file)
 
       reader.onload = async (e) => {
+        // TODO get file size
+        //if ()
+
         // if (!['image/gif','image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'].inc>
         // TODO if svg, no resize ...
 
@@ -123,7 +123,7 @@
 </script>
 
 {#if src}
-  <Cropper active={true} {callback} {src} />
+  <Cropper active={true} {minSize} {forceRatio} {callback} {src} />
 {/if}
 
 <FilePond
@@ -157,5 +157,8 @@
     color: rgb(153, 0, 0) !important;
     font-size: 0.75rem !important;
     height: 10em;
+    top: unset;
+    right: unset;
+    left: unset;
   }
 </style>

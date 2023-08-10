@@ -26,29 +26,19 @@
   const uploadSuccess = (event) => {
     console.log('uploadSuccess', event)
     // TDOO remove croppedVisual
-    delete control.croppedVisual
-    delete control.error.visual
+    delete control.visualcroppedVisual
+    delete control.error.icon
 
     data.icon = event.detail.src
   }
 
   const uploadFailure = (event) => {
+    // control.error.icon = `Icon dimensions (${target.width} x ${target.height} px) is too small: a minimum 96px width is required`
+    // control.error.icon = `Icon dimensions (${target.width} x ${target.height} px) is too small: a minimum 96px height is required`
+    // control.error.icon = `Your ${file.type} icon should have a square ratio`
+
     console.log('uploadFailure', event)
   }
-
-  // reader.onload = (e) => {
-  //   const image = new Image()
-  //   image.src = e.target.result
-  //   image.onload = ({ target }) => {
-  //     if (!['image/svg+xml'] && target.width < 96) {
-  //       control.error.icon = `Icon dimensions (${target.width} x ${target.height} px) is too small: a minimum 96px width is required`
-  //       return
-  //     }
-  //     if (!['image/svg+xml'] && target.height < 96) {
-  //       control.error.icon = `Icon dimensions (${target.width} x ${target.height} px) is too small: a minimum 96px height is required`
-  //       return
-  //     }
-  // control.error.icon = `Your ${file.type} icon should have a square ratio`
 
   export const validate = async () => {
     control.error = {}
@@ -226,6 +216,8 @@
               <figure class="image is-96x96" style="overflow: hidden;">
                 {#if /^ipfs:/.test(data.icon)}
                   <img alt="channel icon" data-ipfs={data.icon} use:ipfs />
+                {:else}
+                  <img alt="channel icon" src={data.icon} />
                 {/if}
               </figure>
             </div>
@@ -247,10 +239,14 @@
           </div>
         {:else}
           <Upload
-            ratio="96x96"
+            minSize="96x96"
+            forceRatio={true}
             on:success={uploadSuccess}
             on:failure={uploadFailure} />
         {/if}
+        <p class="has-text-centered is-size-7 py-1">
+          min. size 96x96 pixels, square ratio
+        </p>
         {#if control.error.icon}<p class="help is-danger">
             {control.error.icon}
           </p>{/if}
