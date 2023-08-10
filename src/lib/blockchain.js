@@ -416,6 +416,18 @@ export const getChainTokens = (chainId = 0, chainData = {}) => {
     )
   }
 
+  if (list.USDT) {
+    tokens.USDT = Token.from(
+      {
+        name: 'Tether',
+        decimals: 6,
+        symbol: 'USDT',
+        address: list.USDT
+      },
+      { chainId, type: 'ERC20' }
+    )
+  }
+
   if (dev && list.UNI) {
     tokens.UNI = Token.from(
       {
