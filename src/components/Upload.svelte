@@ -16,6 +16,7 @@
     FilePondPluginFileValidateType,
     FilePondPluginImagePreview
   )
+  /* eslint-disable */
 
   export let minSize
   export let forceRatio = true
@@ -145,18 +146,27 @@
   allowRemove={true}
   labelTapToUndo="Tap to change image" />
 
-<span class="filepond--drop-label" />
-
 <style lang="scss" global>
   @import 'filepond/dist/filepond.css';
   @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
+  .filepond--panel-root {
+    background-color: transparent !important;
+  }
+  .filepond--credits {
+    right: unset;
+    left: 0;
+    margin-top: 10px;
+  }
+
   .filepond--drop-label {
-    background-color: #fff;
-    padding: 20px;
+    background-color: #f5f5f5;
+    border: 2px dashed #ddd;
+    padding: 5px;
     color: rgb(153, 0, 0) !important;
     font-size: 0.75rem !important;
-    height: 10em;
+    height: auto;
+    width: auto;
     top: unset;
     right: unset;
     left: unset;
