@@ -416,6 +416,18 @@ export const getChainTokens = (chainId = 0, chainData = {}) => {
     )
   }
 
+  if (list.DAI) {
+    tokens.DAI = Token.from(
+      {
+        name: 'Dai Stablecoin',
+        decimals: 18,
+        symbol: 'DAI',
+        address: list.DAI
+      },
+      { chainId, type: 'ERC20' }
+    )
+  }
+
   if (list.USDT) {
     tokens.USDT = Token.from(
       {
