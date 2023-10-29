@@ -18,13 +18,15 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@rougenetwork/v2-core": "^2.2.10",
+    "@web3-onboard/web3auth": "^2.2.3",
     "awesome-qr": "^2.1.5-rc.0",
     "buffer": "^6.0.3",
     "bulma-calendar": "^6.1.18",
     "bulma-o-steps": "^1.1.0",
     "dayjs": "^1.11.9",
     "jsonwebtoken-esm": "^2.0.1",
-    "jsqr": "^1.4.0"
+    "jsqr": "^1.4.0",
+    "marble-sdk": "^0.1.18"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "2.0.3",
