@@ -11,6 +11,7 @@ import { IconLogout } from '@tabler/icons-svelte'
 import { IconConfetti } from '@tabler/icons-svelte'
 import { IconTools } from '@tabler/icons-svelte'
 import { IconList } from '@tabler/icons-svelte'
+import { IconCompass } from '@tabler/icons-svelte'
 import { IconEdit } from '@tabler/icons-svelte'
 import { IconTrash } from '@tabler/icons-svelte'
 import { IconEyeOff } from '@tabler/icons-svelte'
@@ -53,6 +54,7 @@ export {
   IconConfetti,
   IconTools,
   IconList,
+  IconCompass,
   IconEdit,
   IconTrash,
   IconEyeOff,

@@ -53,6 +53,12 @@
           ><Icon name="Book" class="mr-1" />Tickets book</a>
       </div>
     {/if}
+    {#if !/^\/hub/.test($page.url.pathname)}
+      <div class="level-item">
+        <a class="button is-text is-small" href="/hub"
+          ><Icon name="Compass" class="mr-1" />Events hub</a>
+      </div>
+    {/if}
     {#each $chainContext.pluginRoutes as entry}
       {#if !activePlugin(entry.path)}
         <div class="level-item">
