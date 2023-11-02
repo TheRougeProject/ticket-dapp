@@ -2,6 +2,8 @@ import Onboard from '@web3-onboard/core'
 import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule from '@web3-onboard/walletconnect'
 import gnosisModule from '@web3-onboard/gnosis'
+import bitgetWalletModule from '@web3-onboard/bitget'
+import bloctoModule from '@web3-onboard/blocto'
 
 // https://web3auth.io/ ?'
 
@@ -81,6 +83,7 @@ export const wrapper = () => {
       custom: [foxwallet]
     })
     const gnosis = gnosisModule()
+    const bitgetWallet = bitgetWalletModule()
 
     const supportedChainIds = getSupportedChainIds(
       registry.get('includeTestnets')
@@ -113,7 +116,7 @@ export const wrapper = () => {
     //.filter((o) => !!o.rpcUrl)
 
     onboard = Onboard({
-      wallets: [injected, gnosis, walletConnect],
+      wallets: [injected, gnosis, walletConnect, bitgetWallet],
       chains,
       accountCenter: {
         desktop: {
