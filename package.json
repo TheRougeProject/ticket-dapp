@@ -19,7 +19,6 @@
     "@popperjs/core": "^2.11.8",
     "@rougenetwork/v2-core": "^2.2.10",
     "awesome-qr": "^2.1.5-rc.0",
-    "buffer": "^6.0.3",
     "bulma-calendar": "^6.1.18",
     "bulma-o-steps": "^1.1.0",
     "dayjs": "^1.11.9",
