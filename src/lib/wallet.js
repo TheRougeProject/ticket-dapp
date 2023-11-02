@@ -4,6 +4,14 @@ import walletConnectModule from '@web3-onboard/walletconnect'
 import gnosisModule from '@web3-onboard/gnosis'
 import bitgetWalletModule from '@web3-onboard/bitget'
 import bloctoModule from '@web3-onboard/blocto'
+import coinbaseWalletModule from '@web3-onboard/coinbase'
+import enrkyptModule from '@web3-onboard/enkrypt'
+import frameModule from '@web3-onboard/frame'
+import frontierModule from '@web3-onboard/frontier'
+import infinityWalletWalletModule from '@web3-onboard/infinity-wallet'
+import tahoWalletModule from '@web3-onboard/taho'
+import torusModule from '@web3-onboard/torus'
+import xdefiWalletModule from '@web3-onboard/xdefi'
 
 // https://web3auth.io/ ?'
 
@@ -84,6 +92,12 @@ export const wrapper = () => {
     })
     const gnosis = gnosisModule()
     const bitgetWallet = bitgetWalletModule()
+    const blocto = bloctoModule()
+    const coinbaseWalletSdk = coinbaseWalletModule({ darkMode: true })
+    const enrkypt = enrkyptModule()
+    const frame = frameModule()
+    const frontier = frontierModule()
+    const infinityWalletSDK = infinityWalletWalletModule()
 
     const supportedChainIds = getSupportedChainIds(
       registry.get('includeTestnets')
@@ -116,7 +130,21 @@ export const wrapper = () => {
     //.filter((o) => !!o.rpcUrl)
 
     onboard = Onboard({
-      wallets: [injected, gnosis, walletConnect, bitgetWallet],
+      wallets: [
+        injected,
+        blocto,
+        gnosis,
+        enrkypt,
+        walletConnect,
+        bitgetWallet,
+        frame,
+        frontier,
+        coinbaseWalletSdk,
+        infinityWalletSDK,
+        tahoWalletModule(),
+        torusModule(),
+        xdefiWalletModule(),
+      ],
       chains,
       accountCenter: {
         desktop: {
