@@ -30,16 +30,16 @@ import {
   foxWallet
 } from '$icons/strings.js'
 
-// polyfill Buffer for Walletconnect
-import { Buffer } from 'buffer'
-// eslint-disable-next-line no-undef
-globalThis.Buffer = Buffer
+// // polyfill Buffer for Walletconnect
+// import { Buffer } from 'buffer'
+// // eslint-disable-next-line no-undef
+// globalThis.Buffer = Buffer
 
-if (typeof window !== 'undefined') {
-  //These two lines are required for Walletconnect...
-  window['global'] = window
-  global.Buffer = Buffer
-}
+// if (typeof window !== 'undefined') {
+//   //These two lines are required for Walletconnect...
+//   window['global'] = window
+//   global.Buffer = Buffer
+// }
 
 //That below is required for coinbase
 //global.process = require('process')
