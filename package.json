@@ -51,7 +51,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-svelte": "^2.35.0",
     "ethers": "^6.8.1",
-    "ethers-svelte": "^3.2.0",
+    "ethers-svelte": "^3.2.1",
     "filepond-plugin-file-validate-size": "^2.2.8",
     "filepond-plugin-file-validate-type": "^1.2.8",
     "filepond-plugin-image-preview": "^4.6.11",

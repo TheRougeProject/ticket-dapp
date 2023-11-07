@@ -67,6 +67,18 @@
   </div>
 </nav>
 
+<article class="message is-warn">
+  <div class="message-body">
+    Do you want to publish this event on the Rouge Ticket Hub?
+
+    <p>
+    <button class="button" on:click={test}>Apply Here</button>
+    </p>
+
+  </div>
+</article>
+
+
 <article class="message is-info">
   <div class="message-body">
     Do you like this app? Support us and help shape the future of permissionless
