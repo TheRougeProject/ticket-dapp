@@ -6,12 +6,15 @@
 
   import Project from '$components/Project.svelte'
 
+  import Application from '$components/form/HubApplication.svelte'
+
   import project from '$stores/project.js'
-  //import { toHexString } from '$lib/utils.js'
 
   export let data
 
   $: ({ address } = data)
+
+  let applicationActive = false
 
   dayjs.extend(localizedFormat)
 
@@ -20,17 +23,10 @@
   const endpoint = import.meta.env.VITE_SPRINGBOK_ENDPOINT
   const gateway = `${endpoint}/ipfs/`
 
-  const test = () => {
-    //   // Object { draftNonce: 1 }
-    //   const draftNonce = 1
-    //   //toHexString(draftNonce)
-    //   //invalid BytesLike value (argument="value", value="0x1", code=INVALID_ARGUMENT, version=6.3.0)
-    //   console.log(draftNonce)
-    //
-    //   const address = toHexString(draftNonce, 40)
-    //   console.log(address)
-  }
+
 </script>
+
+<Application bind:active={applicationActive} />
 
 <Project {p} />
 
@@ -72,12 +68,11 @@
     Do you want to publish this event on the Rouge Ticket Hub?
 
     <p>
-    <button class="button" on:click={test}>Apply Here</button>
+      <button class="button" on:click={() => {applicationActive = true} }>Apply Here</button>
     </p>
 
   </div>
 </article>
-
 
 <article class="message is-info">
   <div class="message-body">
@@ -97,9 +92,6 @@
         rel="noreferrer"
         href={(p.uri || '').replace('ipfs://', gateway)}>{p.uri}</a>
     </p>
-    <p><a href="/i/special/foxwallet/">foxwallet</a></p>
-
-    <button class="button" on:click={test}>test</button>
   </article>
 {/if}
 
