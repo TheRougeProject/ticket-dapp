@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "2.0.3",
-    "@sveltejs/kit": "1.27.3",
+    "@sveltejs/kit": "1.27.4",
     "@tabler/icons-svelte": "^2.40.0",
     "@web3-onboard/bitget": "^2.0.1",
     "@web3-onboard/blocto": "^2.0.0",
@@ -56,7 +56,7 @@
     "filepond-plugin-file-validate-type": "^1.2.8",
     "filepond-plugin-image-preview": "^4.6.11",
     "husky": "^8.0.3",
-    "ics": "^2.37.0",
+    "ics": "^3.5.0",
     "lint-staged": "^15.0.2",
     "mustache": "^4.2.0",
     "nanoid": "^5.0.3",
