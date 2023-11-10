@@ -16,6 +16,6 @@ export const load = async ({ params }) => {
 
   return {
     type: params.type,
-    chain: BigInt(params.chain),
+    chain: BigInt(params.chain)
   }
 }

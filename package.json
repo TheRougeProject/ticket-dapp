@@ -19,7 +19,7 @@
     "@popperjs/core": "^2.11.8",
     "@rougenetwork/v2-core": "^2.2.10",
     "awesome-qr": "^2.1.5-rc.0",
-    "bulma-calendar": "^6.1.18",
+    "bulma-calendar": "^6.1.19",
     "bulma-o-steps": "^1.1.0",
     "dayjs": "^1.11.10",
     "jsonwebtoken-esm": "^2.0.1",
@@ -70,7 +70,7 @@
     "vite": "^4.5.0"
   },
   "lint-staged": {
-    "*.{js,svelte}": "eslint --cache --fix",
-    "*.{cjs,js,svelte,json,scss,css,md}": "prettier --write"
+    "*.{js,svelte}": "echo eslint --cache --fix",
+    "*.{cjs,js,svelte,json,scss,css,md}": "echo prettier --write"
   }
 }

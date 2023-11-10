@@ -12,7 +12,7 @@ export default (data) => {
 		<button type="button" class="datetimepicker-footer-validate button is-primary mt-1 is-small ${
       data.displayMode === 'inline' ? 'is-hidden' : ''
     }">${data.icons.validate ? data.icons.validate : ''}${
-    data.validateLabel
-  } </button>
+      data.validateLabel
+    } </button>
 	</div>`
 }

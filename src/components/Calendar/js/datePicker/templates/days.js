@@ -10,10 +10,10 @@ export default (data) => {
           theDate.isEndDate ? ' datepicker-range-end' : ''
         }">
       <button class="date-item${theDate.isToday ? ' is-today' : ''}${
-          theDate.isHighlighted ? ' is-highlighted' : ''
-        }${
-          theDate.isStartDate ? ' is-active' : ''
-        }" type="button">${theDate.date.getDate()}</button>
+        theDate.isHighlighted ? ' is-highlighted' : ''
+      }${
+        theDate.isStartDate ? ' is-active' : ''
+      }" type="button">${theDate.date.getDate()}</button>
   </div>`
     )
     .join('')}</div>`

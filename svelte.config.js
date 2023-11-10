@@ -7,8 +7,12 @@ const config = {
   kit: {
     csp: {
       directives: {
-        'script-src': ['self', 'https://verify.walletconnect.org/', 'https://verify.walletconnect.com/']
-      },
+        'script-src': [
+          'self',
+          'https://verify.walletconnect.org/',
+          'https://verify.walletconnect.com/'
+        ]
+      }
       // reportOnly: {
       //   'script-src': ['self', 'https://verify.walletconnect.com/']
       // }

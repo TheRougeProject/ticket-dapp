@@ -143,7 +143,7 @@ export const wrapper = () => {
         infinityWalletSDK,
         tahoWalletModule(),
         torusModule(),
-        xdefiWalletModule(),
+        xdefiWalletModule()
       ],
       chains,
       accountCenter: {

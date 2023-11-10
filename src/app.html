@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -9,13 +9,14 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#ffffff" />
     <style>
-      body, html {
+      body,
+      html {
         margin: 0;
         padding: 0;
         height: 100%;
       }
       #preloaded {
-        font-family: "Helvetica", "Arial", sans-serif;
+        font-family: 'Helvetica', 'Arial', sans-serif;
         background-color: rgba(128, 128, 128, 0.3);
         position: fixed;
         top: 0;
@@ -28,8 +29,12 @@
         flex-direction: column;
       }
       @keyframes pulse {
-        from { color: #444; }
-        to { color: #888; }
+        from {
+          color: #444;
+        }
+        to {
+          color: #888;
+        }
       }
       #preloaded > span {
         font-size: 14px;
@@ -38,8 +43,12 @@
         animation: pulse 0.5s ease-in-out infinite alternate;
       }
       @keyframes slide {
-        from { transform: translateX(-8px); }
-        to { transform: translateX(8px); }
+        from {
+          transform: translateX(-8px);
+        }
+        to {
+          transform: translateX(8px);
+        }
       }
       #preloaded > img {
         animation: slide 0.5s ease-in-out infinite alternate;

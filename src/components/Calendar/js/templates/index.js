@@ -5,8 +5,8 @@ export default (data) => {
         <input placeholder="${
           data.labelFrom
         }" readonly="readonly" class="datetimepicker-dummy-input${
-    data.isRange ? ' is-datetimepicker-range' : ''
-  }" type="text">
+          data.isRange ? ' is-datetimepicker-range' : ''
+        }" type="text">
         ${
           data.isRange
             ? `<input placeholder="${data.labelTo}" readonly="readonly" class="datetimepicker-dummy-input" type="text">`

@@ -8,7 +8,8 @@
 @import 'bulma/sass/utilities/functions';
 
 // some derived-variables overwrite here
-$shadow: 0.05rem 0.05rem 0.15rem -0.05rem $primary-disabled,
+$shadow:
+  0.05rem 0.05rem 0.15rem -0.05rem $primary-disabled,
   1px 1px 3px 1px $grey-lightest;
 
 @import 'bulma/sass/base/_all';
