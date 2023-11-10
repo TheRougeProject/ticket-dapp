@@ -62,7 +62,7 @@
 
                 <div class="m-auto" style="height: 5em; width: 5em;">
                   {#if graphics[id]}
--                    {@html graphics[id].icon}
+                    {@html graphics[id].icon}
                   {/if}
                 </div>
 
