@@ -1,13 +1,11 @@
 <script>
   import { onMount } from 'svelte'
 
-  import { signerAddress, chainData } from 'ethers-svelte'
+  import { signerAddress } from 'ethers-svelte'
 
   import blockchain from '$lib/blockchain.js'
 
   // import Icon from '$components/Icon.svelte'
-
-  import EmptyState from '$components/design/EmptyState.svelte'
 
   export let data
   $: ({ chain } = data)

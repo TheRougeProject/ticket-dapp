@@ -16,8 +16,6 @@
 
   import registry from '$stores/registry.js'
 
-  import Icon from '$components/Icon.svelte'
-
   $: supportedChainIds = getSupportedChainIds($registry.includeTestnets)
 
   const graphics = {

@@ -4,7 +4,6 @@
   import { Jazzicon } from 'ethers-svelte/components'
 
   import { keyDownA11y, formatAddress } from '$lib/utils'
-  import blockchain from '$lib/blockchain.js'
 
   import AppContext from '$components/AppContext.svelte'
   import Icon from '$components/Icon.svelte'
