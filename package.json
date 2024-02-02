@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "2.0.3",
-    "@sveltejs/kit": "1.27.5",
+    "@sveltejs/kit": "1.30.3",
     "@tabler/icons-svelte": "^2.40.0",
     "@web3-onboard/bitget": "^2.0.1",
     "@web3-onboard/blocto": "^2.0.0",

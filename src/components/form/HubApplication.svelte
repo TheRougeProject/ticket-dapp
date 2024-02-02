@@ -1,11 +1,7 @@
 <script>
-  import { getContext } from 'svelte'
-
   import dayjs from 'dayjs'
 
   import backend from '$lib/backend.js'
-
-  import { categories, visuals } from '$lib/visuals.js'
 
   import Modal from '$components/Modal.svelte'
   import Waiting from '$components/Waiting.svelte'
