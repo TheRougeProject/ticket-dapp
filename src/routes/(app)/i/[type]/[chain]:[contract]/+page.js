@@ -8,7 +8,7 @@ export const load = async ({ params }) => {
     const search = allChainsData.filter((o) => o.shortName === params.chain)
     if (search.length !== 1) {
       console.log('unknown chain')
-      throw redirect(400, '/')
+      redirect(400, '/');
     }
     params.chain = search[0].chainId
   }
