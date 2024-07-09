@@ -6,7 +6,25 @@ In-depth documentation on Rouge Ticket is available at [docs.rouge.network](http
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install`, start a development server:
+Once you've cloned the project to your local machine, navigate to the project directory and install the dependencies:
+
+```bash
+npm install
+```
+
+After the dependencies have been installed, you should copy the `rougeticket.config.example.js` file to `rougeticket.config.js` and update the values to match your environment.
+
+```bash
+cp rougeticket.config.example.js rougeticket.config.js
+```
+
+You will also need to copy the `.env.example` file to `.env` and update the values to match your environment.
+
+```bash
+cp .env.example .env
+```
+
+Finally, you can start the development server:
 
 ```bash
 npm run dev
