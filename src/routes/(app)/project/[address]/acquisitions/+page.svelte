@@ -73,14 +73,16 @@
 <div
   class="tabs is-boxed is-toggle"
   class:is-active={!!selected}
-  class:is-on={!!filterType}>
+  class:is-on={!!filterType}
+>
   <ul>
     <li class:is-active={selected === 'filter'}>
       <a
         href="#filter"
         on:click={() => {
           selected = selected === 'filter' ? undefined : 'filter'
-        }}>
+        }}
+      >
         <Icon name="Filter" class="is-medium" />
         <span>Filter</span>
       </a>
@@ -91,7 +93,8 @@
           href="#group"
           on:click={() => {
             selected = selected === 'group' ? undefined : 'group'
-          }}>
+          }}
+        >
           <Icon name="BoxMultiple" class="is-medium" />
           <span>Group</span>
         </a>
@@ -115,7 +118,9 @@
             class="mr-1"
             type="radio"
             name="filter"
-            value="id" />by id</label>
+            value="id"
+          />by id</label
+        >
         <p class="control">
           <input
             class="input"
@@ -126,7 +131,8 @@
             type="number"
             min="1"
             max={nfts.length}
-            bind:value={filterParams.id} />
+            bind:value={filterParams.id}
+          />
         </p>
       </div>
     </div>
@@ -139,7 +145,9 @@
             class="mr-1"
             type="radio"
             name="filter"
-            value="address" />by address</label>
+            value="address"
+          />by address</label
+        >
         <p class="control">
           <input
             class="input"
@@ -148,7 +156,8 @@
             }}
             class:is-danger={control.error.label}
             type="text"
-            bind:value={filterParams.address} />
+            bind:value={filterParams.address}
+          />
         </p>
       </div>
     </div>
@@ -162,13 +171,16 @@
               class="mr-1"
               type="radio"
               name="filter"
-              value="channel" />by channel</label>
+              value="channel"
+            />by channel</label
+          >
           <p class="control">
             <span
               class="select"
               on:change={() => {
                 filterType = 'channel'
-              }}>
+              }}
+            >
               <select bind:value={filterParams.label}>
                 <option value={null}>--all--</option>
                 {#each p.channels || [] as channel, i}
@@ -221,7 +233,7 @@
 
 <style lang="scss">
   @import '../../../../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @use 'bulma/sass/utilities/';
 
   .tabs.is-toggle {
     li:not(:last-child) a {

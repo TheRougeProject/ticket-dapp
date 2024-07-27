@@ -187,7 +187,8 @@
 
       <p class="my-4">
         <a class="my-4 is-primary" href="/book"
-          >See them in the tickets book or as NFT in your wallet...</a>
+          >See them in the tickets book or as NFT in your wallet...</a
+        >
       </p>
 
       <a class="button is-primary text-icon my-4" href="/book">
@@ -212,7 +213,8 @@
             {#if /0xaFbe5Ea6b281ddCbb72273953293fE4A852Dbc00/i.test(contract)}
               <a
                 class="button is-text is-small is-responsive"
-                href="/i/special/foxwallet">
+                href="/i/special/foxwallet"
+              >
                 <span>Back to Bingo Game</span>
               </a>
             {:else if balances.total}
@@ -229,7 +231,8 @@
             {:else if p._loaded}
               <button
                 class="button is-text is-small is-responsive"
-                on:click={bookmark}>
+                on:click={bookmark}
+              >
                 <Icon name="Bookmark" class="mr-1" />Bookmark this event
               </button>
             {/if}
@@ -243,7 +246,8 @@
               class="button is-text is-small is-responsive"
               href="/project/{contract}/{$project[contract]._isDraft
                 ? 'draft/'
-                : ''}">
+                : ''}"
+            >
               <Icon name="Tools" class="mr-1" />Manager view
             </a>
           </div>
@@ -273,7 +277,8 @@
               on:click={() => {
                 step = 1
               }}
-              class:is-active={step === 1}>
+              class:is-active={step === 1}
+            >
               <a href="#select">
                 <Icon name="select" />
                 <span>1. Select</span>
@@ -328,13 +333,15 @@
                           <img
                             alt="channel icon"
                             data-ipfs={channel.icon}
-                            use:ipfs />
+                            use:ipfs
+                          />
                         </figure>
                       </th>
                     {/if}
                     <th
                       colspan={channel.icon ? 4 : 5}
-                      style="vertical-align: center;">{channel.label}</th>
+                      style="vertical-align: center;">{channel.label}</th
+                    >
                     <td colspan="2" class="has-text-right">
                       {channel?.amount?.toString() || 'Free'}
                     </td>
@@ -348,7 +355,8 @@
                         (balances[i] || 0) >= channel.max
                           ? true
                           : undefined}
-                        bind:value={$cart[i]} />
+                        bind:value={$cart[i]}
+                      />
                       {#if channel.max && balances[i] >= channel.max}
                         <p class="help is-info">
                           maximum {channel.max} reached
@@ -368,7 +376,8 @@
                 <tr>
                   <th colspan="5" />
                   <th colspan="3" class="has-text-right"
-                    >Total = {$cart.total || 'tx gas only'}</th>
+                    >Total = {$cart.total || 'tx gas only'}</th
+                  >
                 </tr>
               </thead>
               <tfoot>
@@ -381,7 +390,8 @@
                         if ($cart.totalQty < 1) return
                         step = 2
                         validate()
-                      }}>Next</button>
+                      }}>Next</button
+                    >
                   </th>
                 </tr>
               </tfoot>
@@ -395,14 +405,16 @@
             {#if !validChain}
               <h3 class="subtitle">
                 <strong
-                  >Not connected to {getChainDataByChainId(chain).name}</strong>
+                  >Not connected to {getChainDataByChainId(chain).name}</strong
+                >
               </h3>
             {:else}
               <h3 class="subtitle"><strong>Not yet connected!</strong></h3>
             {/if}
             <button
               class="button is-primary"
-              on:click={() => blockchain.connect(chain)}>Connect Wallet</button>
+              on:click={() => blockchain.connect(chain)}>Connect Wallet</button
+            >
             <p class="help is-info">
               Connect your wallet to {getChainDataByChainId(chain).name} to complete
               your order.
@@ -424,7 +436,8 @@
                         <img
                           alt="channel icon"
                           data-ipfs={p.channels[entry].icon}
-                          use:ipfs />
+                          use:ipfs
+                        />
                       </figure>
                     </div>
                   {/if}
@@ -467,7 +480,8 @@
                 {amount}
                 max={false}
                 bind:allowed={$allowed[amount.token.address]}
-                bind:sufficient={$sufficient[amount.token.address]}>
+                bind:sufficient={$sufficient[amount.token.address]}
+              >
                 {amount.toString()}
               </Approve>
             {/each}
@@ -479,7 +493,8 @@
                     disabled={!readyAllow || !readyBalance}
                     class="button is-primary mt-4"
                     submitCtx={buyCtx}
-                    on:success={() => (success = true)}>
+                    on:success={() => (success = true)}
+                  >
                     Checkout {#if $cart.total}({$cart.total}){/if}
                   </TxButton>
                   {#if readyBalance && readyAllow}
@@ -509,7 +524,7 @@
   }
 
   @import '../../../../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @use 'bulma/sass/utilities/';
 
   input.is-narrow {
     max-width: 7rem;

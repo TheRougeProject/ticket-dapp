@@ -1,33 +1,28 @@
-@charset "utf-8";
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@use '_variables' as v;
 
-@import './_variables.scss';
+@forward 'bulma/sass/utilities';
+@forward 'bulma/bulma.scss';
 
-@import 'bulma/sass/utilities/_all';
+@forward 'bulma/sass/base';
+@forward 'bulma/sass/elements';
+@forward 'bulma/sass/form';
+@forward 'bulma/sass/components';
+@forward 'bulma/sass/grid';
+@forward 'bulma/sass/helpers';
+@forward 'bulma/sass/layout';
+@forward '_overrides.scss';
 
-@import 'bulma/sass/utilities/functions';
-
-// some derived-variables overwrite here
-$shadow:
-  0.05rem 0.05rem 0.15rem -0.05rem $primary-disabled,
-  1px 1px 3px 1px $grey-lightest;
-
-@import 'bulma/sass/base/_all';
-@import 'bulma/sass/elements/_all';
-@import 'bulma/sass/form/_all';
-@import 'bulma/sass/components/_all';
-@import 'bulma/sass/grid/_all';
-@import 'bulma/sass/helpers/_all';
-@import 'bulma/sass/layout/_all';
-
-//@import "bulma/bulma.sass";
-
-@import 'bulma-switch/src/sass/index.sass';
+@forward 'bulma-switch/src/scss/index';
 
 // has deprecation warning - not used anymore...
 /// @import "bulma-o-steps/bulma-steps.sass";
 
-@import './_overrides.scss';
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+// some derived-variables overwrite here
+$shadow:
+  0.05rem 0.05rem 0.15rem -0.05rem v.$primary-disabled,
+  1px 1px 3px 1px v.$grey-lightest;
 
 #preloaded {
   display: none;

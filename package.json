@@ -19,11 +19,13 @@
     "@popperjs/core": "^2.11.8",
     "@rougenetwork/v2-core": "^2.2.10",
     "awesome-qr": "^2.1.5-rc.0",
-    "bulma-calendar": "^6.1.19",
+    "bulma-calendar": "github:Hael616/bulma-calendar",
     "bulma-o-steps": "^1.1.0",
+    "bulma-switch": "github:Hael616/bulma-switch",
     "dayjs": "^1.11.10",
     "jsonwebtoken-esm": "^2.0.1",
-    "jsqr": "^1.4.0"
+    "jsqr": "^1.4.0",
+    "sass": "^1.77.8"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.1",
@@ -45,8 +47,7 @@
     "@web3-onboard/walletconnect": "2.5.3",
     "@web3-onboard/xdefi": "^2.0.5",
     "add-to-calendar-button": "^1.8.7",
-    "bulma": "^0.9.4",
-    "bulma-switch": "^2.0.4",
+    "bulma": "^1.0.2",
     "cropperjs": "^2.0.0-beta.4",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
@@ -64,7 +65,6 @@
     "prettier": "^3.2.4",
     "prettier-config-standard": "^7.0.0",
     "prettier-plugin-svelte": "^3.1.2",
-    "sass": "^1.70.0",
     "svelte": "^4.2.9",
     "svelte-eslint-parser": "^0.33.1",
     "svelte-filepond": "^0.2.2",

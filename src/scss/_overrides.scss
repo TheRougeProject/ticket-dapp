@@ -1,3 +1,8 @@
+@use '_variables' as v;
+@use 'bulma/sass/utilities/initial-variables' as iv;
+@use 'bulma/sass/utilities/mixins' as mixins;
+@use 'bulma/sass/components/card' as c;
+
 .icon > svg {
   height: 100%;
   height: auto;
@@ -6,41 +11,41 @@
 // ########## .button ##################################################
 
 .button {
-  font-weight: $weight-semibold;
+  font-weight: iv.$weight-semibold;
 
   &.is-primary {
     &:hover,
     &.is-hovered {
-      background-color: $primary-hover;
+      background-color: v.$primary-hover;
     }
     &.is-inverted {
       background-color: transparent;
-      border-color: $primary;
-      color: $primary;
+      border-color: v.$primary;
+      color: v.$primary;
       &:hover,
       &.is-hovered {
         background-color: transparent;
-        border-color: $primary-hover;
-        color: $primary-hover;
+        border-color: v.$primary-hover;
+        color: v.$primary-hover;
       }
     }
   }
 
   &.is-secondary {
-    background-color: $secondary;
+    background-color: v.$secondary;
     &:hover,
     &.is-hovered {
-      background-color: $secondary-hover;
+      background-color: v.$secondary-hover;
     }
     &.is-inverted {
       background-color: transparent;
-      border-color: $secondary;
-      color: $secondary;
+      border-color: v.$secondary;
+      color: v.$secondary;
       &:hover,
       &.is-hovered {
         background-color: transparent;
-        border-color: $secondary-hover;
-        color: $secondary-hover;
+        border-color: v.$secondary-hover;
+        color: v.$secondary-hover;
       }
     }
   }
@@ -52,27 +57,27 @@
 
 // to avoid side effects
 html {
-  background-color: $white;
+  background-color: iv.$white;
 }
 
 .manager-nav {
   .level-right {
     a {
-      color: $white;
+      color: iv.$white;
 
       &:hover,
       &.is-hovered {
-        color: $secondary-disabled;
+        color: v.$secondary-disabled;
       }
     }
 
-    @include mobile {
+    @include mixins.mobile {
       a {
-        color: $primary;
+        color: v.$primary;
 
         &:hover,
         &.is-hovered {
-          color: $primary-hover;
+          color: v.$primary-hover;
         }
       }
     }
@@ -80,7 +85,7 @@ html {
 }
 
 .breadcrumb {
-  @include tablet {
+  @include mixins.tablet {
     padding-bottom: 1.5rem; // same as columns
 
     //$breadcrumb-item-color: $white;
@@ -89,19 +94,19 @@ html {
 
     a {
       font-weight: bold;
-      color: $white;
+      color: iv.$white;
       &:hover {
-        color: $secondary-disabled;
+        color: v.$secondary-disabled;
       }
     }
 
     li.is-active a {
-      color: $secondary-disabled;
+      color: v.$secondary-disabled;
     }
   }
 
-  @include mobile {
-    background-color: $white;
+  @include mixins.mobile {
+    background-color: iv.$white;
     margin-bottom: 0;
     // aka $section-padding
     padding: 0 1.5rem;
@@ -111,8 +116,8 @@ html {
 // ########## 2 modes section   ##################################################
 
 .section.is-rounded {
-  @include tablet {
-    border-radius: $radius-large;
+  @include mixins.tablet {
+    border-radius: iv.$radius-large;
   }
 }
 
@@ -120,7 +125,7 @@ html {
 
 .box {
   &.is-slate {
-    background-color: $grey-lightest;
+    background-color: iv.$grey-lightest;
   }
 }
 
@@ -141,9 +146,7 @@ html {
 // ########## OLD ##################################################
 
 .navbar {
-  //border-radius: $card-radius;
-  // box-shadow: $card-shadow;
-  color: $card-color;
+  color: c.$card-color;
   position: fixed;
   top: 0px;
   width: 100%;
@@ -156,11 +159,6 @@ main {
 // default justify right modal button
 .modal-card-foot {
   justify-content: flex-end;
-}
-
-.modal-content.is-large,
-.modal-card.is-large {
-  //width: $modal-large-content-width;
 }
 
 body {

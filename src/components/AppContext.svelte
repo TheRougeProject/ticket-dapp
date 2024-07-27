@@ -26,14 +26,11 @@
   <!-- eslint-enable -->
 </div>
 
-<style lang="scss" global>
-  @import '../scss/main.scss';
-
+<style lang="scss">
   body {
     position: relative;
     height: fit-content;
   }
-
   .version {
     position: absolute;
     bottom: 2px;

@@ -12,11 +12,11 @@
 </div>
 
 <style lang="scss">
-  @import '../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @use '../../scss/_variables.scss';
+  @use 'bulma/sass/utilities/mixins' as m;
 
   .rge-empty-state {
-    @include tablet {
+    @include m.tablet {
       img {
         padding: 2rem;
       }
@@ -25,11 +25,11 @@
       }
     }
 
-    @include mobile {
+    @include m.mobile {
+      text-align: center !important;
       img {
         max-width: 70%;
       }
-      text-align: center !important;
     }
   }
 

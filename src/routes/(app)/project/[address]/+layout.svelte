@@ -84,7 +84,8 @@
   bind:this={modal}
   bind:active={qrActive}
   noCloseButton={true}
-  bottomIsRounded={true}>
+  bottomIsRounded={true}
+>
   <div class="modal-card">
     <header class="modal-card-head has-background-light">
       <p class="modal-card-title">Event Id QR code</p>
@@ -92,7 +93,8 @@
     </header>
     <section
       class="modal-card-body"
-      style="position: relative; min-height: 432px;">
+      style="position: relative; min-height: 432px;"
+    >
       <article class="message is-info">
         <div class="message-body">
           Share this event id QR code, to add this event on another browser or
@@ -106,7 +108,8 @@
           class="icon-text"
           target="_blank"
           rel="noreferrer"
-          href={p._isDraft ? '#' : explorer($chainData, 'address', address)}>
+          href={p._isDraft ? '#' : explorer($chainData, 'address', address)}
+        >
           <span><b>{$chainData.shortName}:</b>{address}</span>
           <Icon name="ExternalLink" class="mr-3" />
         </a>
@@ -120,7 +123,8 @@
   on:close={() => {
     helpActive = false
   }}
-  bottomIsRounded={true}>
+  bottomIsRounded={true}
+>
   <div class="p-6">
     <article class="message is-info">
       <div class="message-body">
@@ -128,8 +132,8 @@
           An event Id is a unique identifier for you event over all chains. It
           is composed of the chain short name (<b>{$chainData.shortName}</b> for
           the current event) and the contract address (<b
-            >{mobile ? formatAddress(address) : address}</b> for the current event)
-          separated by a colon punctuation mark.
+            >{mobile ? formatAddress(address) : address}</b
+          > for the current event) separated by a colon punctuation mark.
         </p>
         <p class="m-4">
           You can copy/paste your event Id or alternatively use its QR code to
@@ -152,7 +156,8 @@
         if (mobile) {
           open = !open
         }
-      }}>
+      }}
+    >
       <span aria-hidden="true" />
       <span aria-hidden="true" />
       <span aria-hidden="true" />
@@ -182,17 +187,20 @@
         <div class="level-item">
           <div
             class="breadcrumb has-succeeds-separator my-0"
-            aria-label="breadcrumbs">
+            aria-label="breadcrumbs"
+          >
             <ul>
               <li><a href="/">Event manager</a></li>
               <li class="is-active">
                 <a href="/project" aria-disabled="true" aria-current="page"
-                  >{p.name}</a>
+                  >{p.name}</a
+                >
               </li>
               {#if false && labels[position]}
                 <li class="is-active">
                   <a href="#position" aria-disabled="true" aria-current="page"
-                    >{labels[position]}</a>
+                    >{labels[position]}</a
+                  >
                 </li>
               {/if}
             </ul>
@@ -210,13 +218,15 @@
       <div
         class:column={!mobile}
         class:is-narrow={collapse}
-        class:is-3or4={!collapse}>
+        class:is-3or4={!collapse}
+      >
         <aside
           id="projectMenu"
           class="menu box has-background-white"
           class:is-mobile={mobile}
           class:is-active={activated}
-          class:collapsed>
+          class:collapsed
+        >
           {#if !collapse}
             <div class="menu-label">
               {#if p._isDraft}Draft mode{:else}Event Id{/if}
@@ -241,7 +251,8 @@
                       })}
                       on:click={() => {
                         qrActive = !qrActive
-                      }}><Identicon {address} /></a>
+                      }}><Identicon {address} /></a
+                    >
                   {/if}
                 </span>
               </div>
@@ -252,7 +263,8 @@
                       <small
                         ><b>{$chainData.shortName}:</b>{formatAddress(
                           address
-                        )}</small>
+                        )}</small
+                      >
                     </p>
 
                     <p style="vertical-align: bottom;">
@@ -263,16 +275,19 @@
                         })}
                         on:click={() => {
                           qrActive = !qrActive
-                        }}><Icon name="qrcode" class="is-small" /></a>
+                        }}><Icon name="qrcode" class="is-small" /></a
+                      >
                       <ClipboardCopy
                         let:copy
                         text={`${$chainData.shortName}:${address}`}
-                        tootipLabel="copied!">
+                        tootipLabel="copied!"
+                      >
                         <a
                           href="#copy"
                           on:keydown={keyDownA11y(copy)}
                           on:click={copy}
-                          ><Icon name="Copy" class="is-small" /></a>
+                          ><Icon name="Copy" class="is-small" /></a
+                        >
                       </ClipboardCopy>
                       <a
                         target="_blank"
@@ -280,7 +295,8 @@
                         href={p._isDraft
                           ? '#'
                           : explorer($chainData, 'address', address)}
-                        ><Icon name="ExternalLink" class="is-small" /></a>
+                        ><Icon name="ExternalLink" class="is-small" /></a
+                      >
                       <a
                         href="#info"
                         on:keydown={keyDownA11y(() => {
@@ -288,7 +304,8 @@
                         })}
                         on:click={() => {
                           helpActive = !helpActive
-                        }}><Icon name="InfoCircle" class="is-small" /></a>
+                        }}><Icon name="InfoCircle" class="is-small" /></a
+                      >
                     </p>
                   {/if}
                 </div>
@@ -306,11 +323,13 @@
                 <a
                   on:click={close}
                   class:is-active={/^\/draft/.test(position)}
-                  href="/project/{address}/draft">
+                  href="/project/{address}/draft"
+                >
                   <span class="icon-text"
                     ><Icon name="Edit" class="mr-3" />{#if !collapse}<span
                         >Edit draft</span
-                      >{/if}</span>
+                      >{/if}</span
+                  >
                 </a>
               </li>
             {/if}
@@ -318,21 +337,25 @@
               <a
                 on:click={close}
                 class:is-active={/^\/$/.test(position)}
-                href="/project/{address}/">
+                href="/project/{address}/"
+              >
                 <span class="icon-text"
                   ><Icon name="dashboard" class="mr-3" />{#if !collapse}<span
                       >Dashboard</span
-                    >{/if}</span>
+                    >{/if}</span
+                >
               </a>
             </li>
             <li>
               <a
                 on:click={close}
-                href="/i/ticket/{$chainData.shortName}:{address}/">
+                href="/i/ticket/{$chainData.shortName}:{address}/"
+              >
                 <span class="icon-text"
                   ><Icon name="ticket" class="mr-3" />{#if !collapse}<span
                       >Get tickets{#if p._isDraft}&nbsp;preview{/if}</span
-                    >{/if}</span>
+                    >{/if}</span
+                >
               </a>
             </li>
             {#if !p._isDraft}
@@ -340,12 +363,14 @@
                 <a
                   on:click={close}
                   class:is-active={/^\/state/.test(position)}
-                  href="/project/{address}/state">
+                  href="/project/{address}/state"
+                >
                   <span class="icon-text"
                     ><Icon name="state" class="mr-3" />{#if !collapse}<span
                         >State</span
                       >{/if}</span
-                  ></a>
+                  ></a
+                >
               </li>
               <li>
                 <a
@@ -356,7 +381,8 @@
                     ><Icon name="holdings" class="mr-3" />{#if !collapse}<span
                         >Holdings</span
                       >{/if}</span
-                  ></a>
+                  ></a
+                >
               </li>
               <li>
                 <a
@@ -367,7 +393,8 @@
                     ><Icon name="settings" class="mr-3" />{#if !collapse}<span
                         >Settings</span
                       >{/if}</span
-                  ></a>
+                  ></a
+                >
               </li>
             {/if}
           </ul>
@@ -387,7 +414,8 @@
                     ><Icon name="users" class="mr-3" />{#if !collapse}<span
                         >List</span
                       >{/if}</span
-                  ></a>
+                  ></a
+                >
               </li>
             </ul>
 
@@ -405,7 +433,8 @@
                     ><Icon name="scanQr" class="mr-3" />{#if !collapse}<span
                         >Scanner</span
                       >{/if}</span
-                  ></a>
+                  ></a
+                >
               </li>
               <li>
                 <a
@@ -416,7 +445,8 @@
                     ><Icon name="history" class="mr-3" />{#if !collapse}<span
                         >History</span
                       >{/if}</span
-                  ></a>
+                  ></a
+                >
               </li>
             </ul>
           {/if}
@@ -435,7 +465,8 @@
                   ><Icon name="details" class="mr-3" />{#if !collapse}<span
                       >Details</span
                     >{/if}</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -446,7 +477,8 @@
                   ><Icon name="add" class="mr-3" />{#if !collapse}<span
                       >Add</span
                     >{/if}</span
-                ></a>
+                ></a
+              >
             </li>
           </ul>
 
@@ -468,9 +500,10 @@
                   ><span class="icon-text"
                     ><Icon
                       name={collapse ? 'openCollapse' : 'closeCollapse'}
-                      class="mr-3" />{#if !collapse}<span>Collapse</span
-                      >{/if}</span
-                  ></a>
+                      class="mr-3"
+                    />{#if !collapse}<span>Collapse</span>{/if}</span
+                  ></a
+                >
               </li>
             </ul>
             <div class="menu-label is-flex is-flex-direction-row-reverse">
@@ -484,7 +517,8 @@
     <div class:column={!mobile}>
       <section
         class="section has-background-white is-rounded"
-        class:pt-1={mobile}>
+        class:pt-1={mobile}
+      >
         <slot />
       </section>
     </div>
@@ -493,7 +527,7 @@
 
 <style lang="scss">
   @import '../../../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @use 'bulma/sass/utilities/';
 
   .navbar-burger {
     position: fixed;

@@ -46,31 +46,38 @@
   <aside
     class="box has-background-primary"
     use:clickoutside
-    on:clickoutside={outside}>
+    on:clickoutside={outside}
+  >
     <ul class="menu-list">
       <li class="mb-4">
         <span class="mx-2"
           ><img
             style="height: 2em;"
             alt="Rouge Ticket logo"
-            src="/rouge-ticket-white.svg" /></span>
+            src="/rouge-ticket-white.svg"
+          /></span
+        >
       </li>
       <li>
         <a
           on:click={toggle}
           href="/"
-          class:is-active={!/^(\/journey|\/book)/.test($page.url.pathname)}>
+          class:is-active={!/^(\/journey|\/book)/.test($page.url.pathname)}
+        >
           <span class="icon-text is-small"
-            ><Icon name="List" class="mr-2" /><span>Event Manager</span></span>
+            ><Icon name="List" class="mr-2" /><span>Event Manager</span></span
+          >
         </a>
       </li>
       <li>
         <a
           on:click={toggle}
           href="/book"
-          class:is-active={/^\/book/.test($page.url.pathname)}>
+          class:is-active={/^\/book/.test($page.url.pathname)}
+        >
           <span class="icon-text"
-            ><Icon name="Book" class="mr-2" /><span>Tickets book</span></span>
+            ><Icon name="Book" class="mr-2" /><span>Tickets book</span></span
+          >
         </a>
       </li>
       {#if $chainContext.plugins.includes('journey')}
@@ -78,10 +85,12 @@
           <a
             on:click={toggle}
             href="/journey"
-            class:is-active={/^\/journey/.test($page.url.pathname)}>
+            class:is-active={/^\/journey/.test($page.url.pathname)}
+          >
             <span class="icon-text"
               ><Icon name="Award" class="mr-2" /><span>Rouge Journey</span
-              ></span>
+              ></span
+            >
           </a>
         </li>
       {/if}
@@ -89,9 +98,11 @@
         <a
           href="#disconnect"
           on:click={blockchain.disconnect}
-          on:keydown={keyDownA11y(blockchain.disconnect)}>
+          on:keydown={keyDownA11y(blockchain.disconnect)}
+        >
           <span class="icon-text"
-            ><Icon name="Logout" class="mr-2" /><span>Disconnect</span></span>
+            ><Icon name="Logout" class="mr-2" /><span>Disconnect</span></span
+          >
         </a>
       </li>
     </ul>
@@ -99,11 +110,11 @@
 </div>
 
 <style lang="scss">
-  @import '../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @use '../../scss/_variables.scss';
+  @use 'bulma/sass/utilities/initial-variables' as iv;
 
   a {
-    color: $white;
+    color: iv.$white;
   }
 
   .arrow,
@@ -111,7 +122,7 @@
     position: absolute;
     width: 1em;
     height: 1em;
-    background: $primary;
+    background: variables.$primary;
   }
 
   .arrow {

@@ -1,4 +1,4 @@
-@import 'bulma/sass/utilities/initial-variables';
+@use 'bulma/sass/utilities/initial-variables';
 
 $family-sans-serif: 'Public Sans', sans-serif;
 
@@ -52,7 +52,7 @@ $grey-disabled: $grey;
 //$dark: $grey-darker;
 //$text: $grey-dark;
 
-$scheme-main: $white; //$grey-lightest;
+$scheme-main: initial-variables.$white; //$grey-lightest;
 
 $button-border-width: 2px;
 
@@ -71,7 +71,7 @@ $navbar-background-color: $brand;
 // eg content title
 // $text-strong: rgb(0, 23, 70);
 
-$navbar-breakpoint: $tablet;
+$navbar-breakpoint: initial-variables.$tablet;
 //$top-navbar-opacity: 1;
 
 $navbar-breakpoint: 769px; // $tablet;
