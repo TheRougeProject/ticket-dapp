@@ -24,6 +24,19 @@ $shadow:
   0.05rem 0.05rem 0.15rem -0.05rem v.$primary-disabled,
   1px 1px 3px 1px v.$grey-lightest;
 
+body {
+  position: relative;
+  height: fit-content;
+}
+.version {
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  a {
+    color: #ddd;
+  }
+}
+
 #preloaded {
   display: none;
 }

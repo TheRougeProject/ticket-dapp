@@ -177,9 +177,8 @@
   </div>
 </AppContext>
 
-<style lang="scss" global>
+<style lang="scss">
   @use '../../scss/_variables';
-  @use '../../scss/main.scss';
   @use 'bulma/sass/utilities/mixins';
 
   nav.navbar,
@@ -188,18 +187,6 @@
     background-color: variables.$primary;
   }
 
-  body {
-    position: relative;
-    height: fit-content;
-  }
-  .version {
-    position: absolute;
-    bottom: 2px;
-    left: 4px;
-    a {
-      color: #ddd;
-    }
-  }
   main {
     min-height: calc(100vh - 5rem);
   }

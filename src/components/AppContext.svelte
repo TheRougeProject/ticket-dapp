@@ -1,4 +1,5 @@
 <script>
+  import '../scss/app.scss'
   import { setContext } from 'svelte'
 
   import { writable, derived } from 'svelte/store'
@@ -25,18 +26,3 @@
   <a>{__APP_NAME__} {__APP_VERSION__}</a>
   <!-- eslint-enable -->
 </div>
-
-<style lang="scss">
-  body {
-    position: relative;
-    height: fit-content;
-  }
-  .version {
-    position: absolute;
-    bottom: 2px;
-    left: 4px;
-    a {
-      color: #ddd;
-    }
-  }
-</style>

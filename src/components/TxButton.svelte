@@ -84,7 +84,8 @@
     <button
       disabled={disabled || call.step ? true : false}
       class={importedClasses}
-      on:click={submit}>
+      on:click={submit}
+    >
       <slot />
     </button>
   {/if}
@@ -111,7 +112,8 @@
         <a
           rel="noreferrer"
           target="_blank"
-          href={explorer($chainData, 'tx', call.tx.hash)}>pending</a>
+          href={explorer($chainData, 'tx', call.tx.hash)}>pending</a
+        >
         <Icon name="ExternalLink" />
       </span>
     {:else if call.step === 3}
@@ -120,7 +122,8 @@
         <a
           rel="noreferrer"
           target="_blank"
-          href={explorer($chainData, 'tx', call.tx.hash)}>success</a>
+          href={explorer($chainData, 'tx', call.tx.hash)}>success</a
+        >
         <Icon name="ExternalLink" />
       </span>
     {/if}
@@ -128,13 +131,13 @@
 </div>
 
 <style lang="scss">
-  @import '../scss/_variables.scss';
+  @use '../scss/_variables.scss' as v;
 
   .pending {
     border: 0.5em solid #f3f3f3;
     border-radius: 60%;
-    border-top: 0.3em solid $primary;
-    border-bottom: 0.3em solid $primary;
+    border-top: 0.3em solid v.$primary;
+    border-bottom: 0.3em solid v.$primary;
     width: 1em;
     height: 1em;
     -webkit-animation: spin 1s linear infinite;

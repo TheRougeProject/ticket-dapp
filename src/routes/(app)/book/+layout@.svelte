@@ -94,11 +94,11 @@
 </AppContext>
 
 <style lang="scss">
-  @import '../../../scss/_variables.scss';
-  @use 'bulma/sass/utilities/';
+  @use 'bulma/sass/utilities/mixins' as m;
+  @use '../../../scss/_variables.scss' as v;
 
   :global(body) {
-    background-color: $grey-standalone;
+    background-color: v.$grey-standalone;
   }
 
   :global(.version a) {
@@ -106,16 +106,16 @@
   }
 
   .container.is-max-desktop {
-    @include mobile {
+    @include m.mobile {
       padding-top: 3.5rem;
     }
-    @include tablet {
+    @include m.tablet {
       padding: 4rem;
     }
   }
 
   .navbar {
-    background-color: $grey-standalone;
+    background-color: v.$grey-standalone;
   }
 
   nav {

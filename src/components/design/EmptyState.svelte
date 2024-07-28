@@ -26,8 +26,8 @@
     }
 
     @include m.mobile {
-      text-align: center !important;
       img {
+        text-align: center !important;
         max-width: 70%;
       }
     }
