@@ -1,4 +1,5 @@
 <script>
+  import '../../scss/app.scss'
   import { onMount } from 'svelte'
 
   import { connected, signerAddress, chainData } from 'ethers-svelte'
@@ -178,7 +179,8 @@
 </AppContext>
 
 <style lang="scss">
-  @use '../../scss/_variables';
+  @forward '../../scss/variables';
+  @use '../../scss/variables';
   @use 'bulma/sass/utilities/mixins';
 
   nav.navbar,

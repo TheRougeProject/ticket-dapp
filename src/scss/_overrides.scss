@@ -4,7 +4,7 @@
 @use 'bulma/sass/components/card' as c;
 
 .icon > svg {
-  height: 100%;
+  width: 100%;
   height: auto;
 }
 
@@ -15,11 +15,11 @@
 
   &.is-primary {
     &:hover,
-    &.is-hovered {
+    x &.is-hovered {
       background-color: v.$primary-hover;
     }
     &.is-inverted {
-      background-color: transparent;
+      background-color: transparent !important;
       border-color: v.$primary;
       color: v.$primary;
       &:hover,
@@ -38,12 +38,12 @@
       background-color: v.$secondary-hover;
     }
     &.is-inverted {
-      background-color: transparent;
+      background-color: transparent !important;
       border-color: v.$secondary;
       color: v.$secondary;
       &:hover,
       &.is-hovered {
-        background-color: transparent;
+        background-color: transparent !important;
         border-color: v.$secondary-hover;
         color: v.$secondary-hover;
       }

@@ -26,3 +26,7 @@
   <a>{__APP_NAME__} {__APP_VERSION__}</a>
   <!-- eslint-enable -->
 </div>
+
+<style lang="scss" global>
+  @forward '../scss/variables';
+</style>

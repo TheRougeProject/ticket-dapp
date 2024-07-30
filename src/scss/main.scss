@@ -1,8 +1,7 @@
-@use '_variables' as v;
-
+@forward 'bulma/bulma';
 @forward 'bulma/sass/utilities';
-@forward 'bulma/bulma.scss';
 
+// @forward 'variables';
 @forward 'bulma/sass/base';
 @forward 'bulma/sass/elements';
 @forward 'bulma/sass/form';
@@ -10,14 +9,17 @@
 @forward 'bulma/sass/grid';
 @forward 'bulma/sass/helpers';
 @forward 'bulma/sass/layout';
-@forward '_overrides.scss';
+@forward '_overrides';
 
 @forward 'bulma-switch/src/scss/index';
 
+@use 'variables' as v;
 // has deprecation warning - not used anymore...
 /// @import "bulma-o-steps/bulma-steps.sass";
 
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+$family-sans-serif: 'Public Sans', sans-serif;
 
 // some derived-variables overwrite here
 $shadow:
