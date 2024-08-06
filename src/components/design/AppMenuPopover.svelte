@@ -122,7 +122,7 @@
     position: absolute;
     width: 1em;
     height: 1em;
-    background: variables.$primary;
+    background: variables.$rn-primary;
   }
 
   .arrow {

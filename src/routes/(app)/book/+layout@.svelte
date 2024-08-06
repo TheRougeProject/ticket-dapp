@@ -98,7 +98,7 @@
   @use '../../../scss/_variables.scss' as v;
 
   :global(body) {
-    background-color: v.$grey-standalone;
+    background-color: v.$rn-grey-standalone;
   }
 
   :global(.version a) {
@@ -115,7 +115,7 @@
   }
 
   .navbar {
-    background-color: v.$grey-standalone;
+    background-color: v.$rn-grey-standalone;
   }
 
   nav {

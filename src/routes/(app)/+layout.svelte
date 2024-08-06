@@ -186,7 +186,7 @@
   nav.navbar,
   main,
   .footer {
-    background-color: variables.$primary;
+    background-color: variables.$rn-primary;
   }
 
   main {
@@ -240,7 +240,7 @@
   }
 
   .footer {
-    background-color: variables.$primary;
+    background-color: variables.$rn-primary;
     color: #fff;
 
     nav > div {

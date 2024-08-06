@@ -534,8 +534,8 @@
 
   .tabs li.is-active a {
     border-bottom-width: 2px;
-    border-bottom-color: $brand;
-    color: $brand;
+    border-bottom-color: $rn-brand;
+    color: $rn-brand;
   }
 
   tbody th,
@@ -552,8 +552,8 @@
       }
 
       li.is-active a {
-        border-bottom-color: $brand;
-        color: $brand;
+        border-bottom-color: $rn-brand;
+        color: $rn-brand;
       }
     }
 

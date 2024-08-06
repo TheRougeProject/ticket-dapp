@@ -8,16 +8,16 @@ $calendar-border: 0.1rem solid iv.$white-ter !default;
 $calendar-border-radius: iv.$radius-small !default;
 $calendar-selection-background-color: $dv.primary !default;
 $calendar-days-background-color: transparent !default;
-$calendar-selection-days-color: iv.$grey-light !default;
-$calendar-date-color: iv.$grey-dark !default;
+$calendar-selection-days-color: iv.$rn-grey-light !default;
+$calendar-date-color: iv.$rn-grey-dark !default;
 $calendar-date-hover-background-color: iv.$white !default;
-$calendar-date-hover-border: 0.1rem solid v.$primary !default;
-$calendar-date-hover-border: v.$primary !default;
-$calendar-date-highlighted-border: 0.1rem solid v.$primary !default;
+$calendar-date-hover-border: 0.1rem solid v.$rn-primary !default;
+$calendar-date-hover-border: v.$rn-primary !default;
+$calendar-date-highlighted-border: 0.1rem solid v.$rn-primary !default;
 $calendar-today-background: transparent !default;
-$calendar-today-border: 0.1rem dotted v.$primary !default;
-$calendar-today-color: v.$primary !default;
-$calendar-range-background-color: v.$primary !default;
+$calendar-today-border: 0.1rem dotted v.$rn-primary !default;
+$calendar-today-color: v.$rn-primary !default;
+$calendar-range-background-color: v.$rn-primary !default;
 $calendar-body-padding: 0 !default;
 $calendar-selection-padding: 0.3rem 0 !default;
 $calendar-selection-nav-padding: 0.5em !default;
@@ -51,7 +51,7 @@ $calendar-date-padding: 0.1rem 0 !default;
     .datetimepicker-selection-from,
     .datetimepicker-selection-to {
       font-size: 0.65rem;
-      color: $grey-light;
+      color: $rn-grey-light;
       text-transform: uppercase;
       padding: 0;
     }
@@ -76,7 +76,7 @@ $calendar-date-padding: 0.1rem 0 !default;
         font-size: 2rem;
         line-height: 2.5rem;
         margin-right: 0.5rem;
-        color: v.$primary;
+        color: v.$rn-primary;
         font-weight: 100;
       }
 
@@ -154,7 +154,7 @@ $calendar-date-padding: 0.1rem 0 !default;
         justify-content: center;
         align-items: center;
         padding: 0 1rem;
-        color: v.$grey-light;
+        color: v.$rn-grey-light;
       }
     }
   }
@@ -178,8 +178,8 @@ $calendar-date-padding: 0.1rem 0 !default;
     .datepicker-nav-month,
     .datepicker-nav-year {
       text-decoration: none;
-      font-size: $size-6;
-      color: fn.findColorInvert(v.$primary);
+      font-size: v.$rn-size-6;
+      color: fn.findColorInvert(v.$rn-primary);
 
       &:hover {
         cursor: pointer;
@@ -255,7 +255,7 @@ $calendar-date-padding: 0.1rem 0 !default;
       padding: $calendar-selection-padding;
       background: $calendar-days-background-color;
       color: fn.findColorInvert($calendar-days-background-color);
-      font-size: v.$size-7;
+      font-size: v.$rn-size-7;
 
       .datepicker-date {
         background: $calendar-days-background-color !important;
@@ -271,7 +271,7 @@ $calendar-date-padding: 0.1rem 0 !default;
         flex-wrap: wrap;
         justify-content: space-around;
         padding: $calendar-body-padding;
-        color: v.$grey;
+        color: v.$rn-grey;
 
         .datepicker-date {
           background: #f5f5f5;
@@ -318,14 +318,14 @@ $calendar-date-padding: 0.1rem 0 !default;
             }
 
             &.is-active {
-              background: v.$primary;
-              border-color: v.$primary;
+              background: v.$rn-primary;
+              border-color: v.$rn-primary;
               border-radius: 25091983px;
-              color: fn.findColorInvert(v.$primary);
+              color: fn.findColorInvert(v.$rn-primary);
 
               &.is-today {
-                border-color: fn.findColorInvert(v.$primary) !important;
-                color: fn.findColorInvert(v.$primary) !important;
+                border-color: fn.findColorInvert(v.$rn-primary) !important;
+                color: fn.findColorInvert(v.$rn-primary) !important;
               }
             }
 
@@ -366,9 +366,9 @@ $calendar-date-padding: 0.1rem 0 !default;
             &.datepicker-range-start,
             &.datepicker-range-end {
               .date-item {
-                background: fn.findColorInvert(v.$primary);
-                border: 0.1rem solid v.$primary;
-                color: v.$primary;
+                background: fn.findColorInvert(v.$rn-primary);
+                border: 0.1rem solid v.$rn-primary;
+                color: v.$rn-primary;
                 box-shadow: 0 0.2rem 0.2rem rgba(10, 10, 10, 0.1);
               }
             }
@@ -384,12 +384,12 @@ $calendar-date-padding: 0.1rem 0 !default;
             }
 
             .date-item {
-              background-color: v.$primary;
-              color: fn.findColorInvert(v.$primary);
+              background-color: v.$rn-primary;
+              color: fn.findColorInvert(v.$rn-primary);
 
               &.is-today {
-                border-color: fn.findColorInvert(v.$primary) !important;
-                color: fn.findColorInvert(v.$primary) !important;
+                border-color: fn.findColorInvert(v.$rn-primary) !important;
+                color: fn.findColorInvert(v.$rn-primary) !important;
               }
             }
           }
@@ -397,7 +397,7 @@ $calendar-date-padding: 0.1rem 0 !default;
           &.datepicker-range-start.datepicker-range-end {
             .date-item {
               &.is-today {
-                color: v.$primary !important;
+                color: v.$rn-primary !important;
               }
             }
           }
@@ -422,7 +422,7 @@ $calendar-date-padding: 0.1rem 0 !default;
       .datepicker-year {
         padding: 0.5rem;
         margin: 0.5rem;
-        font-size: $size-7;
+        font-size: v.$rn-size-7;
         text-align: center;
         flex: 1 25%;
         text-transform: capitalize;
@@ -430,9 +430,9 @@ $calendar-date-padding: 0.1rem 0 !default;
         border: 0.1rem solid transparent;
 
         &.is-active {
-          background: v.$primary;
-          border-color: v.$primary;
-          color: fn.findColorInvert(v.$primary);
+          background: v.$rn-primary;
+          border-color: v.$rn-primary;
+          color: fn.findColorInvert(v.$rn-primary);
         }
 
         &:hover {
@@ -560,7 +560,7 @@ $calendar-date-padding: 0.1rem 0 !default;
     }
 
     .datepicker-event {
-      background-color: v.$grey;
+      background-color: v.$rn-grey;
       border-radius: iv.$radius-small;
       color: $white;
       display: block;
@@ -751,7 +751,7 @@ $calendar-date-padding: 0.1rem 0 !default;
   .datetimepicker-clear-button {
     background: transparent;
     border: 0;
-    color: v.$primary;
+    color: v.$rn-primary;
     cursor: pointer;
     font-weight: iv.$weight-normal;
     outline: 0;

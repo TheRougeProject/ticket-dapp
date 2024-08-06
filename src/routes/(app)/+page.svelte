@@ -391,7 +391,7 @@
   }
 
   .box {
-    background-color: v.$grey-lightest;
+    background-color: v.$rn-grey-lightest;
     border-radius: iv.$radius-large;
   }
 

@@ -27,6 +27,6 @@
   <!-- eslint-enable -->
 </div>
 
-<style lang="scss" global>
+<style lang="scss">
   @forward '../scss/variables';
 </style>

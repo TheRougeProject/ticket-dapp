@@ -16,36 +16,36 @@
   &.is-primary {
     &:hover,
     x &.is-hovered {
-      background-color: v.$primary-hover;
+      background-color: v.$rn-primary-hover;
     }
     &.is-inverted {
       background-color: transparent !important;
-      border-color: v.$primary;
-      color: v.$primary;
+      border-color: v.$rn-primary;
+      color: v.$rn-primary;
       &:hover,
       &.is-hovered {
         background-color: transparent;
-        border-color: v.$primary-hover;
-        color: v.$primary-hover;
+        border-color: v.$rn-primary-hover;
+        color: v.$rn-primary-hover;
       }
     }
   }
 
   &.is-secondary {
-    background-color: v.$secondary;
+    background-color: v.$rn-secondary;
     &:hover,
     &.is-hovered {
-      background-color: v.$secondary-hover;
+      background-color: v.$rn-secondary-hover;
     }
     &.is-inverted {
       background-color: transparent !important;
-      border-color: v.$secondary;
-      color: v.$secondary;
+      border-color: v.$rn-secondary;
+      color: v.$rn-secondary;
       &:hover,
       &.is-hovered {
         background-color: transparent !important;
-        border-color: v.$secondary-hover;
-        color: v.$secondary-hover;
+        border-color: v.$rn-secondary-hover;
+        color: v.$rn-secondary-hover;
       }
     }
   }
@@ -67,17 +67,17 @@ html {
 
       &:hover,
       &.is-hovered {
-        color: v.$secondary-disabled;
+        color: v.$rn-secondary-disabled;
       }
     }
 
     @include mixins.mobile {
       a {
-        color: v.$primary;
+        color: v.$rn-primary;
 
         &:hover,
         &.is-hovered {
-          color: v.$primary-hover;
+          color: v.$rn-primary-hover;
         }
       }
     }
@@ -89,19 +89,19 @@ html {
     padding-bottom: 1.5rem; // same as columns
 
     //$breadcrumb-item-color: $white;
-    //$breadcrumb-item-active-color: $secondary-disabled;
-    //$breadcrumb-item-hover-color: $secondary-disabled;
+    //$breadcrumb-item-active-color: $rn-secondary-disabled;
+    //$breadcrumb-item-hover-color: $rn-secondary-disabled;
 
     a {
       font-weight: bold;
       color: iv.$white;
       &:hover {
-        color: v.$secondary-disabled;
+        color: v.$rn-secondary-disabled;
       }
     }
 
     li.is-active a {
-      color: v.$secondary-disabled;
+      color: v.$rn-secondary-disabled;
     }
   }
 

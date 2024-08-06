@@ -1,7 +1,7 @@
 @forward 'bulma/bulma';
 @forward 'bulma/sass/utilities';
 
-// @forward 'variables';
+@forward 'variables';
 @forward 'bulma/sass/base';
 @forward 'bulma/sass/elements';
 @forward 'bulma/sass/form';
@@ -23,8 +23,8 @@ $family-sans-serif: 'Public Sans', sans-serif;
 
 // some derived-variables overwrite here
 $shadow:
-  0.05rem 0.05rem 0.15rem -0.05rem v.$primary-disabled,
-  1px 1px 3px 1px v.$grey-lightest;
+  0.05rem 0.05rem 0.15rem -0.05rem v.$rn-primary-disabled,
+  1px 1px 3px 1px v.$rn-grey-lightest;
 
 body {
   position: relative;
