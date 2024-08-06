@@ -70,10 +70,12 @@
       </div>
     {:else}
       <div
-        class="column is-4 is-flex is-align-items-center is-justify-content-center">
+        class="column is-4 is-flex is-align-items-center is-justify-content-center"
+      >
         <a
           href="/i/ticket/{$chainData.shortName}:{address}/"
-          class="button is-small is-primary is-outlined">Get more tickets</a>
+          class="button is-small is-primary is-outlined">Get more tickets</a
+        >
       </div>
     {/if}
   </div>

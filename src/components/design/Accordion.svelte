@@ -19,7 +19,8 @@
     })}
     on:click={() => {
       opened = !opened
-    }}>
+    }}
+  >
     <span class:is-rotated={opened}><Icon name="ChevronsRight" /></span>
     <span class="ml-3">{label}</span>
   </a>
@@ -37,7 +38,7 @@
   .box {
     padding-top: 0.6rem;
     padding-bottom: 0.4rem;
-    background-color: $primary;
+    background-color: $rn-primary;
     color: $white;
     a:hover {
       color: $white;

@@ -38,7 +38,8 @@
     <a
       rel="noreferrer"
       target="_blank"
-      href={explorer($chainData, 'tx', call.tx.hash)}>pending</a>
+      href={explorer($chainData, 'tx', call.tx.hash)}>pending</a
+    >
     <Icon name="ExternalLink" />
   </span>
 {:else if call.step === 3}
@@ -47,7 +48,8 @@
     <a
       rel="noreferrer"
       target="_blank"
-      href={explorer($chainData, 'tx', call.tx.hash)}>success</a>
+      href={explorer($chainData, 'tx', call.tx.hash)}>success</a
+    >
     <Icon name="ExternalLink" />
   </span>
 {/if}
@@ -58,8 +60,8 @@
   .pending {
     border: 0.5em solid #f3f3f3;
     border-radius: 60%;
-    border-top: 0.3em solid $primary;
-    border-bottom: 0.3em solid $secondary;
+    border-top: 0.3em solid $rn-primary;
+    border-bottom: 0.3em solid $rn-secondary;
     width: 1em;
     height: 1em;
     -webkit-animation: spin 1s linear infinite;

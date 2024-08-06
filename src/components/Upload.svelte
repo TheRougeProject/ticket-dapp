@@ -144,9 +144,10 @@
   onprocessfiles={handleEnd}
   FilePondPlugin="Error"
   allowRemove={true}
-  labelTapToUndo="Tap to change image" />
+  labelTapToUndo="Tap to change image"
+/>
 
-<style lang="scss" global>
+<style lang="scss">
   @import 'filepond/dist/filepond.css';
   @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 

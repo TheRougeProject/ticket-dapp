@@ -44,26 +44,29 @@
       <div
         class="modal-background"
         on:click={onClose}
-        on:keydown={keyDownA11y(onClose)} />
+        on:keydown={keyDownA11y(onClose)}
+      />
       <div
         class="modal-content"
         class:top-is-rounded={topIsRounded}
-        class:bottom-is-rounded={bottomIsRounded}>
+        class:bottom-is-rounded={bottomIsRounded}
+      >
         <slot />
       </div>
       {#if !noCloseButton}
         <button
           class="modal-close is-large"
           aria-label="close"
-          on:click={onClose} />
+          on:click={onClose}
+        />
       {/if}
     </div>
   </Portal>
 {/if}
 
 <style lang="scss">
-  @import '../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @use '../scss/_variables.scss' as v;
+  @use 'bulma/sass/utilities/initial-variables' as iv;
 
   .modal {
     &:not(.fullscreen) {
@@ -71,13 +74,13 @@
       padding-right: 2px;
 
       .modal-content.top-is-rounded {
-        border-top-left-radius: $radius-large;
-        border-top-right-radius: $radius-large;
+        border-top-left-radius: iv.$radius-large;
+        border-top-right-radius: iv.$radius-large;
       }
 
       .modal-content.bottom-is-rounded {
-        border-bottom-left-radius: $radius-large;
-        border-bottom-right-radius: $radius-large;
+        border-bottom-left-radius: iv.$radius-large;
+        border-bottom-right-radius: iv.$radius-large;
       }
     }
 
