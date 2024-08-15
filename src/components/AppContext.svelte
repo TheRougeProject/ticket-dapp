@@ -27,6 +27,18 @@
   <!-- eslint-enable -->
 </div>
 
-<style lang="scss">
-  @forward '../scss/variables';
+<style lang="scss" global>
+  body {
+    position: relative;
+    height: fit-content;
+  }
+
+  .version {
+    position: absolute;
+    bottom: 2px;
+    left: 4px;
+    a {
+      color: #ddd;
+    }
+  }
 </style>

@@ -237,7 +237,7 @@
 
   .tabs.is-toggle {
     li:not(:last-child) a {
-      background-color: $rn-primary;
+      background-color: $primary;
       color: #fff;
       border-color: none;
     }
@@ -277,7 +277,7 @@
       color: #fff;
     }
     @include tablet {
-      background-color: $rn-primary;
+      background-color: $primary;
       color: #fff;
       border-top-left-radius: 0;
     }
@@ -286,7 +286,7 @@
 
       &.is-active {
         display: block;
-        background-color: $rn-primary;
+        background-color: $primary;
         color: #fff;
         border-top-left-radius: 0;
       }

@@ -1,5 +1,6 @@
 <script>
   import '../../scss/app.scss'
+
   import { onMount } from 'svelte'
 
   import { connected, signerAddress, chainData } from 'ethers-svelte'
@@ -179,14 +180,13 @@
 </AppContext>
 
 <style lang="scss">
-  @forward '../../scss/variables';
-  @use '../../scss/variables';
+  @use '../../scss/main.scss' as m;
   @use 'bulma/sass/utilities/mixins';
 
   nav.navbar,
   main,
   .footer {
-    background-color: variables.$rn-primary;
+    background-color: m.$brand;
   }
 
   main {
@@ -240,7 +240,7 @@
   }
 
   .footer {
-    background-color: variables.$rn-primary;
+    background-color: m.$brand;
     color: #fff;
 
     nav > div {

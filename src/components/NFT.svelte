@@ -352,7 +352,7 @@
 
   .nft {
     display: grid;
-    background-color: v.$rn-grey-lightest;
+    background-color: v.$grey-lightest;
     grid-template-columns: repeat(32, 1fr);
     grid-template-rows: repeat(32, 1fr);
     column-gap: 0;
@@ -362,7 +362,7 @@
     font-size: 100%;
 
     &:hover {
-      background-color: iv.$rn-grey-lighter;
+      background-color: iv.$grey-lighter;
       cursor: pointer;
       transform: scale(1.02);
     }

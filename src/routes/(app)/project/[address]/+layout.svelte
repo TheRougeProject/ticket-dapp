@@ -535,7 +535,7 @@
     margin: 1.5rem 0 !important;
     // equivalent desktop container
     right: 24px;
-    background-color: $rn-primary;
+    background-color: $primary;
     color: $white;
     border-radius: 50%;
     width: 1.6em;
@@ -575,7 +575,7 @@
     }
     .is-overlay {
       z-index: 19;
-      background-color: $rn-grey;
+      background-color: $grey;
       position: fixed;
       top: 0;
       bottom: 0;
@@ -592,7 +592,7 @@
     .close {
       padding: 0.75em;
       .delete {
-        background-color: $rn-primary;
+        background-color: $primary;
         color: $white;
       }
     }
@@ -618,12 +618,12 @@
       padding: 0.5em 0em;
     }
     a:hover {
-      color: $rn-primary-hover;
+      color: $primary-hover;
       background-color: transparent;
     }
 
     a.is-active {
-      color: $rn-primary;
+      color: $primary;
       background-color: transparent;
       font-weight: $weight-semibold;
     }
@@ -631,7 +631,7 @@
 
   .menu-label {
     hr {
-      border-bottom: 2px solid $rn-secondary-disabled;
+      border-bottom: 2px solid $secondary-disabled;
       margin: 1em 0 0 1em;
       box-sizing: content-box;
     }

@@ -80,7 +80,7 @@
   @use 'bulma/sass/utilities/mixins' as m;
 
   :global(body) {
-    background-color: v.$rn-grey-standalone;
+    background-color: v.$grey-standalone;
   }
 
   :global(.version a) {
@@ -97,7 +97,7 @@
   }
 
   .navbar {
-    background-color: v.$rn-grey-standalone;
+    background-color: v.$grey-standalone;
   }
 
   nav {

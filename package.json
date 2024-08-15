@@ -9,6 +9,8 @@
     "update-icons": "node ./update-icons.js",
     "preview": "vite preview",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "build-bulma": "sass --load-path=node_modules ./src/scss/main.scss  app.css",
+    "start": "npm run build-bulma -- --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "lint2": "eslint --ignore-path .gitignore .",
     "prepare": "husky install"
@@ -24,8 +26,7 @@
     "bulma-switch": "file:./libs/bulma-switch",
     "dayjs": "^1.11.10",
     "jsonwebtoken-esm": "^2.0.1",
-    "jsqr": "^1.4.0",
-    "sass": "^1.77.8"
+    "jsqr": "^1.4.0"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.1",
@@ -47,6 +48,7 @@
     "@web3-onboard/walletconnect": "2.5.3",
     "@web3-onboard/xdefi": "^2.0.5",
     "add-to-calendar-button": "^1.8.7",
+    "autoprefixer": "^10.4.20",
     "bulma": "^1.0.2",
     "cropperjs": "^2.0.0-beta.4",
     "eslint": "^8.56.0",
@@ -62,9 +64,11 @@
     "lint-staged": "^15.2.1",
     "mustache": "^4.2.0",
     "nanoid": "^5.0.5",
+    "postcss": "^8.4.41",
     "prettier": "^3.2.4",
     "prettier-config-standard": "^7.0.0",
     "prettier-plugin-svelte": "^3.1.2",
+    "sass": "^1.77.8",
     "svelte": "^4.2.9",
     "svelte-eslint-parser": "^0.33.1",
     "svelte-filepond": "^0.2.2",

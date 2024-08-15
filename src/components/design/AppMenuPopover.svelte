@@ -110,7 +110,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../scss/_variables.scss';
+  @use 'bulma/sass/utilities/derived-variables' as dv;
   @use 'bulma/sass/utilities/initial-variables' as iv;
 
   a {
@@ -122,7 +122,7 @@
     position: absolute;
     width: 1em;
     height: 1em;
-    background: variables.$rn-primary;
+    background: dv.$primary;
   }
 
   .arrow {

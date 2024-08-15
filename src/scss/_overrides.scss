@@ -16,36 +16,36 @@
   &.is-primary {
     &:hover,
     x &.is-hovered {
-      background-color: v.$rn-primary-hover;
+      background-color: v.$danger;
     }
     &.is-inverted {
       background-color: transparent !important;
-      border-color: v.$rn-primary;
-      color: v.$rn-primary;
+      border-color: v.$brand;
+      color: v.$brand;
       &:hover,
       &.is-hovered {
         background-color: transparent;
-        border-color: v.$rn-primary-hover;
-        color: v.$rn-primary-hover;
+        border-color: v.$brand;
+        color: v.$danger;
       }
     }
   }
 
   &.is-secondary {
-    background-color: v.$rn-secondary;
+    background-color: v.$secondary;
     &:hover,
     &.is-hovered {
-      background-color: v.$rn-secondary-hover;
+      background-color: v.$secondary-hover;
     }
     &.is-inverted {
       background-color: transparent !important;
-      border-color: v.$rn-secondary;
-      color: v.$rn-secondary;
+      border-color: v.$secondary;
+      color: v.$secondary;
       &:hover,
       &.is-hovered {
         background-color: transparent !important;
-        border-color: v.$rn-secondary-hover;
-        color: v.$rn-secondary-hover;
+        border-color: v.$secondary-hover;
+        color: v.$secondary-hover;
       }
     }
   }
@@ -67,17 +67,17 @@ html {
 
       &:hover,
       &.is-hovered {
-        color: v.$rn-secondary-disabled;
+        color: v.$secondary-disabled;
       }
     }
 
     @include mixins.mobile {
       a {
-        color: v.$rn-primary;
+        color: v.$brand;
 
         &:hover,
         &.is-hovered {
-          color: v.$rn-primary-hover;
+          color: v.$danger;
         }
       }
     }
@@ -89,19 +89,19 @@ html {
     padding-bottom: 1.5rem; // same as columns
 
     //$breadcrumb-item-color: $white;
-    //$breadcrumb-item-active-color: $rn-secondary-disabled;
-    //$breadcrumb-item-hover-color: $rn-secondary-disabled;
+    //$breadcrumb-item-active-color: $secondary-disabled;
+    //$breadcrumb-item-hover-color: $secondary-disabled;
 
     a {
       font-weight: bold;
       color: iv.$white;
       &:hover {
-        color: v.$rn-secondary-disabled;
+        color: v.$secondary-disabled;
       }
     }
 
     li.is-active a {
-      color: v.$rn-secondary-disabled;
+      color: v.$secondary-disabled;
     }
   }
 

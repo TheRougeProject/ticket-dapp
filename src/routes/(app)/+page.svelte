@@ -1,4 +1,5 @@
 <script>
+  import '../../scss/app.scss'
   import { getContext } from 'svelte'
 
   import {
@@ -306,7 +307,7 @@
                     target="_blank"
                     href={getChainDataByChainId(id)?.infoURL}
                   >
-                    <span class="tag is-grey mr-2 mb-2"
+                    <span class="tag mr-2 mb-2"
                       >{getChainDataByChainId(id)?.name}</span
                     >
                   </a>
@@ -354,9 +355,7 @@
   </div>
 </section>
 
-<style lang="scss">
-  @use '../../scss/main';
-  @use '../../scss/variables' as v;
+<style lang="scss" global>
   @use 'bulma/sass/utilities/mixins' as mixins;
   @use 'bulma/sass/utilities/initial-variables' as iv;
 
@@ -391,7 +390,7 @@
   }
 
   .box {
-    background-color: v.$rn-grey-lightest;
+    background-color: iv.$grey-lightest;
     border-radius: iv.$radius-large;
   }
 

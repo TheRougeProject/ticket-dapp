@@ -1,87 +1,18 @@
-@use 'bulma/sass/utilities/initial-variables';
+// @use 'bulma/sass/utilities/initial-variables' as iv;
+// @use 'bulma/sass/utilities/derived-variables' as dv;
 
 // higher big size
 
-$rn-size-1: 2.8rem;
-$rn-size-2: 1.75rem; // H1
-$rn-size-3: 1.5rem; // H2
-$rn-size-4: 1.25rem; // H3
-$rn-size-5: 1.2rem; // H4
-$rn-size-6: 0.9375rem; // H5
-$rn-size-7: 0.75rem; //
+$brand: rgb(153, 0, 0); // #900; dark red
 
-$rn-body-line-height: 1.6;
+$danger: rgb(239, 26, 13); // #ef1a0d
 
-// base on logo to margin 9px
-$rn-gap: 18px; // default is 32px, used by container
+$secondary: rgb(93, 0, 0); // #5d0000
+$secondary-hover: rgb(111, 0, 0); // #6f0000
+$secondary-disabled: rgb(223, 170, 169); // #dfaaa9
 
-// ########## colors ##################################################
-// https://coolors.co/990000-39a2ae-55dbcb-75e4b3-cc998d
+$full-disabled: rgb(253, 243, 242); // #fdf3f2
+$grey-standalone: #ededed;
 
-$rn-brand: rgb(153, 0, 0); // #900; dark red
-
-$rn-info: rgb(0, 97, 148); // #006194       was rgb(0, 102, 255);  // #0066FF;
-$rn-success: rgb(51, 134, 0); // #338600    was rgb(0, 153, 0); // #009900;
-$rn-warning: rgb(255, 165, 0); // #ffa500   was rgb(242, 113, 28); // #f2711c;
-$rn-danger: rgb(239, 26, 13); // #ef1a0d
-
-$rn-primary: $rn-brand; // (selection/active/focus/normal CTA)
-$rn-primary-hover: $rn-danger;
-$rn-primary-disabled: rgb(223, 170, 169); // #dfaaa9
-
-$rn-secondary: rgb(93, 0, 0); // #5d0000
-$rn-secondary-hover: rgb(111, 0, 0); // #6f0000
-$rn-secondary-disabled: rgb(223, 170, 169); // #dfaaa9
-
-$rn-full-disabled: rgb(253, 243, 242); // #fdf3f2
-
-$rn-link: rgb(0, 157, 163); // #009DA3;
-$rn-link-hover: rgb(41, 104, 122); // #29687a
-
-$rn-grey-dark: rgb(112, 112, 112); //
-$rn-grey: rgb(176, 176, 176); //
-$rn-grey-lightest: rgb(247, 247, 247); // #f7f7f7
-
-$rn-grey-standalone: #ededed;
-
-//$rn-primary-grey: $rn-grey-lightest;
-$rn-grey-disabled: $rn-grey;
-
-//$dark: $rn-grey-darker;
-//$text: $rn-grey-dark;
-
-$rn-scheme-main: initial-variables.$white; //$rn-grey-lightest;
-
-$rn-button-border-width: 2px;
-
-$rn-body-background-color: $rn-brand;
-$rn-navbar-background-color: $rn-brand;
-
-// ########## buttons ##################################################
-
-//$box-background-color: #fff;
-//$box-shadow: none;
-
-// $title-color: $rn-primary;
-// $subtitle-color: #fff;
-// $subtitle-strong-color: #fff;
-
-// eg content title
-// $text-strong: rgb(0, 23, 70);
-
-$rn-navbar-breakpoint: initial-variables.$tablet;
-//$top-navbar-opacity: 1;
-
-$rn-navbar-breakpoint: 769px; // $tablet;
-$rn-navbar-height: 3.5rem;
-
-$rn-modal-content-width: 800px;
-//$modal-large-content-width: 800px; doesn't work
-$rn-modal-background-background-color: rgba(153, 0, 0, 0.75);
-$rn-modal-content-margin-mobile: 0;
-$rn-modal-content-spacing-mobile: 0;
-
-// calendar
-
-$rn-calendar-header-padding: 0.2rem 0;
-$rn-calendar-header-nav-padding: 0.3em;
+// $calendar-header-padding: 0.2rem 0;
+// $calendar-header-nav-padding: 0.3em;
