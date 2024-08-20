@@ -9,8 +9,6 @@
     "update-icons": "node ./update-icons.js",
     "preview": "vite preview",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "build-bulma": "sass --load-path=node_modules ./src/scss/main.scss  app.css",
-    "start": "npm run build-bulma -- --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "lint2": "eslint --ignore-path .gitignore .",
     "prepare": "husky install"
