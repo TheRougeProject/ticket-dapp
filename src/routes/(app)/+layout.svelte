@@ -16,6 +16,7 @@
 
   import Icon from '$components/Icon.svelte'
   import blockchain from '$lib/blockchain.js'
+  import ThemeSwitch from '../../components/tools/ThemeSwitch.svelte'
 
   onMount(async () => {
     if (!$signerAddress) blockchain.autoConnect()
@@ -93,13 +94,11 @@
           </button>
         </div>
       {/if}
+      <div class="navbar-item">
+        <ThemeSwitch isTrue={false} />
+      </div>
     </div>
 
-    <!--
-         <a class="navbar-item">
-         Report an issue
-         </a>
-    -->
   </nav>
 
   <main>

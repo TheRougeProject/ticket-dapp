@@ -23,6 +23,7 @@
     "bulma-o-steps": "^1.1.0",
     "bulma-switch": "file:./libs/bulma-switch",
     "dayjs": "^1.11.10",
+    "iconify-icon": "^2.1.0",
     "jsonwebtoken-esm": "^2.0.1",
     "jsqr": "^1.4.0"
   },
