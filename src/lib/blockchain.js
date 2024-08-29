@@ -83,6 +83,7 @@ const createBlockchain = () => {
   // })
 
   const connect = async (chainId) => {
+    console.log(chainId)
     if (!wallet) {
       // todo
     }

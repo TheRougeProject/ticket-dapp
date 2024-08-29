@@ -222,6 +222,8 @@ export const wrapper = () => {
   const connect = async () => {
     if (!onboard) load()
     const wallets = await onboard.connectWallet()
+
+    console.log(wallets[0])
     evmConnect(wallets[0])
   }
 

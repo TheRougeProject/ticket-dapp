@@ -16,6 +16,9 @@
   "type": "module",
   "prettier": "prettier-config-standard",
   "dependencies": {
+    "@alchemy/aa-accounts": "^3.19.0",
+    "@alchemy/aa-alchemy": "^3.19.0",
+    "@alchemy/aa-signers": "^3.19.0",
     "@popperjs/core": "^2.11.8",
     "@rougenetwork/v2-core": "^2.2.10",
     "awesome-qr": "^2.1.5-rc.0",
@@ -25,7 +28,10 @@
     "dayjs": "^1.11.10",
     "iconify-icon": "^2.1.0",
     "jsonwebtoken-esm": "^2.0.1",
-    "jsqr": "^1.4.0"
+    "jsqr": "^1.4.0",
+    "magic-sdk": "^28.5.0",
+    "viem": "^2.20.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.1",
