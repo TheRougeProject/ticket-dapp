@@ -1,13 +1,4 @@
-import { createWalletClient, custom } from 'viem'
-import { mainnet, WalletClientSigner } from '@alchemy/aa-core'
 import { MagicSigner } from '@alchemy/aa-signers/magic'
-
-const client = createWalletClient({
-  chain: mainnet,
-  transport: custom(window.ethereum)
-})
-
-export const eoaSigner = new WalletClientSigner(client, 'json-rpc')
 
 export const createMagicSigner = async () => {
   const magicSigner = new MagicSigner({
