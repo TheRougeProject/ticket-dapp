@@ -1,4 +1,5 @@
 <script>
+  import '../scss/app.scss'
   import { setContext } from 'svelte'
 
   import { writable, derived } from 'svelte/store'
@@ -27,8 +28,6 @@
 </div>
 
 <style lang="scss" global>
-  @import '../scss/main.scss';
-
   body {
     position: relative;
     height: fit-content;

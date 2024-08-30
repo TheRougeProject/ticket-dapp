@@ -23,9 +23,11 @@
         <div class="navbar-item pr-0">
           <span class="icon-text">
             <span class="icon"
-              ><Jazzicon address={$signerAddress} size={24} /></span>
+              ><Jazzicon address={$signerAddress} size={24} /></span
+            >
             <small class="is-hidden-mobile"
-              >{formatAddress($signerAddress)}</small>
+              >{formatAddress($signerAddress)}</small
+            >
           </span>
         </div>
       {/if}
@@ -41,12 +43,12 @@
   <slot />
 </AppContext>
 
-<style lang="scss">
-  @import '../../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+<style lang="scss" global>
+  @use '../../../scss/_variables.scss' as v;
+  @use 'bulma/sass/utilities/mixins' as m;
 
   :global(body) {
-    background-color: $grey-standalone;
+    background-color: v.$grey-standalone;
   }
 
   :global(.version a) {
@@ -54,16 +56,16 @@
   }
 
   .container.is-max-desktop {
-    @include mobile {
+    @include m.mobile {
       padding-top: 3.5rem;
     }
-    @include tablet {
+    @include m.tablet {
       padding: 4rem;
     }
   }
 
   .navbar {
-    background-color: $grey-standalone;
+    background-color: v.$grey-standalone;
   }
 
   nav {

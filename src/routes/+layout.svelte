@@ -1,5 +1,6 @@
 <script>
   import blockchain from '$lib/blockchain.js'
+  import 'iconify-icon'
 
   const beforeUnload = () => {
     // Cancel the event as stated by the standard.

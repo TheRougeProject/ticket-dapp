@@ -19,22 +19,26 @@
     <div class="navbar-brand">
       <a class="navbar-item is-black" alt="Rouge Ticket" href="/book">
         <span class="mx-2 is-hidden-mobile"
-          ><img alt="Rouge Ticket logo" src="/rouge-ticket-black.svg" /></span>
+          ><img alt="Rouge Ticket logo" src="/rouge-ticket-black.svg" /></span
+        >
         <span class="mx-2 icon is-large is-hidden-tablet"
-          ><img alt="Rouge Ticket logo" src="/logo.svg" /></span>
+          ><img alt="Rouge Ticket logo" src="/logo.svg" /></span
+        >
       </a>
     </div>
 
     {#if $connected}
       <div
         bind:this={popparent}
-        class="navbar-brand is-justify-content-center is-hidden-tablet">
+        class="navbar-brand is-justify-content-center is-hidden-tablet"
+      >
         <AppMenuPopover let:toggle {popparent}>
           <a
             href="#apps"
             class="navbar-item"
             on:click={toggle}
-            on:keydown={keyDownA11y(toggle)}>
+            on:keydown={keyDownA11y(toggle)}
+          >
             <Icon name="GridDots" />
           </a>
         </AppMenuPopover>
@@ -46,9 +50,11 @@
         <div class="navbar-item pr-0">
           <span class="icon-text">
             <span class="icon"
-              ><Jazzicon address={$signerAddress} size={24} /></span>
+              ><Jazzicon address={$signerAddress} size={24} /></span
+            >
             <small class="is-hidden-mobile"
-              >{formatAddress($signerAddress)}</small>
+              >{formatAddress($signerAddress)}</small
+            >
           </span>
         </div>
         <div class="navbar-item">
@@ -59,14 +65,16 @@
           href="#disconnect"
           class="navbar-item is-hidden-mobile"
           on:click={() => blockchain.disconnect()}
-          on:keydown={keyDownA11y(() => blockchain.disconnect())}>
+          on:keydown={keyDownA11y(() => blockchain.disconnect())}
+        >
           <Icon name="Logout" class="" />
         </a>
       {:else}
         <div class="navbar-item">
           <button
             class="button is-white is-inverted is-responsive"
-            on:click={() => blockchain.connect()}>
+            on:click={() => blockchain.connect()}
+          >
             Connect Wallet
           </button>
         </div>
@@ -86,11 +94,11 @@
 </AppContext>
 
 <style lang="scss">
-  @import '../../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @use 'bulma/sass/utilities/mixins' as m;
+  @use '../../../scss/_variables.scss' as v;
 
   :global(body) {
-    background-color: $grey-standalone;
+    background-color: v.$grey-standalone;
   }
 
   :global(.version a) {
@@ -98,16 +106,16 @@
   }
 
   .container.is-max-desktop {
-    @include mobile {
+    @include m.mobile {
       padding-top: 3.5rem;
     }
-    @include tablet {
+    @include m.tablet {
       padding: 4rem;
     }
   }
 
   .navbar {
-    background-color: $grey-standalone;
+    background-color: v.$grey-standalone;
   }
 
   nav {

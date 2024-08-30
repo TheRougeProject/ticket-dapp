@@ -1,4 +1,5 @@
 <script>
+  import '../../scss/app.scss'
   import { getContext } from 'svelte'
 
   import {
@@ -78,20 +79,22 @@
             <button
               class="button is-primary"
               disabled={!$signerAddress}
-              on:click={openCreate}>Create</button>
+              on:click={openCreate}>Create</button
+            >
           </div>
           <div class="level-item">
             <button
               class="button is-primary is-inverted"
               disabled={!$signerAddress}
-              on:click={openLoad}>Load</button>
+              on:click={openLoad}>Load</button
+            >
           </div>
         </div>
         {#if $chainContext.hasPlugin('search')}
           <div class="level-right">
             <div class="level-item">
-              <a class="button is-primary is-inverted" href="/search/"
-                >Search</a>
+              <a class="button is-primary is-inverted" href="/search/">Search</a
+              >
             </div>
           </div>
         {/if}
@@ -103,7 +106,8 @@
             <strong>No events on {$chainData.name}!</strong>
           </h3>
           <button class="button is-primary" on:click={openCreate}
-            >Create event</button>
+            >Create event</button
+          >
           <p class="help is-info">
             Switch network to see your events on other chains.
           </p>
@@ -118,7 +122,8 @@
             <a
               href="/project/{address}/{$project[address]._isDraft
                 ? 'draft/'
-                : ''}">
+                : ''}"
+            >
               <figure class="image xis-16by9" style="width: 150px;">
                 {#if $project[address].visual}
                   {#key all.length}
@@ -127,13 +132,15 @@
                       src="/empty_p.png"
                       alt="Project main visual"
                       style="object-fit: cover;"
-                      use:ipfs />
+                      use:ipfs
+                    />
                   {/key}
                 {:else}
                   <img
                     src="/empty_p.png"
                     alt="Project main visual"
-                    style="object-fit: cover;" />
+                    style="object-fit: cover;"
+                  />
                 {/if}
               </figure>
             </a>
@@ -141,14 +148,16 @@
 
           <div class="part-item mx-4">
             <div
-              class="flex is-flex-direction-column is-align-content-space-around summary">
+              class="flex is-flex-direction-column is-align-content-space-around summary"
+            >
               <div>
                 <strong
                   ><a
                     href="/project/{address}/{$project[address]._isDraft
                       ? 'draft/'
                       : ''}">{$project[address].name || '...'}</a
-                  ></strong>
+                  ></strong
+                >
                 {#if $project[address]._isDraft}<span class="tag is-primary"
                     >Draft</span
                   >{/if}
@@ -157,7 +166,8 @@
               <div>
                 {#if !$project[address]._isDraft}<Address
                     noIdenticon={true}
-                    {address} /> ·
+                    {address}
+                  /> ·
                 {/if}{$project[address].channels?.length} channels
               </div>
               {#if !$project[address]._isDraft}
@@ -171,7 +181,8 @@
           </div>
 
           <div
-            class="part-item is-flex is-flex-direction-column is-justify-content-space-evenly has-text-centered">
+            class="part-item is-flex is-flex-direction-column is-justify-content-space-evenly has-text-centered"
+          >
             {#if $project[address]._isDraft}
               <p>
                 <small
@@ -179,7 +190,8 @@
                     <span class="icon-text"
                       ><Icon name="Edit" /><span>Edit draft</span>
                     </span></a
-                  ></small>
+                  ></small
+                >
               </p>
               <Confirm
                 let:activate
@@ -188,17 +200,20 @@
                   address
                 ].name}» and everything you set up? There is no going back."
                 confirmLabel="Delete"
-                on:confirm={() => project.deleteDraft(address)}>
+                on:confirm={() => project.deleteDraft(address)}
+              >
                 <p>
                   <small
                     ><a
                       href="#activate"
                       on:click={activate}
-                      on:keydown={keyDownA11y(activate)}>
+                      on:keydown={keyDownA11y(activate)}
+                    >
                       <span class="icon-text"
                         ><Icon name="Trash" /><span>Delete draft</span>
                       </span></a
-                    ></small>
+                    ></small
+                  >
                 </p>
               </Confirm>
             {:else}
@@ -208,7 +223,8 @@
                     <span class="icon-text"
                       ><Icon name="ticket" /><span>Get Tickets</span>
                     </span></a
-                  ></small>
+                  ></small
+                >
               </p>
               <!--
                      <p class="level-item"><small><a href="/project/{address}/scan/">
@@ -218,17 +234,20 @@
               <ConfirmUnload
                 let:activate
                 p={$project[address]}
-                on:confirm={() => project.rm(address)}>
+                on:confirm={() => project.rm(address)}
+              >
                 <p>
                   <small
                     ><a
                       href="#activate"
                       on:click={activate}
-                      on:keydown={keyDownA11y(activate)}>
+                      on:keydown={keyDownA11y(activate)}
+                    >
                       <span class="icon-text"
                         ><Icon name="EyeOff" /><span>Unload & forget</span>
                       </span></a
-                    ></small>
+                    ></small
+                  >
                 </p>
               </ConfirmUnload>
             {/if}
@@ -246,14 +265,15 @@
               Check our <a
                 rel="noreferrer"
                 target="_blank"
-                href="https://docs.rouge.network">documentation</a> website.
+                href="https://docs.rouge.network">documentation</a
+              > website.
             </li>
             <li>
               Join us <a
                 rel="noreferrer"
                 target="_blank"
-                href="https://discord.gg/aUeSjsN8Tx">on Discord</a> for feedback,
-              bug reports and help.
+                href="https://discord.gg/aUeSjsN8Tx">on Discord</a
+              > for feedback, bug reports and help.
             </li>
           </ul>
         </div>
@@ -271,9 +291,11 @@
                     type="checkbox"
                     name="testnets"
                     class="switch is-rtl"
-                    bind:checked={$registry.includeTestnets} />
+                    bind:checked={$registry.includeTestnets}
+                  />
                   <label class="has-text-grey-light" for="testnets"
-                    >Include testnets?</label>
+                    >Include testnets?</label
+                  >
                 </span>
               </p>
             </div>
@@ -283,9 +305,11 @@
                   <a
                     rel="noreferrer"
                     target="_blank"
-                    href={getChainDataByChainId(id)?.infoURL}>
-                    <span class="tag is-grey mr-2 mb-2"
-                      >{getChainDataByChainId(id)?.name}</span>
+                    href={getChainDataByChainId(id)?.infoURL}
+                  >
+                    <span class="tag mr-2 mb-2"
+                      >{getChainDataByChainId(id)?.name}</span
+                    >
                   </a>
                 {/each}
               </p>
@@ -298,13 +322,15 @@
         <EmptyState svg="/bad-connection.svg">
           <h3 class="subtitle">
             <strong
-              >Sorry, the network «{$chainData.name}» is not yet supported.</strong>
+              >Sorry, the network «{$chainData.name}» is not yet supported.</strong
+            >
           </h3>
           {#each supportedChainIds as id}
             <button
               class="button is-primary mb-1 mr-1"
               on:click={() => blockchain.connect(id)}
-              >Switch to {getChainDataByChainId(id).name}</button>
+              >Switch to {getChainDataByChainId(id).name}</button
+            >
           {/each}
           <p class="help is-info">
             This app in still beta and we only support a few networks for now.
@@ -317,7 +343,8 @@
           <h3 class="subtitle"><strong>Not connected!</strong></h3>
           <button
             class="button is-primary"
-            on:click={() => blockchain.connect()}>Connect Wallet</button>
+            on:click={() => blockchain.connect()}>Connect Wallet</button
+          >
           <p class="help is-info">
             In order to view your events or create an event, you need to
             connect.
@@ -328,15 +355,15 @@
   </div>
 </section>
 
-<style lang="scss">
-  @import '../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+<style lang="scss" global>
+  @use 'bulma/sass/utilities/mixins' as mixins;
+  @use 'bulma/sass/utilities/initial-variables' as iv;
 
   .homelist {
     display: flex;
     justify-content: space-between;
 
-    @include mobile {
+    @include mixins.mobile {
       display: block;
     }
 
@@ -363,14 +390,14 @@
   }
 
   .box {
-    background-color: $grey-lightest;
-    border-radius: $radius-large;
+    background-color: iv.$grey-lightest;
+    border-radius: iv.$radius-large;
   }
 
   .summary {
     line-height: 1.5rem;
 
-    @include mobile {
+    @include mixins.mobile {
       text-align: center;
     }
   }

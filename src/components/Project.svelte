@@ -40,7 +40,8 @@
         alt={p.name}
         data-ipfs={p.visual}
         style="object-fit: cover;"
-        use:ipfs />
+        use:ipfs
+      />
     {:else}
       <img alt={p.name} src="/empty_p.png" style="object-fit: cover;" />
     {/if}
@@ -62,7 +63,8 @@
           let:google
           on:action={() => {
             calendarMenu = !calendarMenu
-          }}>
+          }}
+        >
           <div class="dropdown" class:is-active={calendarMenu}>
             <div class="dropdown-trigger">
               <p class="mt-2 oneLine">
@@ -73,7 +75,8 @@
                     aria-controls="dropdown-menu"
                     on:click={() => {
                       calendarMenu = !calendarMenu
-                    }}>
+                    }}
+                  >
                     <Icon name="calendar" /><span>Add to Calendar</span>
                   </a>
                 </span>
@@ -86,11 +89,13 @@
               on:clickoutside={() => {
                 if (calendarMenu) calendarMenu = false
               }}
-              role="menu">
+              role="menu"
+            >
               <div class="dropdown-content">
                 <a href="#apple" class="dropdown-item">Apple</a>
                 <a href="#google" on:click={google} class="dropdown-item"
-                  >Google</a>
+                  >Google</a
+                >
                 <a href="#ical" class="dropdown-item">iCal</a>
                 <a href="#microsoft365" class="dropdown-item">Microsoft365</a>
                 <a href="#tems" class="dropdown-item">MicrosoftTeams</a>
@@ -124,7 +129,8 @@
             <span>Share event</span>
             <ClipboardCopy let:copy text={url} tootipLabel="copied!">
               <a href="#copy" class="ml-2" on:click={copy}
-                ><Icon name="Copy" /></a>
+                ><Icon name="Copy" /></a
+              >
             </ClipboardCopy>
             <Share
               let:api
@@ -134,39 +140,46 @@
               let:whatsapp
               let:linkedin
               {url}
-              title={p.name}>
+              title={p.name}
+            >
               {#if api}
                 <a
                   href="#api"
                   class="ml-2"
                   on:keydown={keyDownA11y(api)}
-                  on:click={api}><Icon name="share" /></a>
+                  on:click={api}><Icon name="share" /></a
+                >
               {:else}
                 <a
                   href="#telegram"
                   class="ml-2"
                   on:keydown={keyDownA11y(telegram)}
-                  on:click={telegram}><Icon name="BrandTelegram" /></a>
+                  on:click={telegram}><Icon name="BrandTelegram" /></a
+                >
                 <a
                   href="#whatsapp"
                   class="ml-2"
                   on:keydown={keyDownA11y(whatsapp)}
-                  on:click={whatsapp}><Icon name="BrandWhatsapp" /></a>
+                  on:click={whatsapp}><Icon name="BrandWhatsapp" /></a
+                >
                 <a
                   href="#twitter"
                   class="ml-2"
                   on:keydown={keyDownA11y(twitter)}
-                  on:click={twitter}><Icon name="BrandTwitter" /></a>
+                  on:click={twitter}><Icon name="BrandTwitter" /></a
+                >
                 <a
                   href="#facebook"
                   class="ml-2"
                   on:keydown={keyDownA11y(facebook)}
-                  on:click={facebook}><Icon name="BrandFacebook" /></a>
+                  on:click={facebook}><Icon name="BrandFacebook" /></a
+                >
                 <a
                   href="#linkedin"
                   class="ml-2"
                   on:keydown={keyDownA11y(linkedin)}
-                  on:click={linkedin}><Icon name="BrandLinkedin" /></a>
+                  on:click={linkedin}><Icon name="BrandLinkedin" /></a
+                >
               {/if}
             </Share>
           </span>
@@ -188,8 +201,8 @@
 </div>
 
 <style lang="scss" global>
-  @import '../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @forward '../scss/_variables.scss';
+  @use 'bulma/sass/utilities/mixins' as m;
 
   .filler {
     height: 100%;
@@ -207,7 +220,7 @@
   .projectRightPanel {
     position: relative;
 
-    @include mobile {
+    @include m.mobile {
       text-align: center;
     }
 

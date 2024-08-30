@@ -178,30 +178,35 @@
               on:click={() => {
                 modal.close()
                 isUnlocked = false
-              }} />
+              }}
+            />
           </div>
         </div>
       </div>
     </header>
     <section
       class="modal-card-body"
-      style="position: relative; min-height: 432px;">
+      style="position: relative; min-height: 432px;"
+    >
       {#if !nft.redeemed}
         <p class="has-text-centered field">
           {#if !qrUnlocked}
             <button class="button is-primary mr-3" on:click={certify}
-              >Sign a ticket proof</button>
+              >Sign a ticket proof</button
+            >
           {:else}
             <input
               id="unlock"
               type="checkbox"
               class="switch"
               disabled={qrUnlocked ? undefined : true}
-              bind:checked={isUnlocked} />
+              bind:checked={isUnlocked}
+            />
             <label for="unlock"
               >{isUnlocked
                 ? 'Lock ticket QR to keep your proof safe'
-                : 'Unlock ticket QR to enable check-in proof scan'}</label>
+                : 'Unlock ticket QR to enable check-in proof scan'}</label
+            >
           {/if}
         </p>
       {/if}
@@ -248,7 +253,8 @@
         <a
           class="button is-info"
           href={src}
-          download={`${p.name}#${tokenId}.png`}>Download</a>
+          download={`${p.name}#${tokenId}.png`}>Download</a
+        >
         <ClipboardCopy let:copy text={qrUnlocked} tootipLabel="QR code copied!">
           <button class="button" on:click={copy}>Copy as text</button>
         </ClipboardCopy>
@@ -258,7 +264,8 @@
       -->
         {#if dev}
           <button class="button" on:click={() => saveLocal(qrData)}
-            >devpush {proofType}</button>
+            >devpush {proofType}</button
+          >
         {/if}
       </footer>
     {/if}
@@ -269,7 +276,8 @@
   use:resize={updater}
   class="nft box p-0 m-4"
   on:keydown={keyDownA11y(openQR)}
-  on:click={openQR}>
+  on:click={openQR}
+>
   <img alt={p.name} data-ipfs={p.visual} use:ipfs />
   <div
     class="id"
@@ -277,7 +285,8 @@
       (4 / 32) * $ticketWidth
     )}px; font-size: {Math.floor(
       (4 / 32) * $ticketWidth
-    )}px; line-height: {Math.floor((4 / 32) * $ticketWidth)}px">
+    )}px; line-height: {Math.floor((4 / 32) * $ticketWidth)}px"
+  >
     <span>{nft.redeemed ? 'Stub' : 'Ticket'} #{tokenId}<span /></span>
   </div>
   {#if channel.icon}
@@ -293,7 +302,8 @@
     class="type has-text-centered"
     style="font-size: {Math.floor(
       (3 / 32) * $ticketWidth
-    )}px; line-height: {Math.floor((3 / 32) * $ticketWidth)}px">
+    )}px; line-height: {Math.floor((3 / 32) * $ticketWidth)}px"
+  >
     <p class="cellcentered">{channel.label}</p>
   </div>
   <div
@@ -302,7 +312,8 @@
       (4 / 32) * $ticketWidth
     )}px; font-size: {Math.floor(
       (2.5 / 32) * $ticketWidth
-    )}px; line-height: {Math.floor((3 / 32) * $ticketWidth)}px">
+    )}px; line-height: {Math.floor((3 / 32) * $ticketWidth)}px"
+  >
     {#if nft.redeemed}
       <span class="tag is-info">
         <span class="memo"><Icon name="Checkbox" raw={true} /></span>
@@ -328,7 +339,8 @@
 </div>
 
 <style lang="scss">
-  @import '../scss/_variables.scss';
+  @use '../scss/variables' as v;
+  @use 'bulma/sass/utilities/initial-variables' as iv;
 
   /*
   Grid    = 32 x 32
@@ -340,7 +352,7 @@
 
   .nft {
     display: grid;
-    background-color: $grey-lightest;
+    background-color: v.$grey-lightest;
     grid-template-columns: repeat(32, 1fr);
     grid-template-rows: repeat(32, 1fr);
     column-gap: 0;
@@ -350,7 +362,7 @@
     font-size: 100%;
 
     &:hover {
-      background-color: $grey-lighter;
+      background-color: iv.$grey-lighter;
       cursor: pointer;
       transform: scale(1.02);
     }

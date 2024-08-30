@@ -38,7 +38,8 @@
     <a
       rel="noreferrer"
       target="_blank"
-      href={explorer($chainData, 'tx', call.tx.hash)}>pending</a>
+      href={explorer($chainData, 'tx', call.tx.hash)}>pending</a
+    >
     <Icon name="ExternalLink" />
   </span>
 {:else if call.step === 3}
@@ -47,7 +48,8 @@
     <a
       rel="noreferrer"
       target="_blank"
-      href={explorer($chainData, 'tx', call.tx.hash)}>success</a>
+      href={explorer($chainData, 'tx', call.tx.hash)}>success</a
+    >
     <Icon name="ExternalLink" />
   </span>
 {/if}

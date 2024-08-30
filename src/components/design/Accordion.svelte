@@ -19,7 +19,8 @@
     })}
     on:click={() => {
       opened = !opened
-    }}>
+    }}
+  >
     <span class:is-rotated={opened}><Icon name="ChevronsRight" /></span>
     <span class="ml-3">{label}</span>
   </a>

@@ -1,34 +1,308 @@
-@charset "utf-8";
+$brand: #990000;
+$primary-disabled: rgb(223, 170, 169);
+$grey-lightest: rgb(247, 247, 247);
+
+@use 'bulma/sass/utilities' with (
+  $size-1: 2.8rem,
+  $size-2: 1.75rem,
+  // H1
+  $size-3: 1.5rem,
+  // H2
+  $size-4: 1.25rem,
+  // H3
+  $size-5: 1.2rem,
+  // H4
+  $size-6: 0.9375rem,
+  // H5
+  $size-7: 0.75rem,
+  // $body-line-height: 1.6rem,
+  $gap: 18px,
+  $primary: $brand,
+  $grey-dark: rgb(112, 112, 112),
+  //
+  $grey: rgb(176, 176, 176),
+  //
+  $grey-lightest: #f7f7f7
+);
+
+@use '_variables' as v;
+@use 'bulma/sass/utilities/initial-variables' as iv;
+@use 'bulma/sass/utilities/mixins' as mixins;
+@use 'bulma/sass/components/card' as c;
+
+@forward 'bulma/bulma';
+@forward 'bulma/sass';
+
+@forward 'bulma-switch/src/scss/index';
+
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
-@import './_variables.scss';
+:root {
+  --bulma-primary-h: 0deg;
+  --bulma-primary-l: 30%;
+  --bulma-link-h: 182deg;
+  --bulma-link-l: 32%;
+  --bulma-success-h: 97deg;
+  --bulma-success-s: 100%;
+  --bulma-success-l: 26%;
+  --bulma-warning-h: 39deg;
+  --bulma-warning-l: 50%;
+  --bulma-danger-h: 3deg;
+  --bulma-danger-s: 90%;
+  --bulma-danger-l: 96%;
+  --bulma-family-primary: 'Public Sans', sans-serif;
+  --bulma-body-background-color: #900;
 
-@import 'bulma/sass/utilities/_all';
+  --bulma-body-color: #f5f5f5;
+}
 
-@import 'bulma/sass/utilities/functions';
+.modal {
+  --bulma-modal-background-background-color: #900;
+  --bulma-modal-content-width: 800px;
+  --bulma-modal-content-margin-mobile: 0;
+  --bulma-modal-content-spacing-mobile: 0;
+}
+.button {
+  font-weight: iv.$weight-semibold;
 
-// some derived-variables overwrite here
+  &.is-primary {
+    &:hover,
+    x &.is-hovered {
+      background-color: v.$danger;
+    }
+    &.is-inverted {
+      background-color: transparent !important;
+      border-color: v.$brand;
+      color: v.$brand;
+      &:hover,
+      &.is-hovered {
+        background-color: transparent;
+        border-color: v.$brand;
+        color: v.$danger;
+      }
+    }
+  }
+
+  &.is-secondary {
+    background-color: v.$secondary;
+    &:hover,
+    &.is-hovered {
+      background-color: v.$secondary-hover;
+    }
+    &.is-inverted {
+      background-color: transparent !important;
+      border-color: v.$secondary;
+      color: v.$secondary;
+      &:hover,
+      &.is-hovered {
+        background-color: transparent !important;
+        border-color: v.$secondary-hover;
+        color: v.$secondary-hover;
+      }
+    }
+  }
+}
+
+.icon > svg {
+  width: 100%;
+  height: auto;
+}
+
+// ########## .button ##################################################
+
+.button {
+  font-weight: iv.$weight-semibold;
+
+  &.is-primary {
+    &:hover,
+    x &.is-hovered {
+      background-color: v.$danger;
+    }
+    &.is-inverted {
+      background-color: transparent !important;
+      border-color: v.$brand;
+      color: v.$brand;
+      &:hover,
+      &.is-hovered {
+        background-color: transparent;
+        border-color: v.$brand;
+        color: v.$danger;
+      }
+    }
+  }
+
+  &.is-secondary {
+    background-color: v.$secondary;
+    &:hover,
+    &.is-hovered {
+      background-color: v.$secondary-hover;
+    }
+    &.is-inverted {
+      background-color: transparent !important;
+      border-color: v.$secondary;
+      color: v.$secondary;
+      &:hover,
+      &.is-hovered {
+        background-color: transparent !important;
+        border-color: v.$secondary-hover;
+        color: v.$secondary-hover;
+      }
+    }
+  }
+}
+
+// ########## manager nac ##################################################
+
+// ########## 2 modes breadcrumb ##################################################
+
+// to avoid side effects
+html {
+  background-color: iv.$white;
+}
+
+.manager-nav {
+  .level-right {
+    a {
+      color: iv.$white;
+
+      &:hover,
+      &.is-hovered {
+        color: v.$secondary-disabled;
+      }
+    }
+
+    @include mixins.mobile {
+      a {
+        color: v.$brand;
+
+        &:hover,
+        &.is-hovered {
+          color: v.$danger;
+        }
+      }
+    }
+  }
+}
+
+.breadcrumb {
+  @include mixins.tablet {
+    padding-bottom: 1.5rem; // same as columns
+
+    //$breadcrumb-item-color: $white;
+    //$breadcrumb-item-active-color: $secondary-disabled;
+    //$breadcrumb-item-hover-color: $secondary-disabled;
+
+    a {
+      font-weight: bold;
+      color: iv.$white;
+      &:hover {
+        color: v.$secondary-disabled;
+      }
+    }
+
+    li.is-active a {
+      color: v.$secondary-disabled;
+    }
+  }
+
+  @include mixins.mobile {
+    background-color: iv.$white;
+    margin-bottom: 0;
+    // aka $section-padding
+    padding: 0 1.5rem;
+  }
+}
+
+// ########## 2 modes section   ##################################################
+
+.section.is-rounded {
+  @include mixins.tablet {
+    border-radius: iv.$radius-large;
+  }
+}
+
+// ########## box is-slate ##################################################
+
+.box {
+  &.is-slate {
+    background-color: iv.$grey-lightest;
+  }
+}
+
+.breadcrumb {
+  padding-top: 1.5rem; // default bottom margin is 1.5rem
+}
+
+// ########## rounded identicon ##################################################
+
+.icon {
+  &.is-rounded {
+    img {
+      border-radius: 50%;
+    }
+  }
+}
+
+// ########## OLD ##################################################
+
+.navbar {
+  color: c.$card-color;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+
+main {
+  margin-top: 3.5rem; // aka min-height navbar
+}
+
+// default justify right modal button
+.modal-card-foot {
+  justify-content: flex-end;
+}
+
+body {
+  min-height: calc(100vh - 1.6em);
+}
+
+.timepicker-next {
+  margin: 0.7rem 0 0 !important;
+}
+.timepicker-previous {
+  margin: 0 0 0.7rem !important;
+}
+
+.timepicker-next,
+.timepicker-previous {
+  padding: 0 !important;
+  line-height: 1.2rem !important;
+  font-size: 1.2rem !important;
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+.navbar {
+  --bulma-navbar-background-color: #900;
+}
+.title {
+  --bulma-title-color: #363636;
+}
+
 $shadow:
   0.05rem 0.05rem 0.15rem -0.05rem $primary-disabled,
   1px 1px 3px 1px $grey-lightest;
-
-@import 'bulma/sass/base/_all';
-@import 'bulma/sass/elements/_all';
-@import 'bulma/sass/form/_all';
-@import 'bulma/sass/components/_all';
-@import 'bulma/sass/grid/_all';
-@import 'bulma/sass/helpers/_all';
-@import 'bulma/sass/layout/_all';
-
-//@import "bulma/bulma.sass";
-
-@import 'bulma-switch/src/sass/index.sass';
-
-// has deprecation warning - not used anymore...
-/// @import "bulma-o-steps/bulma-steps.sass";
-
-@import './_overrides.scss';
-
+body {
+  position: relative;
+  height: fit-content;
+}
+.version {
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+}
+a {
+  color: #ddd;
+}
 #preloaded {
   display: none;
 }

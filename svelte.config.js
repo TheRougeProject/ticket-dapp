@@ -3,7 +3,10 @@ import sveltePreprocess from 'svelte-preprocess'
 import adapter from '@sveltejs/adapter-static'
 
 const config = {
-  preprocess: sveltePreprocess({}),
+  compilerOptions: {
+    enableSourcemap: true
+  },
+  preprocess: sveltePreprocess({ sourceMap: true }),
   kit: {
     csp: {
       directives: {
