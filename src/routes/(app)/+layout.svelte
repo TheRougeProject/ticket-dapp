@@ -126,6 +126,9 @@
       <div class="navbar-item">
         <ThemeSwitch isTrue={false} />
       </div>
+      <div class="navbar-item">
+        <ThemeSwitch isTrue={false} />
+      </div>
     </div>
   </nav>
 
@@ -237,6 +240,7 @@
   }
 
   .container.is-fluid {
+    @include mixins.mobile {
     @include mixins.mobile {
       padding-left: 0;
       padding-right: 0;
