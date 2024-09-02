@@ -229,13 +229,13 @@
 </AppContext>
 
 <style lang="scss">
-  @import '../../scss/_variables.scss';
-  @import 'bulma/sass/utilities/_all';
+  @use '../../scss/main.scss' as m;
+  @use 'bulma/sass/utilities/mixins';
 
   nav.navbar,
   main,
   .footer {
-    background-color: $primary;
+    background-color: m.$brand;
   }
 
   main {
@@ -248,16 +248,7 @@
       padding-right: 0;
     }
   }
-  .content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    background: rgba(0, 0, 0, 0.26);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+
   nav {
     display: flex;
     align-items: stretch;
@@ -298,7 +289,7 @@
   }
 
   .footer {
-    background-color: $primary;
+    background-color: m.$brand;
     color: #fff;
 
     nav > div {

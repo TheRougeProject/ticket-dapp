@@ -526,8 +526,8 @@
 {/if}
 
 <style lang="scss">
-  @import '../../../../scss/_variables.scss';
-  @use 'bulma/sass/utilities/';
+  @use '../../../../scss/main' as m;
+  @use 'bulma/sass/utilities/mixins' as mixin;
 
   .navbar-burger {
     position: fixed;
@@ -535,8 +535,8 @@
     margin: 1.5rem 0 !important;
     // equivalent desktop container
     right: 24px;
-    background-color: $primary;
-    color: $white;
+    background-color: m.$brand;
+    color: m.$white;
     border-radius: 50%;
     width: 1.6em;
     height: 1.6em;
@@ -559,7 +559,7 @@
     }
   }
 
-  @include mobile {
+  @include mixin.mobile {
     .menu {
       position: fixed;
       // aka navbar
@@ -592,8 +592,8 @@
     .close {
       padding: 0.75em;
       .delete {
-        background-color: $primary;
-        color: $white;
+        background-color: m.$brand;
+        color: m.$white;
       }
     }
   }

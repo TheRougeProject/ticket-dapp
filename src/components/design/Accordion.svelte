@@ -33,15 +33,15 @@
 {/if}
 
 <style lang="scss">
-  @import '../../scss/_variables.scss';
+  @use '../../scss/main.scss' as m;
 
   .box {
     padding-top: 0.6rem;
     padding-bottom: 0.4rem;
-    background-color: $primary;
-    color: $white;
+    background-color: m.$brand;
+    color: m.$white;
     a:hover {
-      color: $white;
+      color: m.$white;
     }
   }
 
