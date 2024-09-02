@@ -126,10 +126,13 @@
       <div class="navbar-item">
         <ThemeSwitch isTrue={false} />
       </div>
-      <div class="navbar-item">
-        <ThemeSwitch isTrue={false} />
-      </div>
     </div>
+
+    <!--
+         <a class="navbar-item">
+         Report an issue
+         </a>
+    -->
   </nav>
 
   <main>
@@ -226,13 +229,13 @@
 </AppContext>
 
 <style lang="scss">
-  @use '../../scss/variables.scss' as v;
-  @use 'bulma/sass/utilities/mixins';
+  @import '../../scss/_variables.scss';
+  @import 'bulma/sass/utilities/_all';
 
   nav.navbar,
   main,
   .footer {
-    background-color: v.$brand;
+    background-color: $primary;
   }
 
   main {
@@ -240,7 +243,6 @@
   }
 
   .container.is-fluid {
-    @include mixins.mobile {
     @include mixins.mobile {
       padding-left: 0;
       padding-right: 0;
@@ -296,7 +298,7 @@
   }
 
   .footer {
-    background-color: v.$brand;
+    background-color: $primary;
     color: #fff;
 
     nav > div {
