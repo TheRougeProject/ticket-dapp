@@ -1,7 +1,7 @@
 <script>
   import '../../scss/app.scss'
 
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
 
   import { connected, signerAddress, chainData } from 'ethers-svelte'
 
@@ -12,14 +12,43 @@
   import AppMenuPopover from '$components/design/AppMenuPopover.svelte'
 
   import { dev } from '$app/environment'
-  import { keyDownA11y, formatAddress } from '$lib/utils'
+  import { keyDownA11y, formatAddress, isChoosing } from '$lib/utils'
 
   import Icon from '$components/Icon.svelte'
   import blockchain from '$lib/blockchain.js'
   import ThemeSwitch from '../../components/tools/ThemeSwitch.svelte'
+  import WalletChoiceModal from '../../components/WalletChoiceModal.svelte'
+  import wallet from '$lib/wallet'
+  import { createMagicSigner } from '$lib/eoa-signer'
+
+  let signer
+
+  // using this because the sdk ui takes a little while to load
+  let loading = false
+
+  async function handleChoice(choice) {
+    if (choice === 'eoa') {
+      loading = true
+      try {
+        signer = await createMagicSigner()
+
+        // log to console to signer to see
+      } finally {
+        loading = false
+      }
+    } else if (choice === 'existing') {
+      blockchain.connect()
+    }
+  }
 
   onMount(async () => {
     if (!$signerAddress) blockchain.autoConnect()
+  })
+
+  let unsubscribeChoosing = isChoosing.subscribe((v) => v)
+
+  onDestroy(() => {
+    unsubscribeChoosing()
   })
 
   let popparent
@@ -88,7 +117,7 @@
         <div class="navbar-item">
           <button
             class="button is-white is-inverted is-responsive"
-            on:click={() => blockchain.connect()}
+            on:click={() => isChoosing.set(true)}
           >
             Connect<span class="is-hidden-mobile ml-2"> Wallet</span>
           </button>
@@ -99,6 +128,11 @@
       </div>
     </div>
 
+    <!--
+         <a class="navbar-item">
+         Report an issue
+         </a>
+    -->
   </nav>
 
   <main>
@@ -109,6 +143,22 @@
     </div>
   </main>
 
+  {#if loading}
+    <div class="content">
+      <iconify-icon
+        icon="eos-icons:bubble-loading"
+        style="color: #900;"
+        width="50"
+      ></iconify-icon>
+    </div>
+  {/if}
+
+  <WalletChoiceModal
+    isOpen={$isChoosing}
+    on:choice={async (e) => await handleChoice(e.detail)}
+  />
+
+  <div id="turnkey-iframe-container" />
   <div class="footer">
     <div class="container is-max-desktop">
       <nav class="flex is-flex-wrap-wrap is-justify-content-center is-size-7">

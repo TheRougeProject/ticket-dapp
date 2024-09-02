@@ -8,8 +8,9 @@ export const ssr = false
 
 const initBrowser = async () => {
   const wallet = await import('$lib/wallet.js')
+  console.log('test')
   blockchain.wallet = wallet.default
-  await blockchain.on()
+  blockchain.on()
 
   console.log('wallet & blockchain ready...')
 }

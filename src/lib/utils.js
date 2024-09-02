@@ -2,6 +2,7 @@ import { ethers } from 'ethers'
 
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat.js'
+import { writable } from 'svelte/store'
 
 dayjs.extend(localizedFormat)
 
@@ -82,3 +83,5 @@ export const keyDownA11y = (handler) => {
     }
   }
 }
+
+export const isChoosing = writable(false)

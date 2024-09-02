@@ -352,7 +352,7 @@
 
   .nft {
     display: grid;
-    background-color: v.$grey-lightest;
+    background-color: iv.$grey-lightest;
     grid-template-columns: repeat(32, 1fr);
     grid-template-rows: repeat(32, 1fr);
     column-gap: 0;

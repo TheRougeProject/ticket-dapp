@@ -17,7 +17,7 @@
   import registry from '$stores/registry.js'
 
   import { ipfs } from '$lib/actions/ipfs.js'
-  import { keyDownA11y } from '$lib/utils.js'
+  import { isChoosing, keyDownA11y } from '$lib/utils.js'
 
   import EmptyState from '$components/design/EmptyState.svelte'
   import Confirm from '$components/design/Confirm.svelte'
@@ -343,7 +343,7 @@
           <h3 class="subtitle"><strong>Not connected!</strong></h3>
           <button
             class="button is-primary"
-            on:click={() => blockchain.connect()}>Connect Wallet</button
+            on:click={() => isChoosing.set(true)}>Connect Wallet</button
           >
           <p class="help is-info">
             In order to view your events or create an event, you need to
@@ -355,7 +355,9 @@
   </div>
 </section>
 
-<style lang="scss" global>
+<!-- <WalletChoiceModal isOpen /> -->
+
+<style lang="scss">
   @use 'bulma/sass/utilities/mixins' as mixins;
   @use 'bulma/sass/utilities/initial-variables' as iv;
 
